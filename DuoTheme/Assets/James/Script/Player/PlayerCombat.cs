@@ -6,12 +6,6 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [Serializable]
-public class PlayerClassSkill
-{
-    public Class playerClass;
-    public List<Skill> skills;
-}
-[Serializable]
 public class Skill
 {
     public string skillName;
@@ -23,15 +17,24 @@ public class Skill
         skillEvent?.Invoke();
     }
 }
+
+public enum SkillName
+{
+    NormalSlash = 0,
+    SpecialSlash = 1,
+    ShieldSlab = 2,
+    RaiseShield = 3,
+}
 public class PlayerCombat : MonoBehaviour
 {
     [Header("Combat Setting")] 
+    [SerializeField] private SkillName normalSkill;
+    [SerializeField] private SkillName specialSkill;
     [SerializeField] private float skillCooldown;
     private bool onSkillActive;
     
     [Header("Player Skill")] 
-    [SerializeField] private int classNumber;
-    [SerializeField] private List<PlayerClassSkill> playerSkill;
+    [SerializeField] private List<Skill> playerSkill;
     private Class oldClass;
     
     [Header("Ref")] 
@@ -54,12 +57,12 @@ public class PlayerCombat : MonoBehaviour
             ChangeClass();
         }
         
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !onSkillActive)
         {
-            if (_playerController.PlayerStamina > playerSkill[classNumber].skills[0].skillCost)
+            if (_playerController.PlayerStamina > playerSkill[(int)normalSkill].skillCost)
             {
-                _playerController.DecreaseStamina(playerSkill[classNumber].skills[0].skillCost);
-                playerSkill[classNumber].skills[0].ActiveSkill();
+                _playerController.DecreaseStamina(playerSkill[(int)normalSkill].skillCost);
+                playerSkill[(int)normalSkill].ActiveSkill();
             }
             else
             {
@@ -67,12 +70,12 @@ public class PlayerCombat : MonoBehaviour
             }
             
         }
-        else if (Input.GetMouseButtonDown(1))
+        else if (Input.GetMouseButtonDown(1) && !onSkillActive)
         {
-            if (_playerController.PlayerStamina > playerSkill[classNumber].skills[1].skillCost)
+            if (_playerController.PlayerStamina > playerSkill[(int)specialSkill].skillCost)
             {
-                _playerController.DecreaseStamina(playerSkill[classNumber].skills[1].skillCost);
-                playerSkill[classNumber].skills[1].ActiveSkill();
+                _playerController.DecreaseStamina(playerSkill[(int)specialSkill].skillCost);
+                playerSkill[(int)specialSkill].ActiveSkill();
             }
             else
             {
@@ -85,37 +88,64 @@ public class PlayerCombat : MonoBehaviour
         switch (_playerController.PlayerClass)
         {
             case Class.Sword:
-                classNumber = 0;
+                normalSkill = SkillName.NormalSlash;
+                specialSkill = SkillName.SpecialSlash;
                 break;
             case Class.Shield:
-                classNumber = 1;
+                normalSkill = SkillName.ShieldSlab;
+                specialSkill = SkillName.RaiseShield;
                 break;
         }
         oldClass = oldClass = _playerController.PlayerClass;
     }
     
 
+    
     public void NormalSlash()
     {
         onSkillActive = true;
+        StartCoroutine(NormalSlashCoroutine());
+
+    }
+    IEnumerator NormalSlashCoroutine()
+    {
         Debug.Log("Slash");
+        yield return new WaitForSeconds(5);
+        onSkillActive = false;
     }
     public void SpecialSlash()
     {
-        if (_playerController)
-        {
-            
-        }
+        onSkillActive = true;
+        StartCoroutine(SpecialSlashCoroutine());
+    }
+    IEnumerator SpecialSlashCoroutine()
+    {
         Debug.Log("Special Slash");
+        yield return new WaitForSeconds(5);
+        onSkillActive = false;
     }
     
     public void ShieldSlam()
     {
-        Debug.Log("Shield Slam");
+        onSkillActive = true;
+        StartCoroutine(ShieldSlamCoroutine());
+    }
+    IEnumerator ShieldSlamCoroutine()
+    {
+        Debug.Log("ShieldSlam");
+        yield return new WaitForSeconds(5);
+        onSkillActive = false;
     }
     
     public void RaiseShield()
     {
-        Debug.Log("Raise Shield");
+        onSkillActive = true;
+        StartCoroutine(RaiseShieldCoroutine());
+    }
+    IEnumerator RaiseShieldCoroutine()
+    {
+        Debug.Log("RaiseShield");
+        yield return new WaitForSeconds(5);
+        onSkillActive = false;
     }
 }
