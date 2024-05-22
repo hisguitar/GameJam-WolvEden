@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace JamesCode
-{
-    public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
     {
         [Header("Movement Setting")] 
         private float playerSpeed;
@@ -77,4 +75,3 @@ namespace JamesCode
             isDashing = false;
         }
     }
-}

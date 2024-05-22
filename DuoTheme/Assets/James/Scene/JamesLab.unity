@@ -303,9 +303,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c3e2aeb0fbbda4eadfd661902629fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: 0
-  playerStamina: 0
-  playerSpeed: 0
+  playerStats: {fileID: 11400000, guid: 45baf719d3ef1c74db9357a76f24dffc, type: 2}
+  playerHealth: 100
+  playerStamina: 100
+  playerSpeed: 5
 --- !u!1 &1349567431
 GameObject:
   m_ObjectHideFlags: 0
