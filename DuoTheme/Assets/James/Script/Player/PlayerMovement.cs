@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
     {
-        [Header("Movement Setting")] 
-        private float playerSpeed;
-        
         [Header("Dash Setting")] 
         [SerializeField] private float dashDuration;
         [SerializeField] private float dashDistance;
@@ -25,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb = GetComponent<Rigidbody2D>();
             _playerController = GetComponent<PlayerController>();
-            playerSpeed = _playerController.PlayerSpeed;
         }
 
         private void Update()
@@ -47,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         {
             moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            transform.position += moveDirection * playerSpeed * Time.deltaTime;
+            transform.position += moveDirection * _playerController.PlayerSpeed * Time.deltaTime;
         }
 
         private void PlayerDash()
