@@ -714,11 +714,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 7800d87d-3f92-4752-ac43-dc0edbaa7714
+  cloudProjectId: 9383284c-8106-48b7-860f-65a34453a15f
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: DuoTheme
-  organizationId: mrjokit
+  organizationId: unity_4ae2b0a0ca2c8737a916
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
