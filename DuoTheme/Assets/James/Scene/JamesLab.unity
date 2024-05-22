@@ -184,7 +184,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 598207739}
   - component: {fileID: 598207736}
   - component: {fileID: 598207738}
+  - component: {fileID: 598207740}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -304,9 +305,97 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: 45baf719d3ef1c74db9357a76f24dffc, type: 2}
-  playerHealth: 100
+  playerClass: 0
+  playerMaxHealth: 100
   playerStamina: 100
   playerSpeed: 5
+--- !u!114 &598207740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598207735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c6c11151fa784e439616c5df19b981e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillCooldown: 0
+  classNumber: 0
+  playerSkill:
+  - playerClass: 0
+    skills:
+    - skillName: Slash
+      skillCost: 15
+      skillEvent:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 598207740}
+            m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
+            m_MethodName: NormalSlash
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+    - skillName: Khod Slash
+      skillCost: 30
+      skillEvent:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 598207740}
+            m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
+            m_MethodName: SpecialSlash
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+  - playerClass: 1
+    skills:
+    - skillName: Shield Slab
+      skillCost: 15
+      skillEvent:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 598207740}
+            m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
+            m_MethodName: ShieldSlam
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+    - skillName: Raise Shield
+      skillCost: 30
+      skillEvent:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 598207740}
+            m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
+            m_MethodName: RaiseShield
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
 --- !u!1 &1349567431
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,7 +407,7 @@ GameObject:
   - component: {fileID: 1349567432}
   - component: {fileID: 1349567433}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
