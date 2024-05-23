@@ -16,3 +16,5 @@ MonoBehaviour:
   playerMaxHealth: 100
   playerMaxStamina: 100
   playerSpeed: 5
+  normalSkill: 0
+  specialSkill: 1

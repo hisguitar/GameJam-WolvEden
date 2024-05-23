@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using EditorAttributes;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 [Serializable]
 public class Skill
 {
     public string skillName;
     public float skillCost;
+    public float skillCooldown;
+    public SpriteRenderer skillIcon;
     public UnityEvent skillEvent;
 
     public void ActiveSkill()
@@ -31,8 +34,14 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private Transform skillPosition;
     [SerializeField] private SkillName normalSkill;
     [SerializeField] private SkillName specialSkill;
-    [SerializeField] private float skillCooldown;
-    private bool onSkillActive;
+    
+    [Header("Cooldown")]
+    [SerializeField] private float normalSkillCooldown,specialSkillCooldown;
+    
+    [Header("Image")]
+    [SerializeField] private Image normalSkillImage,normalSkillImageCD, specialSkillImage,specialSkillImageCD;
+    private bool onNormalSkillActive,onSpecialSkillActive;
+    private float lastNormalSkillCooldown, lastSpecialSkillCooldown;
     
     [Header("Player Skill")] 
     [SerializeField] private List<Skill> playerSkill;
@@ -58,12 +67,16 @@ public class PlayerCombat : MonoBehaviour
             ChangeClass();
         }
         
-        if (Input.GetMouseButtonDown(0) && !onSkillActive)
+        CheckCooldown();
+        
+        if (Input.GetMouseButtonDown(0) && !onNormalSkillActive)
         {
             if (_playerController.PlayerStamina > playerSkill[(int)normalSkill].skillCost)
             {
                 _playerController.DecreaseStamina(playerSkill[(int)normalSkill].skillCost);
                 playerSkill[(int)normalSkill].ActiveSkill();
+                normalSkillCooldown = playerSkill[(int)normalSkill].skillCooldown;
+                lastNormalSkillCooldown = playerSkill[(int)normalSkill].skillCooldown;
             }
             else
             {
@@ -71,12 +84,14 @@ public class PlayerCombat : MonoBehaviour
             }
             
         }
-        else if (Input.GetMouseButtonDown(1) && !onSkillActive)
+        else if (Input.GetMouseButtonDown(1) && !onSpecialSkillActive)
         {
             if (_playerController.PlayerStamina > playerSkill[(int)specialSkill].skillCost)
             {
                 _playerController.DecreaseStamina(playerSkill[(int)specialSkill].skillCost);
                 playerSkill[(int)specialSkill].ActiveSkill();
+                specialSkillCooldown = playerSkill[(int)specialSkill].skillCooldown;
+                lastSpecialSkillCooldown = playerSkill[(int)specialSkill].skillCooldown;
             }
             else
             {
@@ -89,64 +104,67 @@ public class PlayerCombat : MonoBehaviour
         switch (_playerController.PlayerClass)
         {
             case Class.Sword:
-                normalSkill = SkillName.NormalSlash;
-                specialSkill = SkillName.SpecialSlash;
+                normalSkill = _playerController.PlayerStats.normalSkill;
+                specialSkill = _playerController.PlayerStats.specialSkill;
+                normalSkillImage.sprite = playerSkill[(int)normalSkill].skillIcon.GetComponent<SpriteRenderer>().sprite;
+                normalSkillImageCD.sprite = playerSkill[(int)normalSkill].skillIcon.GetComponent<SpriteRenderer>().sprite;
+                specialSkillImage.sprite = playerSkill[(int)specialSkill].skillIcon.GetComponent<SpriteRenderer>().sprite;
+                specialSkillImageCD.sprite = playerSkill[(int)specialSkill].skillIcon.GetComponent<SpriteRenderer>().sprite;
                 break;
             case Class.Shield:
                 normalSkill = SkillName.ShieldSlab;
                 specialSkill = SkillName.RaiseShield;
+                normalSkillImage.sprite = playerSkill[(int)normalSkill].skillIcon.sprite;
+                normalSkillImageCD.sprite = playerSkill[(int)normalSkill].skillIcon.sprite;
+                specialSkillImage.sprite = playerSkill[(int)specialSkill].skillIcon.sprite;
+                specialSkillImageCD.sprite = playerSkill[(int)specialSkill].skillIcon.sprite;
                 break;
         }
         oldClass = oldClass = _playerController.PlayerClass;
     }
-    
+
+    private void CheckCooldown()
+    {
+        if (normalSkillCooldown > 0)
+        {
+            normalSkillImageCD.fillAmount = normalSkillCooldown / lastNormalSkillCooldown;
+            normalSkillCooldown -= Time.deltaTime;
+            if (normalSkillCooldown < 0)
+            {
+                normalSkillCooldown = 0;
+                onNormalSkillActive = false;
+            }
+        }
+
+        if (specialSkillCooldown > 0)
+        {
+            specialSkillImageCD.fillAmount = specialSkillCooldown / lastSpecialSkillCooldown;
+            specialSkillCooldown -= Time.deltaTime;
+            if (specialSkillCooldown < 0)
+            {
+                specialSkillCooldown = 0;
+                onSpecialSkillActive = false;
+            }
+        }
+    }
 
     
     public void NormalSlash()
     {
-        onSkillActive = true;
-        StartCoroutine(NormalSlashCoroutine());
-
-    }
-    IEnumerator NormalSlashCoroutine()
-    {
-        Debug.Log("Slash");
-        yield return new WaitForSeconds(5);
-        onSkillActive = false;
+        
     }
     public void SpecialSlash()
     {
-        onSkillActive = true;
-        StartCoroutine(SpecialSlashCoroutine());
-    }
-    IEnumerator SpecialSlashCoroutine()
-    {
-        Debug.Log("Special Slash");
-        yield return new WaitForSeconds(5);
-        onSkillActive = false;
+        
     }
     
     public void ShieldSlam()
     {
-        onSkillActive = true;
-        StartCoroutine(ShieldSlamCoroutine());
-    }
-    IEnumerator ShieldSlamCoroutine()
-    {
-        Debug.Log("ShieldSlam");
-        yield return new WaitForSeconds(5);
-        onSkillActive = false;
+        
     }
     
     public void RaiseShield()
     {
-        onSkillActive = true;
-        StartCoroutine(RaiseShieldCoroutine());
-    }
-    IEnumerator RaiseShieldCoroutine()
-    {
-        Debug.Log("RaiseShield");
-        yield return new WaitForSeconds(5);
-        onSkillActive = false;
+        
     }
 }
