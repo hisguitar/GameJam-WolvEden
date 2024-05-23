@@ -14,10 +14,17 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private Class playerClass;
+    
+    [Header("Health")]
     [SerializeField] private float playerMaxHealth;
-    private float playerHealth;
+    [ReadOnly][SerializeField]private float playerHealth;
+
+    [Header("Stamina")] 
+    [SerializeField] private float reganSpeed;
     [SerializeField] private float playerMaxStamina;
-    private float playerStamina;
+    [ReadOnly][SerializeField]private float playerStamina;
+    
+    [Header("Movement")]
     [SerializeField] private float playerSpeed;
     
     public Class PlayerClass { get { return playerClass; } }
@@ -38,7 +45,7 @@ public class PlayerController : MonoBehaviour
     {
         if (playerStamina < playerMaxStamina)
         {
-            playerStamina += Time.deltaTime * 3.5f;
+            playerStamina += Time.deltaTime * reganSpeed;
         }
         else
         {
