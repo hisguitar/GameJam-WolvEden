@@ -103,5 +103,18 @@ public class PlayerController : MonoBehaviour
     {
         playerSpeed += 0.25f;
     }
+    
+    [Button("Change Class")]
+    public void ChangeClassPlayer()
+    {
+        if (playerClass == Class.Sword)
+        {
+            playerClass = Class.Shield;
+        }
+        else
+        {
+            playerClass = Class.Sword;
+        }
+    }
 }
 

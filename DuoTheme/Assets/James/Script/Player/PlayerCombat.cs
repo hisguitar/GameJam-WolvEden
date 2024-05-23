@@ -73,6 +73,7 @@ public class PlayerCombat : MonoBehaviour
         {
             if (_playerController.PlayerStamina > playerSkill[(int)normalSkill].skillCost)
             {
+                onNormalSkillActive = true;
                 _playerController.DecreaseStamina(playerSkill[(int)normalSkill].skillCost);
                 playerSkill[(int)normalSkill].ActiveSkill();
                 normalSkillCooldown = playerSkill[(int)normalSkill].skillCooldown;
@@ -88,6 +89,7 @@ public class PlayerCombat : MonoBehaviour
         {
             if (_playerController.PlayerStamina > playerSkill[(int)specialSkill].skillCost)
             {
+                onSpecialSkillActive = true;
                 _playerController.DecreaseStamina(playerSkill[(int)specialSkill].skillCost);
                 playerSkill[(int)specialSkill].ActiveSkill();
                 specialSkillCooldown = playerSkill[(int)specialSkill].skillCooldown;
@@ -152,23 +154,23 @@ public class PlayerCombat : MonoBehaviour
     public void NormalSlash(GameObject slash)
     {
         GameObject shieldObject = Instantiate(slash, skillPosition.position, skillPosition.rotation, skillPosition);
-        Destroy(shieldObject,playerSkill[(int)specialSkill].skillCooldown - 0.4f);
+        Destroy(shieldObject,playerSkill[(int)normalSkill].skillCooldown - 0.05f);
     }
     public void SpecialSlash(GameObject slash)
     {
         GameObject shieldObject = Instantiate(slash, skillPosition.position, skillPosition.rotation, skillPosition);
-        Destroy(shieldObject,playerSkill[(int)specialSkill].skillCooldown - 0.4f);
+        Destroy(shieldObject,playerSkill[(int)specialSkill].skillCooldown - 0.05f);
     }
     
     public void ShieldSlam(GameObject shield)
     {
         GameObject shieldObject = Instantiate(shield, skillPosition.position, skillPosition.rotation, skillPosition);
-        Destroy(shieldObject,playerSkill[(int)specialSkill].skillCooldown - 0.4f);
+        Destroy(shieldObject,playerSkill[(int)normalSkill].skillCooldown - 0.05f);
     }
     
     public void RaiseShield(GameObject shield)
     {
         GameObject shieldObject = Instantiate(shield, skillPosition.position, skillPosition.rotation, skillPosition);
-        Destroy(shieldObject,playerSkill[(int)specialSkill].skillCooldown - 0.4f);
+        Destroy(shieldObject,playerSkill[(int)specialSkill].skillCooldown - 0.05f);
     }
 }
