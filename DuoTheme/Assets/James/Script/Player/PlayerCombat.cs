@@ -28,6 +28,7 @@ public enum SkillName
 public class PlayerCombat : MonoBehaviour
 {
     [Header("Combat Setting")] 
+    [SerializeField] private Transform skillPosition;
     [SerializeField] private SkillName normalSkill;
     [SerializeField] private SkillName specialSkill;
     [SerializeField] private float skillCooldown;

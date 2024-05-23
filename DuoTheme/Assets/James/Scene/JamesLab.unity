@@ -410,6 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c6c11151fa784e439616c5df19b981e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillPosition: {fileID: 1948237822}
   normalSkill: 0
   specialSkill: 1
   skillCooldown: 0
@@ -624,7 +625,7 @@ GameObject:
   - component: {fileID: 1948237822}
   - component: {fileID: 1948237823}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
