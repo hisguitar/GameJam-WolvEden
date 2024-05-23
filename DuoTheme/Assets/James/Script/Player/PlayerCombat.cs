@@ -149,22 +149,26 @@ public class PlayerCombat : MonoBehaviour
     }
 
     
-    public void NormalSlash()
+    public void NormalSlash(GameObject slash)
     {
-        
+        GameObject shieldObject = Instantiate(slash, skillPosition.position, skillPosition.rotation, skillPosition);
+        Destroy(shieldObject,playerSkill[(int)specialSkill].skillCooldown - 0.4f);
     }
-    public void SpecialSlash()
+    public void SpecialSlash(GameObject slash)
     {
-        
-    }
-    
-    public void ShieldSlam()
-    {
-        
+        GameObject shieldObject = Instantiate(slash, skillPosition.position, skillPosition.rotation, skillPosition);
+        Destroy(shieldObject,playerSkill[(int)specialSkill].skillCooldown - 0.4f);
     }
     
-    public void RaiseShield()
+    public void ShieldSlam(GameObject shield)
     {
-        
+        GameObject shieldObject = Instantiate(shield, skillPosition.position, skillPosition.rotation, skillPosition);
+        Destroy(shieldObject,playerSkill[(int)specialSkill].skillCooldown - 0.4f);
+    }
+    
+    public void RaiseShield(GameObject shield)
+    {
+        GameObject shieldObject = Instantiate(shield, skillPosition.position, skillPosition.rotation, skillPosition);
+        Destroy(shieldObject,playerSkill[(int)specialSkill].skillCooldown - 0.4f);
     }
 }

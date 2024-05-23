@@ -722,10 +722,10 @@ MonoBehaviour:
   playerStats: {fileID: 11400000, guid: 45baf719d3ef1c74db9357a76f24dffc, type: 2}
   playerClass: 0
   playerMaxHealth: 100
-  playerHealth: 0
+  playerHealth: 100
   reganSpeed: 7.5
   playerMaxStamina: 100
-  playerStamina: 0
+  playerStamina: 100
   playerSpeed: 5
 --- !u!114 &598207740
 MonoBehaviour:
@@ -739,7 +739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c6c11151fa784e439616c5df19b981e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillPosition: {fileID: 1948237822}
+  skillPosition: {fileID: 712662954}
   normalSkill: 0
   specialSkill: 1
   normalSkillCooldown: 0
@@ -759,10 +759,10 @@ MonoBehaviour:
         - m_Target: {fileID: 598207740}
           m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
           m_MethodName: NormalSlash
-          m_Mode: 1
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 136454539784546740, guid: cf054849384bec140b6d284510437522, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -778,10 +778,10 @@ MonoBehaviour:
         - m_Target: {fileID: 598207740}
           m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
           m_MethodName: SpecialSlash
-          m_Mode: 1
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 136454539784546740, guid: cf054849384bec140b6d284510437522, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -797,10 +797,10 @@ MonoBehaviour:
         - m_Target: {fileID: 598207740}
           m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
           m_MethodName: ShieldSlam
-          m_Mode: 1
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 8590899330446990858, guid: 458be622941ac35408b0fb04ba9c8249, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -816,10 +816,10 @@ MonoBehaviour:
         - m_Target: {fileID: 598207740}
           m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
           m_MethodName: RaiseShield
-          m_Mode: 1
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 8590899330446990858, guid: 5b5a9dbb2eabe3f41b912af06878a742, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -1026,6 +1026,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710563954}
   m_CullTransparentMesh: 1
+--- !u!1 &712662953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 712662954}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &712662954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712662953}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 1.3, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1948237822}
+  m_Father: {fileID: 1269436996}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &1269436995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,7 +1087,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1948237822}
+  - {fileID: 712662954}
   m_Father: {fileID: 598207737}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1349567431
@@ -1229,7 +1261,7 @@ GameObject:
   - component: {fileID: 1948237822}
   - component: {fileID: 1948237823}
   m_Layer: 0
-  m_Name: AttackPoint
+  m_Name: CursorSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1243,13 +1275,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948237821}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 1.3, y: 0, z: 0}
-  m_LocalScale: {x: 0.31941, y: 0.31941, z: 0.31941}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.31940997, y: 0.31940997, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1269436996}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_Father: {fileID: 712662954}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1948237823
 SpriteRenderer:
   m_ObjectHideFlags: 0
