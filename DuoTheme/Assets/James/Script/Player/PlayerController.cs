@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float playerSpeed;
     
+    public PlayerStats PlayerStats { get { return playerStats; } }
     public Class PlayerClass { get { return playerClass; } }
     public float PlayerHealth { get { return playerHealth; } }
     public float PlayerStamina { get { return playerStamina; } }

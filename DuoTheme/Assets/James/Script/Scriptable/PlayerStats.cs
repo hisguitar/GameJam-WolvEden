@@ -11,5 +11,7 @@ public class PlayerStats : ScriptableObject
        public float playerMaxHealth;
        public float playerMaxStamina;
        public float playerSpeed;
+       public SkillName normalSkill;
+       public SkillName specialSkill;
 }
 
