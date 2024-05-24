@@ -5,8 +5,14 @@ using UnityEngine;
 
 public class PlayerLookAtMouse : MonoBehaviour
 {
-    [SerializeField] private Transform playerSprite;
     [SerializeField] private Transform cursor;
+    [SerializeField] private Transform playerSprite;
+    private Vector3 mousePosition;
+
+    public Vector3 MousePosition
+    {
+        get { return mousePosition; }
+    }
     private void Update()
     {
         MouseLook();
@@ -14,17 +20,10 @@ public class PlayerLookAtMouse : MonoBehaviour
 
     private void MouseLook()
     {
-        var mousePosition = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        mousePosition = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         var angle = MathF.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
         cursor.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         
-        if (transform.position.x > mousePosition.x)
-        {
-            playerSprite.localScale = new Vector3(-1, 1, 1);
-        }
-        else if(transform.position.x < mousePosition.x)
-        {
-            playerSprite.localScale = new Vector3(1, 1, 1);
-        }
+        
     }
 }
