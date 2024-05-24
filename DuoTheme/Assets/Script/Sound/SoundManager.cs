@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class SoundManager : SingletonNetworkPersistent<SoundManager>
+public class SoundManager : SingletonPersistent<SoundManager>
 {
     [SerializeField] private Sound[] sounds;
 

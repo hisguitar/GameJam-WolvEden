@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
   m_Name: Lava Animated Tile
   m_EditorClassIdentifier: 
-  m_AnimatedSprites: []
+  m_AnimatedSprites:
+  - {fileID: -1719567631, guid: 2883dde2d896acd498ab599a584b2f5e, type: 3}
+  - {fileID: 1416999537, guid: 2883dde2d896acd498ab599a584b2f5e, type: 3}
+  - {fileID: -1546505528, guid: 2883dde2d896acd498ab599a584b2f5e, type: 3}
+  - {fileID: 1795258319, guid: 2883dde2d896acd498ab599a584b2f5e, type: 3}
+  - {fileID: -819490731, guid: 2883dde2d896acd498ab599a584b2f5e, type: 3}
+  - {fileID: -819490731, guid: 2883dde2d896acd498ab599a584b2f5e, type: 3}
   m_MinSpeed: 1
-  m_MaxSpeed: 1
+  m_MaxSpeed: 10
   m_AnimationStartTime: 0
   m_AnimationStartFrame: 0
   m_TileColliderType: 0
