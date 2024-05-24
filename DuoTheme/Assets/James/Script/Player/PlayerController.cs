@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EditorAttributes;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public enum Class
 {
@@ -14,12 +15,14 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private Class playerClass;
-    
-    [Header("Health")]
+
+    [Header("Health")] 
+    [SerializeField] private Image healthBar;
     [SerializeField] private float playerMaxHealth;
     [ReadOnly][SerializeField]private float playerHealth;
 
     [Header("Stamina")] 
+    [SerializeField] private Image staminaBar;
     [SerializeField] private float reganSpeed;
     [SerializeField] private float playerMaxStamina;
     [ReadOnly][SerializeField]private float playerStamina;
@@ -33,14 +36,14 @@ public class PlayerController : MonoBehaviour
     public float PlayerStamina { get { return playerStamina; } }
     public float PlayerSpeed { get { return playerSpeed; } }
 
-    private void Update()
-    {
-        ReganStamina();
-    }
-
     private void Awake()
     {
         ResetStats();
+    }
+    private void Update()
+    {
+        ReganStamina();
+        UpdateStatsGUI();
     }
     private void ReganStamina()
     {
@@ -73,6 +76,12 @@ public class PlayerController : MonoBehaviour
         {
             playerStamina = 0;
         }
+    }
+
+    public void UpdateStatsGUI()
+    {
+        healthBar.fillAmount = playerHealth / playerMaxHealth;
+        staminaBar.fillAmount = playerStamina / playerMaxStamina;
     }
 
     [Button("Reset Stats")]

@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class Skill
 {
     public string skillName;
+    public float skillDamage;
     public float skillCost;
     public float skillCooldown;
     public SpriteRenderer skillIcon;
@@ -31,6 +32,8 @@ public enum SkillName
 public class PlayerCombat : MonoBehaviour
 {
     [Header("Combat Setting")] 
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private float skillRadius;
     [SerializeField] private Transform skillPosition;
     [SerializeField] private SkillName normalSkill;
     [SerializeField] private SkillName specialSkill;
@@ -49,10 +52,12 @@ public class PlayerCombat : MonoBehaviour
     
     [Header("Ref")] 
     private PlayerController _playerController;
+    private PlayerAnimationController _animationController;
 
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
+        _animationController = GetComponent<PlayerAnimationController>();
     }
 
     private void OnEnable()
@@ -78,6 +83,7 @@ public class PlayerCombat : MonoBehaviour
                 playerSkill[(int)normalSkill].ActiveSkill();
                 normalSkillCooldown = playerSkill[(int)normalSkill].skillCooldown;
                 lastNormalSkillCooldown = playerSkill[(int)normalSkill].skillCooldown;
+                _animationController.AttackAnimation("NormalAttack");
             }
             else
             {
@@ -94,6 +100,7 @@ public class PlayerCombat : MonoBehaviour
                 playerSkill[(int)specialSkill].ActiveSkill();
                 specialSkillCooldown = playerSkill[(int)specialSkill].skillCooldown;
                 lastSpecialSkillCooldown = playerSkill[(int)specialSkill].skillCooldown;
+                _animationController.AttackAnimation("SpecialAttack");
             }
             else
             {
@@ -151,10 +158,19 @@ public class PlayerCombat : MonoBehaviour
     }
 
     
-    public void NormalSlash(GameObject slash)
+    public void NormalSlash()
     {
-        GameObject shieldObject = Instantiate(slash, skillPosition.position, skillPosition.rotation, skillPosition);
-        Destroy(shieldObject,playerSkill[(int)normalSkill].skillCooldown - 0.05f);
+        /*GameObject shieldObject = Instantiate(slash, skillPosition.position, skillPosition.rotation, skillPosition);
+        Destroy(shieldObject,playerSkill[(int)normalSkill].skillCooldown - 0.05f);*/
+
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(skillPosition.position, skillRadius, enemyLayer);
+        foreach (var enemies in enemy)
+        {
+            if (enemies.CompareTag("Enemy"))
+            {
+                enemies.GetComponent<BossHealth>().TakeDamage(playerSkill[(int)normalSkill].skillDamage);
+            }
+        }
     }
     public void SpecialSlash(GameObject slash)
     {
@@ -172,5 +188,11 @@ public class PlayerCombat : MonoBehaviour
     {
         GameObject shieldObject = Instantiate(shield, skillPosition.position, skillPosition.rotation, skillPosition);
         Destroy(shieldObject,playerSkill[(int)specialSkill].skillCooldown - 0.05f);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(skillPosition.position,skillRadius);
     }
 }
