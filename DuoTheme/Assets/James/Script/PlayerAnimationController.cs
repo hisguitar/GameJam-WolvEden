@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerAnimationController : MonoBehaviour
 {
+    [SerializeField] private LayerMask cursorLayer;
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Animator animator;
     private Vector3 mouseDirection;
@@ -57,30 +58,51 @@ public class PlayerAnimationController : MonoBehaviour
     }
     public void SetMouseDirection()
     {
-        if (_lookAtMouse.MousePosition.x < transform.position.x)
+        bool leftDirection = Physics2D.OverlapCircle(new Vector3(transform.position.x - 2, transform.position.y), 1.4f, cursorLayer);
+        bool rightDirection = Physics2D.OverlapCircle(new Vector3(transform.position.x + 2, transform.position.y), 1.4f, cursorLayer);
+        bool topDirection = Physics2D.OverlapCircle(new Vector3(transform.position.x, transform.position.y + 2), 1.4f, cursorLayer);
+        bool downDirection = Physics2D.OverlapCircle(new Vector3(transform.position.x, transform.position.y - 2), 1.4f, cursorLayer);
+        if (leftDirection)
         {
+            ResetMousePosition();
             mouseDirection.x = -1;
         }
-        else if (_lookAtMouse.MousePosition.x > transform.position.x)
+        else if (rightDirection)
         {
+            ResetMousePosition();
             mouseDirection.x = 1;
         }
-
-        if (_lookAtMouse.MousePosition.y < transform.position.y)
+        else if (topDirection)
         {
-            mouseDirection.y = -1;
-        }
-        else if (_lookAtMouse.MousePosition.y > transform.position.y)
-        {
+            ResetMousePosition();
             mouseDirection.y = 1;
+        }
+        else if (downDirection)
+        {
+            ResetMousePosition();
+            mouseDirection.y = -1;
         }
         
         animator.SetFloat("MouseX",mouseDirection.x);
         animator.SetFloat("MouseY",mouseDirection.y);
     }
 
+    private void ResetMousePosition()
+    {
+        mouseDirection = Vector3.zero;
+    }
+
     public void AttackAnimation(string parameterName)
     {
         animator.SetTrigger(parameterName);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(new Vector3(transform.position.x,transform.position.y + 2),1.4f);
+        Gizmos.DrawWireSphere(new Vector3(transform.position.x,transform.position.y - 2),1.4f);
+        Gizmos.DrawWireSphere(new Vector3(transform.position.x + 2,transform.position.y),1.4f);
+        Gizmos.DrawWireSphere(new Vector3(transform.position.x - 2,transform.position.y),1.4f);
     }
 }
