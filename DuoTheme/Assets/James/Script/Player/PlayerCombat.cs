@@ -174,8 +174,8 @@ public class PlayerCombat : MonoBehaviour
     }
     public void SpecialSlash(GameObject slash)
     {
-        GameObject shieldObject = Instantiate(slash, skillPosition.position, skillPosition.rotation, skillPosition);
-        Destroy(shieldObject,playerSkill[(int)specialSkill].skillCooldown - 0.05f);
+        GameObject slashObject = Instantiate(slash, skillPosition.position, skillPosition.rotation, skillPosition);
+        slashObject.GetComponent<Damageable>().SetDamage(playerSkill[(int)specialSkill].skillDamage);
     }
     
     public void ShieldSlam(GameObject shield)

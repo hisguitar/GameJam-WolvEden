@@ -1189,7 +1189,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - skillName: Khod Slash
-    skillDamage: 0
+    skillDamage: 200
     skillCost: 30
     skillCooldown: 4
     skillIcon: {fileID: 7035696078084883712, guid: c961534eae7dbca4aa56967d6fcb34b2, type: 3}
@@ -2545,7 +2545,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948237821}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

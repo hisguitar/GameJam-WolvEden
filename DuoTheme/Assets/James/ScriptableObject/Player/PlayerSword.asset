@@ -18,3 +18,4 @@ MonoBehaviour:
   playerSpeed: 5
   normalSkill: 0
   specialSkill: 1
+  animation: {fileID: 9100000, guid: d622341d2adc7ac4e82ccac9d75a5272, type: 2}

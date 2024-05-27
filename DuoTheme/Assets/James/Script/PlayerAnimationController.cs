@@ -27,6 +27,14 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void MovementAnimation()
     {
+        if (_playerMovement.MoveDirection != Vector3.zero)
+        {
+            animator.SetBool("OnMove", true);
+        }
+        else
+        {
+            animator.SetBool("OnMove", false);
+        }
         animator.SetFloat("MoveX",_playerMovement.MoveDirection.x);
         animator.SetFloat("MoveY",_playerMovement.MoveDirection.y);
     }
@@ -95,6 +103,16 @@ public class PlayerAnimationController : MonoBehaviour
     public void AttackAnimation(string parameterName)
     {
         animator.SetTrigger(parameterName);
+    }
+
+    public void HurtAnimation()
+    {
+        animator.SetTrigger("OnHurt");
+    }
+
+    public void DeadAnimation(bool isDead)
+    {
+        animator.SetBool("OnDie",isDead);
     }
 
     private void OnDrawGizmos()

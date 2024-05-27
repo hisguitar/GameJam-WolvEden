@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
     
     [Header("Movement")]
     [SerializeField] private float playerSpeed;
+
+    [Header("Ref")] 
+    private PlayerAnimationController _playerAnimationController;
     
     public PlayerStats PlayerStats { get { return playerStats; } }
     public Class PlayerClass { get { return playerClass; } }
@@ -38,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        _playerAnimationController = GetComponent<PlayerAnimationController>();
         ResetStats();
     }
     private void Update()
@@ -63,10 +67,20 @@ public class PlayerController : MonoBehaviour
     public void ReceiveDamage(float damage)
     {
         playerHealth -= damage;
-        if (playerHealth < 0)
+        if (playerHealth <= 0)
         {
+            PlayerDead();
             playerHealth = 0;
         }
+        else
+        {
+            _playerAnimationController.HurtAnimation();
+        }
+    }
+
+    private void PlayerDead()
+    {
+        _playerAnimationController.DeadAnimation(true);
     }
 
     public void DecreaseStamina(float cost)
@@ -124,6 +138,12 @@ public class PlayerController : MonoBehaviour
         {
             playerClass = Class.Sword;
         }
+    }
+
+    [Button("Test Danage")]
+    public void TestDamage()
+    {
+        ReceiveDamage(50);
     }
 }
 
