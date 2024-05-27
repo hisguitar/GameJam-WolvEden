@@ -16,6 +16,7 @@ public class ChangeSceneOnKeyPress : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
+            SoundManager.Instance.Play(SoundManager.SoundName.ChangeScene);
             animator.SetTrigger("ChangeScene");
         }
     }

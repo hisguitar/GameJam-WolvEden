@@ -9,6 +9,8 @@ public class SoundManager : SingletonPersistent<SoundManager>
     public enum SoundName
     {
         ThemeSong,
+        ChangeScene,
+        ToggleWindow
     }
 
     // For setting sound

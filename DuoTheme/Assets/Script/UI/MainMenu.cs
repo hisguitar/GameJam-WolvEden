@@ -16,11 +16,13 @@ public class MainMenu : MonoBehaviour
 
     public async void StartHost()
     {
+        SoundManager.Instance.Play(SoundManager.SoundName.ChangeScene);
         await HostSingleton.Instance.GameManager.StartHostAsync();
     }
 
     public async void StartClient()
     {
+        SoundManager.Instance.Play(SoundManager.SoundName.ChangeScene);
         await ClientSingleton.Instance.GameManager.StartClientAsync(joinCodeField.text);
     }
 

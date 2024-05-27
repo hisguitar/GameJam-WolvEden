@@ -20,6 +20,7 @@ public class LobbyItem : MonoBehaviour
 
     public void Join()
     {
+        SoundManager.Instance.Play(SoundManager.SoundName.ChangeScene);
         lobbiesList.JoinAsync(lobby);
     }
 }
