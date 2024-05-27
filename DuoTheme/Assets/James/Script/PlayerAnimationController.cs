@@ -27,7 +27,10 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void Update()
     {
-        RotationController();
+        if (_playerController.IsDead)
+        {
+            return;
+        }
         MovementAnimation();
         SetMouseDirection();
     }
@@ -45,32 +48,17 @@ public class PlayerAnimationController : MonoBehaviour
         animator.SetFloat("MoveX",_playerMovement.MoveDirection.x);
         animator.SetFloat("MoveY",_playerMovement.MoveDirection.y);
     }
-
-    private void RotationController()
+    
+    public void OnHoldAnimation()
     {
-        /*if (_playerMovement.MoveDirection != Vector3.zero)
-        {
-            if (_playerMovement.MoveDirection.x < 0)
-            {
-                playerSprite.flipX = true;
-            }
-            else if (_playerMovement.MoveDirection.x > 0)
-            {
-                playerSprite.flipX = false;
-            }
-        }
-        else
-        {
-            if (transform.position.x > _lookAtMouse.MousePosition.x)
-            {
-                playerSprite.flipX = true;
-            }
-            else if(transform.position.x < _lookAtMouse.MousePosition.x)
-            {
-                playerSprite.flipX = false;
-            }
-        }*/
+        animator.SetBool("OnHold",true);
     }
+
+    public void UnHoldAnimation()
+    {
+        animator.SetBool("OnHold",false);
+    }
+    
 
     public void ChangeAnimationClass()
     {

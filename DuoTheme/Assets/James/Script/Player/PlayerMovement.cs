@@ -27,19 +27,19 @@ public class PlayerMovement : MonoBehaviour
 
         private void Update()
         {
-            PlayerDash();
-        }
-
-        private void FixedUpdate()
-        {
+            if (_playerController.IsDead)
+            {
+                return;
+            }
             if (isDashing)
             {
                 return;
             }
 
             PlayerMove();
+            PlayerDash();
         }
-
+        
         private void PlayerMove()
         {
             moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
