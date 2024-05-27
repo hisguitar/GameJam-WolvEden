@@ -11,10 +11,7 @@ public class SoundBox : MonoBehaviour
         // and this sound will play at start (BGM)
         if (!isOnClick)
         {
-            if (SoundManager.Instance.GetComponent<AudioSource>() != null)
-            {
-                SoundManager.Instance.GetComponent<AudioSource>().Stop();
-            }
+            SoundManager.Instance.Stop();
             SoundManager.Instance.Play(soundName);
         }
     }

@@ -33,4 +33,13 @@ public class SoundManager : SingletonPersistent<SoundManager>
     {
         return Array.Find(sounds, s => s.soundName == soundName);
     }
+
+    public void Stop()
+    {
+        var audioSource = GetComponent<AudioSource>();
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+    }
 }
