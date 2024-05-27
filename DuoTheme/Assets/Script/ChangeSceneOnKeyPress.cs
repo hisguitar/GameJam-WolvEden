@@ -10,6 +10,7 @@ public class ChangeSceneOnKeyPress : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        SoundManager.Instance.Play(SoundManager.SoundName.RushIn);
     }
 
     private void Update()

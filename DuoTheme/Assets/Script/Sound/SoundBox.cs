@@ -7,7 +7,8 @@ public class SoundBox : MonoBehaviour
 
     private void Start()
     {
-        // If not on click, the sound will play at start (BGM)
+        // If not on click, all sound will stop
+        // and this sound will play at start (BGM)
         if (!isOnClick)
         {
             if (SoundManager.Instance.GetComponent<AudioSource>() != null)

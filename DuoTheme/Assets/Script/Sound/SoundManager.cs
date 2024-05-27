@@ -11,7 +11,8 @@ public class SoundManager : SingletonPersistent<SoundManager>
         ThemeSong,
         ChangeScene,
         ToggleWindow,
-        EnterDungeon
+        EnterDungeon,
+        RushIn
     }
 
     // For setting sound
