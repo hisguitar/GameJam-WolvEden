@@ -8,12 +8,12 @@ using UnityEngine.UI;
 
 public enum Class
 {
-    Sword,
-    Shield,
+    Sword = 0,
+    Shield = 1,
 }
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private PlayerStats playerStats;
+    [SerializeField] private List<PlayerStats> playerStats;
     [SerializeField] private Class playerClass;
 
     [Header("Health")] 
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     [Header("Ref")] 
     private PlayerAnimationController _playerAnimationController;
     
-    public PlayerStats PlayerStats { get { return playerStats; } }
+    public PlayerStats PlayerStats { get { return playerStats[(int)playerClass]; } }
     public Class PlayerClass { get { return playerClass; } }
     public float PlayerHealth { get { return playerHealth; } }
     public float PlayerStamina { get { return playerStamina; } }
@@ -42,8 +42,13 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _playerAnimationController = GetComponent<PlayerAnimationController>();
+    }
+
+    private void Start()
+    {
         ResetStats();
     }
+
     private void Update()
     {
         ReganStamina();
@@ -101,13 +106,14 @@ public class PlayerController : MonoBehaviour
     [Button("Reset Stats")]
     public void ResetStats()
     {
-        playerClass = playerStats.playerClass;
-        playerMaxHealth = playerStats.playerMaxHealth;
-        playerMaxStamina = playerStats.playerMaxStamina;
-        playerSpeed = playerStats.playerSpeed;
+        playerClass = playerStats[(int)playerClass].playerClass;
+        playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
+        playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
+        playerSpeed = playerStats[(int)playerClass].playerSpeed;
         
         playerHealth = playerMaxHealth;
         playerStamina = playerMaxStamina;
+        _playerAnimationController.ChangeAnimationClass();
     }
 
     [Button("Upgrade Max Health")]
@@ -133,10 +139,12 @@ public class PlayerController : MonoBehaviour
         if (playerClass == Class.Sword)
         {
             playerClass = Class.Shield;
+            ResetStats();
         }
         else
         {
             playerClass = Class.Sword;
+            ResetStats();
         }
     }
 

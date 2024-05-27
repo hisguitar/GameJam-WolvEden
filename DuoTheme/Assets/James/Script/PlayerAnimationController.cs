@@ -12,10 +12,17 @@ public class PlayerAnimationController : MonoBehaviour
     
     private PlayerMovement _playerMovement;
     private PlayerLookAtMouse _lookAtMouse;
+    private PlayerController _playerController;
     private void Awake()
     {
+        _playerController = GetComponent<PlayerController>();
         _playerMovement = GetComponent<PlayerMovement>();
         _lookAtMouse = GetComponent<PlayerLookAtMouse>();
+    }
+
+    private void Start()
+    {
+        ChangeAnimationClass();
     }
 
     private void Update()
@@ -63,6 +70,11 @@ public class PlayerAnimationController : MonoBehaviour
                 playerSprite.flipX = false;
             }
         }*/
+    }
+
+    public void ChangeAnimationClass()
+    {
+        animator.runtimeAnimatorController = _playerController.PlayerStats.animation;
     }
     public void SetMouseDirection()
     {
