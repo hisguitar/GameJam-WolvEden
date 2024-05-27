@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using EditorAttributesSamples;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -13,5 +14,6 @@ public class PlayerStats : ScriptableObject
        public float playerSpeed;
        public SkillName normalSkill;
        public SkillName specialSkill;
+       public AnimatorController animation;
 }
 

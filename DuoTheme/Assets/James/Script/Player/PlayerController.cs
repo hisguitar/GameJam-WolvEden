@@ -4,43 +4,55 @@ using System.Collections.Generic;
 using UnityEngine;
 using EditorAttributes;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public enum Class
 {
-    Sword,
-    Shield,
+    Sword = 0,
+    Shield = 1,
 }
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private PlayerStats playerStats;
+    [SerializeField] private List<PlayerStats> playerStats;
     [SerializeField] private Class playerClass;
-    
-    [Header("Health")]
+
+    [Header("Health")] 
+    [SerializeField] private Image healthBar;
     [SerializeField] private float playerMaxHealth;
     [ReadOnly][SerializeField]private float playerHealth;
 
     [Header("Stamina")] 
+    [SerializeField] private Image staminaBar;
     [SerializeField] private float reganSpeed;
     [SerializeField] private float playerMaxStamina;
     [ReadOnly][SerializeField]private float playerStamina;
     
     [Header("Movement")]
     [SerializeField] private float playerSpeed;
+
+    [Header("Ref")] 
+    private PlayerAnimationController _playerAnimationController;
     
-    public PlayerStats PlayerStats { get { return playerStats; } }
+    public PlayerStats PlayerStats { get { return playerStats[(int)playerClass]; } }
     public Class PlayerClass { get { return playerClass; } }
     public float PlayerHealth { get { return playerHealth; } }
     public float PlayerStamina { get { return playerStamina; } }
     public float PlayerSpeed { get { return playerSpeed; } }
 
+    private void Awake()
+    {
+        _playerAnimationController = GetComponent<PlayerAnimationController>();
+    }
+
+    private void Start()
+    {
+        ResetStats();
+    }
+
     private void Update()
     {
         ReganStamina();
-    }
-
-    private void Awake()
-    {
-        ResetStats();
+        UpdateStatsGUI();
     }
     private void ReganStamina()
     {
@@ -60,10 +72,20 @@ public class PlayerController : MonoBehaviour
     public void ReceiveDamage(float damage)
     {
         playerHealth -= damage;
-        if (playerHealth < 0)
+        if (playerHealth <= 0)
         {
+            PlayerDead();
             playerHealth = 0;
         }
+        else
+        {
+            _playerAnimationController.HurtAnimation();
+        }
+    }
+
+    private void PlayerDead()
+    {
+        _playerAnimationController.DeadAnimation(true);
     }
 
     public void DecreaseStamina(float cost)
@@ -75,16 +97,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void UpdateStatsGUI()
+    {
+        healthBar.fillAmount = playerHealth / playerMaxHealth;
+        staminaBar.fillAmount = playerStamina / playerMaxStamina;
+    }
+
     [Button("Reset Stats")]
     public void ResetStats()
     {
-        playerClass = playerStats.playerClass;
-        playerMaxHealth = playerStats.playerMaxHealth;
-        playerMaxStamina = playerStats.playerMaxStamina;
-        playerSpeed = playerStats.playerSpeed;
+        playerClass = playerStats[(int)playerClass].playerClass;
+        playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
+        playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
+        playerSpeed = playerStats[(int)playerClass].playerSpeed;
         
         playerHealth = playerMaxHealth;
         playerStamina = playerMaxStamina;
+        _playerAnimationController.ChangeAnimationClass();
     }
 
     [Button("Upgrade Max Health")]
@@ -102,6 +131,27 @@ public class PlayerController : MonoBehaviour
     public void UpgradeSpeed()
     {
         playerSpeed += 0.25f;
+    }
+    
+    [Button("Change Class")]
+    public void ChangeClassPlayer()
+    {
+        if (playerClass == Class.Sword)
+        {
+            playerClass = Class.Shield;
+            ResetStats();
+        }
+        else
+        {
+            playerClass = Class.Sword;
+            ResetStats();
+        }
+    }
+
+    [Button("Test Danage")]
+    public void TestDamage()
+    {
+        ReceiveDamage(50);
     }
 }
 

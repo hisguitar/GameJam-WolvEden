@@ -17,7 +17,8 @@ public class PlayerMovement : MonoBehaviour
         [Header("Ref")] 
         private Rigidbody2D rb;
         private PlayerController _playerController;
-
+        
+        public Vector3 MoveDirection { get { return moveDirection; } }
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
