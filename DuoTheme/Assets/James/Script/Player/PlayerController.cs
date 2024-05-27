@@ -27,9 +27,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float reganSpeed;
     [SerializeField] private float playerMaxStamina;
     [ReadOnly][SerializeField]private float playerStamina;
-    
-    [Header("Movement")]
-    [SerializeField] private float playerSpeed;
+
+    [Header("Movement")] 
+    [SerializeField] private float playerMaxSpeed;
+    [ReadOnly][SerializeField] private float playerSpeed;
 
     [Header("Ref")] 
     private PlayerAnimationController _playerAnimationController;
@@ -101,6 +102,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void ReduceSpeed(float reduceCount)
+    {
+        playerSpeed -= reduceCount;
+    }
+
+    public void SetSpeedDefault()
+    {
+        playerSpeed = playerMaxSpeed;
+    }
+
     public void UpdateStatsGUI()
     {
         healthBar.fillAmount = playerHealth / playerMaxHealth;
@@ -113,8 +124,9 @@ public class PlayerController : MonoBehaviour
         playerClass = playerStats[(int)playerClass].playerClass;
         playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
         playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
-        playerSpeed = playerStats[(int)playerClass].playerSpeed;
+        playerMaxSpeed = playerStats[(int)playerClass].playerSpeed;
         
+        playerSpeed = playerMaxSpeed;
         playerHealth = playerMaxHealth;
         playerStamina = playerMaxStamina;
         _playerAnimationController.ChangeAnimationClass();

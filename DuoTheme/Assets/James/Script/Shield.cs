@@ -77,6 +77,7 @@ public class Shield : MonoBehaviour
 
     public void ActiveShield()
     {
+        _playerController.ReduceSpeed(4f);
         _animationController.OnHoldAnimation();
         onActive = true;
         shieldSprite.enabled = true;
@@ -85,6 +86,7 @@ public class Shield : MonoBehaviour
 
     private void DeActiveShield()
     {
+        _playerController.SetSpeedDefault();
         _animationController.UnHoldAnimation();
         onActive = false;
         shieldSprite.enabled = false;
