@@ -7,7 +7,7 @@ using UnityEngine;
 public abstract class Damageable: MonoBehaviour
 {
     [SerializeField] private string tagName;
-    [SerializeField] private float damage;
+    public float damage;
 
     public void SetDamage(float damage)
     {

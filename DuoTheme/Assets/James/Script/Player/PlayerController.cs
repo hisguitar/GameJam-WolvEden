@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Class playerClass;
 
     [Header("Health")] 
+    [SerializeField] private bool isDead;
     [SerializeField] private Image healthBar;
     [SerializeField] private float playerMaxHealth;
     [ReadOnly][SerializeField]private float playerHealth;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
     public float PlayerHealth { get { return playerHealth; } }
     public float PlayerStamina { get { return playerStamina; } }
     public float PlayerSpeed { get { return playerSpeed; } }
+    public bool IsDead { get { return isDead; } }
 
     private void Awake()
     {
@@ -85,7 +87,9 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerDead()
     {
+        GetComponent<Collider2D>().enabled = false;
         _playerAnimationController.DeadAnimation(true);
+        isDead = true;
     }
 
     public void DecreaseStamina(float cost)
@@ -148,7 +152,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    [Button("Test Danage")]
+    [Button("Test Damage")]
     public void TestDamage()
     {
         ReceiveDamage(50);
