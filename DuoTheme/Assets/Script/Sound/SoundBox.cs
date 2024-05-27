@@ -10,11 +10,15 @@ public class SoundBox : MonoBehaviour
         // If not on click, the sound will play at start (BGM)
         if (!isOnClick)
         {
+            if (SoundManager.Instance.GetComponent<AudioSource>() != null)
+            {
+                SoundManager.Instance.GetComponent<AudioSource>().Stop();
+            }
             SoundManager.Instance.Play(soundName);
         }
     }
 
-    public void PlaySound()
+    public void PlaySoundOnClick()
     {
         SoundManager.Instance.Play(soundName);
     }

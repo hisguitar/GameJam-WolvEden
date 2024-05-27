@@ -10,7 +10,8 @@ public class SoundManager : SingletonPersistent<SoundManager>
     {
         ThemeSong,
         ChangeScene,
-        ToggleWindow
+        ToggleWindow,
+        EnterDungeon
     }
 
     // For setting sound

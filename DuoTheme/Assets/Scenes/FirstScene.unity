@@ -349,6 +349,11 @@ MonoBehaviour:
     loop: 0
     volume: 1
     audioSource: {fileID: 0}
+  - soundName: 3
+    clip: {fileID: 8300000, guid: 3ea300ae5bf91df4ab46f7b2ab4984c7, type: 3}
+    loop: 0
+    volume: 1
+    audioSource: {fileID: 0}
 --- !u!4 &1205149373
 Transform:
   m_ObjectHideFlags: 0
