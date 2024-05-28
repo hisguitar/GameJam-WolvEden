@@ -36,10 +36,12 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     public void Stop()
     {
-        var audioSource = GetComponent<AudioSource>();
-        if (audioSource != null && audioSource.isPlaying)
+        foreach (var sound in sounds)
         {
-            audioSource.Stop();
+            if (sound.audioSource != null && sound.audioSource.isPlaying)
+            {
+                sound.audioSource.Stop();
+            }
         }
     }
 }
