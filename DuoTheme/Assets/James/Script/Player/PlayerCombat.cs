@@ -192,7 +192,7 @@ public class PlayerCombat : NetworkBehaviour
         {
             if (enemies.CompareTag("Enemy"))
             {
-                enemies.GetComponent<BossHealth>().TakeDamage(playerSkill[(int)normalSkill].skillDamage);
+                enemies.GetComponent<BossHealth>().TakeDamageServerRpc(playerSkill[(int)normalSkill].skillDamage);
             }
         }
     }
@@ -205,10 +205,18 @@ public class PlayerCombat : NetworkBehaviour
         SpecialSlashClientRpc();
     }
     [ClientRpc]
-    public void SpecialSlashClientRpc()
+    private void SpecialSlashClientRpc()
     {
-        GameObject slashObject = Instantiate(slashClient, skillPosition.position, skillPosition.rotation, skillPosition);
-        slashObject.GetComponent<Damageable>().SetDamage(playerSkill[(int)specialSkill].skillDamage);
+        if (IsOwner)
+        {
+            return;
+        }
+        SpecialSlash();
+    }
+
+    private void SpecialSlash()
+    {
+        Instantiate(slashClient, skillPosition.position, skillPosition.rotation, skillPosition);
     }
     
     
@@ -220,7 +228,7 @@ public class PlayerCombat : NetworkBehaviour
         {
             if (enemies.CompareTag("Enemy"))
             {
-                enemies.GetComponent<BossHealth>().TakeDamage(playerSkill[(int)normalSkill].skillDamage);
+                enemies.GetComponent<BossHealth>().TakeDamageServerRpc(playerSkill[(int)normalSkill].skillDamage);
             }
         }
     }

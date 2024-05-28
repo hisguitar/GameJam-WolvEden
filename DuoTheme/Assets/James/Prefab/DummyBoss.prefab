@@ -163,10 +163,8 @@ GameObject:
   - component: {fileID: 7204805962647029894}
   - component: {fileID: 4016518911416326861}
   - component: {fileID: 7171587489828084061}
-  - component: {fileID: 1773366630780938407}
-  - component: {fileID: 4484699342363590534}
+  - component: {fileID: 78449539258139902}
   - component: {fileID: 2154317104832202557}
-  - component: {fileID: 1732512238770013342}
   m_Layer: 3
   m_Name: DummyBoss
   m_TagString: Enemy
@@ -304,7 +302,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1773366630780938407
+--- !u!114 &78449539258139902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -316,7 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1549332331
+  GlobalObjectIdHash: 3932189066
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -325,37 +323,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &4484699342363590534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7278411258574537065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df2868252ab5c4d1da357e8f11f1b524, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UseUnreliableDeltas: 0
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 0
-  SyncRotAngleX: 0
-  SyncRotAngleY: 0
-  SyncRotAngleZ: 0
-  SyncScaleX: 0
-  SyncScaleY: 0
-  SyncScaleZ: 0
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  UseQuaternionSynchronization: 0
-  UseQuaternionCompression: 0
-  UseHalfFloatPrecision: 0
-  InLocalSpace: 0
-  Interpolate: 1
-  SlerpPosition: 0
 --- !u!114 &2154317104832202557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,8 +335,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2d5e24891bd2944cba2dd6b6b1e9ecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxBossHealth: 1000
-  bossHealth: 1000
+  maxBossHealth:
+    m_InternalValue: 0
+  bossHealth:
+    m_InternalValue: 0
   healthBar: {fileID: 4147534525327771330}
   offSet: {x: -0.52, y: 13}
   areaBossRadius: {x: 11.3, y: 7.84}
@@ -379,18 +348,6 @@ MonoBehaviour:
   _animator: {fileID: 5417633237432929165}
   bulletObject: {fileID: 6552662160762432435, guid: 2c47b18029b2f8248854786ba487c72d, type: 3}
   bulletSpeed: 10
---- !u!114 &1732512238770013342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7278411258574537065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7713980581238242029
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,6 +746,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2347803396557897960}
   - component: {fileID: 5417633237432929165}
+  - component: {fileID: 3446513458111582116}
   m_Layer: 5
   m_Name: BossHUD
   m_TagString: Untagged
@@ -838,3 +796,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3446513458111582116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8939177378387832473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8deae8091111f4eb30a56c1f4e0d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 5417633237432929165}

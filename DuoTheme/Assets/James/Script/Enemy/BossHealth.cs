@@ -23,8 +23,14 @@ public abstract class BossHealth : NetworkBehaviour
         {
             return;
         }
-        healthBar.fillAmount = bossHealth / maxBossHealth;
+
+        UpdateGUI();
         CheckPlayerInArea();
+    }
+
+    private void UpdateGUI()
+    {
+        healthBar.fillAmount = bossHealth / maxBossHealth;
     }
 
     private void CheckPlayerInArea()
@@ -44,6 +50,7 @@ public abstract class BossHealth : NetworkBehaviour
     private void ActiveBoss()
     {
         bossActive = true;
+        bossHealth = maxBossHealth;
         _animator.SetBool("BossActive",true);
     }
 
@@ -53,8 +60,24 @@ public abstract class BossHealth : NetworkBehaviour
         _animator.SetBool("BossActive",false);
     }
 
-    public void TakeDamage(float damage)
+    [ServerRpc]
+    public void TakeDamageServerRpc(float damage)
     {
+        bossHealth -= damage;
+        if (bossHealth < 0)
+        {
+            bossHealth = 0;
+        }
+        TakeDamageClientRpc(damage);
+    }
+
+    [ClientRpc]
+    private void TakeDamageClientRpc(float damage)
+    {
+        if (IsOwner)
+        {
+            return;
+        }
         bossHealth -= damage;
         if (bossHealth < 0)
         {

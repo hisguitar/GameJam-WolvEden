@@ -17,5 +17,7 @@ public class SimpleProjectile : MonoBehaviour
             other.GetComponent<PlayerController>().ReceiveDamage(25);
             Destroy(gameObject);
         }
+        
+        Destroy(gameObject);
     }
 }

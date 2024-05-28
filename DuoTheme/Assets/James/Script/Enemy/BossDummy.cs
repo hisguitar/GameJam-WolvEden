@@ -9,6 +9,8 @@ namespace James.Script
         [SerializeField] private GameObject bulletObject;
         [SerializeField] private float bulletSpeed;
         private bool isShoot;
+        
+
         private void FixedUpdate()
         {
             ShootBullet();
