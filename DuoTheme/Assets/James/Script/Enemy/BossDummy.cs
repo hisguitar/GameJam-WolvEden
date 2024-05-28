@@ -34,7 +34,7 @@ namespace James.Script
 
         public void OnDie()
         {
-            
+            UnActiveBoss();
         }
     }
 }
