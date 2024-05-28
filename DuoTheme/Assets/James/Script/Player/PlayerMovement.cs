@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
     {
         [Header("Dash Setting")] 
         [SerializeField] private float dashDuration;
@@ -27,6 +28,10 @@ public class PlayerMovement : MonoBehaviour
 
         private void Update()
         {
+            if (!IsOwner)
+            {
+                return;
+            }
             if (_playerController.IsDead)
             {
                 return;

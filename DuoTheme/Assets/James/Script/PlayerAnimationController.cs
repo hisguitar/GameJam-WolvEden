@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerAnimationController : MonoBehaviour
+public class PlayerAnimationController : NetworkBehaviour
 {
     [SerializeField] private LayerMask cursorLayer;
     [SerializeField] private SpriteRenderer playerSprite;
@@ -27,6 +28,10 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void Update()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         if (_playerController.IsDead)
         {
             return;
