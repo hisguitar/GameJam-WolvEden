@@ -50,7 +50,7 @@ public abstract class BossHealth : NetworkBehaviour
     private void ActiveBoss()
     {
         bossActive = true;
-        bossHealth = maxBossHealth;
+        RestoreBossHpClientRpc();
         _animator.SetBool("BossActive",true);
     }
 
@@ -58,6 +58,12 @@ public abstract class BossHealth : NetworkBehaviour
     {
         bossActive = false;
         _animator.SetBool("BossActive",false);
+    }
+
+    [ClientRpc]
+    private void RestoreBossHpClientRpc()
+    {
+        bossHealth = maxBossHealth;
     }
 
     [ServerRpc]
@@ -68,6 +74,7 @@ public abstract class BossHealth : NetworkBehaviour
         {
             bossHealth = 0;
         }
+        UpdateGUI();
         TakeDamageClientRpc(damage);
     }
 
@@ -83,6 +90,7 @@ public abstract class BossHealth : NetworkBehaviour
         {
             bossHealth = 0;
         }
+        UpdateGUI();
     }
 
     private void OnDrawGizmos()
