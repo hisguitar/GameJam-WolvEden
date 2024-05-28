@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EditorAttributes;
+using Unity.Netcode;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public enum Class
     Sword = 0,
     Shield = 1,
 }
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     [SerializeField] private List<PlayerStats> playerStats;
     [SerializeField] private Class playerClass;
@@ -32,6 +33,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float playerMaxSpeed;
     [ReadOnly][SerializeField] private float playerSpeed;
 
+    [Header("GUI")] 
+    [SerializeField] private GameObject playerHUD;
+
     [Header("Ref")] 
     private PlayerAnimationController _playerAnimationController;
     
@@ -42,18 +46,48 @@ public class PlayerController : MonoBehaviour
     public float PlayerSpeed { get { return playerSpeed; } }
     public bool IsDead { get { return isDead; } }
 
+    public static event Action<PlayerController> OnPlayerSpawned; 
+    public static event Action<PlayerController> OnPlayerDespawned; 
     private void Awake()
     {
         _playerAnimationController = GetComponent<PlayerAnimationController>();
     }
-
-    private void Start()
+    public override void OnNetworkSpawn()
     {
+        if (IsServer)
+        {
+            OnPlayerSpawned?.Invoke(this);
+        }
+
+        if (!IsOwner)
+        {
+            playerHUD.SetActive(false);
+            return;
+        }
         ResetStats();
     }
 
+    public override void OnNetworkDespawn()
+    {
+        if (IsServer)
+        {
+            OnPlayerDespawned?.Invoke(this);
+        }
+    }
+
+    
+
+    /*private void Start()
+    {
+        ResetStats();
+    }*/
+
     private void Update()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         ReganStamina();
         UpdateStatsGUI();
     }

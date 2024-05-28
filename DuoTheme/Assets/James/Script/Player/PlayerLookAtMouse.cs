@@ -1,20 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerLookAtMouse : MonoBehaviour
+public class PlayerLookAtMouse : NetworkBehaviour
 {
     [SerializeField] private Transform cursor;
     [SerializeField] private Transform playerSprite;
     private Vector3 mousePosition;
 
-    public Vector3 MousePosition
+    public Vector3 MousePosition { get { return mousePosition; } }
+
+    public override void OnNetworkSpawn()
     {
-        get { return mousePosition; }
+        if (!IsOwner)
+        {
+            cursor.gameObject.SetActive(false);
+        }
     }
+
     private void Update()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         MouseLook();
     }
 

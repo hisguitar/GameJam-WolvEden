@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using EditorAttributes;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -29,7 +30,7 @@ public enum SkillName
     ShieldSlab = 2,
     RaiseShield = 3,
 }
-public class PlayerCombat : MonoBehaviour
+public class PlayerCombat : NetworkBehaviour
 {
     [Header("Combat Setting")] 
     [SerializeField] private LayerMask enemyLayer;
@@ -61,13 +62,26 @@ public class PlayerCombat : MonoBehaviour
         _animationController = GetComponent<PlayerAnimationController>();
     }
 
-    private void OnEnable()
+    public override void OnNetworkSpawn()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         ChangeClass();
     }
+
+    /*private void OnEnable()
+    {
+        ChangeClass();
+    }*/
     
     private void Update()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         if (_playerController.IsDead)
         {
             return;
