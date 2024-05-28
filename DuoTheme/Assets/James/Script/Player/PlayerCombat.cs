@@ -39,6 +39,8 @@ public class PlayerCombat : NetworkBehaviour
     [SerializeField] private SkillName normalSkill;
     [SerializeField] private SkillName specialSkill;
     [SerializeField] private Shield shieldObject;
+    [SerializeField] private GameObject slashServer;
+    [SerializeField] private GameObject slashClient;
     
     [Header("Cooldown")]
     [SerializeField] private float normalSkillCooldown,specialSkillCooldown;
@@ -195,11 +197,21 @@ public class PlayerCombat : NetworkBehaviour
         }
     }
     
-    public void SpecialSlash(GameObject slash)
+    [ServerRpc]
+    public void SpecialSlashServerRpc()
     {
-        GameObject slashObject = Instantiate(slash, skillPosition.position, skillPosition.rotation, skillPosition);
+        GameObject slashObject = Instantiate(slashServer, skillPosition.position, skillPosition.rotation, skillPosition);
+        slashObject.GetComponent<Damageable>().SetDamage(playerSkill[(int)specialSkill].skillDamage);
+        SpecialSlashClientRpc();
+    }
+    [ClientRpc]
+    public void SpecialSlashClientRpc()
+    {
+        GameObject slashObject = Instantiate(slashClient, skillPosition.position, skillPosition.rotation, skillPosition);
         slashObject.GetComponent<Damageable>().SetDamage(playerSkill[(int)specialSkill].skillDamage);
     }
+    
+    
     
     public void ShieldSlam()
     {

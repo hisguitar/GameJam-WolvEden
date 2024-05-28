@@ -66,7 +66,7 @@ public class PlayerController : NetworkBehaviour
             return;
         }
         previousClass = playerClass;
-        ResetStats();
+        ResetStatsServerRpc();
     }
 
     public override void OnNetworkDespawn()
@@ -76,20 +76,14 @@ public class PlayerController : NetworkBehaviour
             OnPlayerDespawned?.Invoke(this);
         }
     }
-
     
-
-    /*private void Start()
-    {
-        ResetStats();
-    }*/
-
     private void Update()
     {
         if (!IsOwner)
         {
             return;
         }
+        
         ReganStamina();
         UpdateStatsGUI();
         CheckClassChange();
@@ -127,7 +121,7 @@ public class PlayerController : NetworkBehaviour
     {
         if (previousClass != playerClass)
         {
-            ResetStats();
+            ResetStatsServerRpc();
             previousClass = playerClass;
         }
     }
@@ -175,7 +169,7 @@ public class PlayerController : NetworkBehaviour
         playerSpeed = playerMaxSpeed;
         playerHealth = playerMaxHealth;
         playerStamina = playerMaxStamina;
-        _playerAnimationController.ChangeAnimationClass();
+        _playerAnimationController.ChangeAnimationClassServerRpc();
     }
 
     [Button("Upgrade Max Health")]
@@ -201,12 +195,12 @@ public class PlayerController : NetworkBehaviour
         if (playerClass == Class.Sword)
         {
             playerClass = Class.Shield;
-            ResetStats();
+            ResetStatsServerRpc();
         }
         else
         {
             playerClass = Class.Sword;
-            ResetStats();
+            ResetStatsServerRpc();
         }
     }
 
@@ -215,5 +209,24 @@ public class PlayerController : NetworkBehaviour
     {
         ReceiveDamage(50);
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void ResetStatsServerRpc()
+    {
+        ResetStats();
+        ResetStatsClientRpc();
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    private void ResetStatsClientRpc()
+    {
+        if (IsOwner)
+        {
+            return;
+        }
+        ResetStats();
+    }
+
+    
 }
 

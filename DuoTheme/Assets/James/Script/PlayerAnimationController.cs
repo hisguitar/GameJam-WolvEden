@@ -128,4 +128,21 @@ public class PlayerAnimationController : NetworkBehaviour
         Gizmos.DrawWireSphere(new Vector3(transform.position.x + 1,transform.position.y),0.7f);
         Gizmos.DrawWireSphere(new Vector3(transform.position.x - 1,transform.position.y),0.7f);
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ChangeAnimationClassServerRpc()
+    {
+        ChangeAnimationClass();
+        ChangeAnimationClassClientRpc();
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    public void ChangeAnimationClassClientRpc()
+    {
+        if (IsOwner)
+        {
+            return;
+        }
+        ChangeAnimationClass();
+    }
 }
