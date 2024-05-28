@@ -71,10 +71,10 @@ public class PlayerAnimationController : NetworkBehaviour
     }
     public void SetMouseDirection()
     {
-        bool leftDirection = Physics2D.OverlapCircle(new Vector3(transform.position.x - 2, transform.position.y), 1.4f, cursorLayer);
-        bool rightDirection = Physics2D.OverlapCircle(new Vector3(transform.position.x + 2, transform.position.y), 1.4f, cursorLayer);
-        bool topDirection = Physics2D.OverlapCircle(new Vector3(transform.position.x, transform.position.y + 2), 1.4f, cursorLayer);
-        bool downDirection = Physics2D.OverlapCircle(new Vector3(transform.position.x, transform.position.y - 2), 1.4f, cursorLayer);
+        bool leftDirection = Physics2D.OverlapCircle(new Vector3(transform.position.x - 1, transform.position.y), 0.7f, cursorLayer);
+        bool rightDirection = Physics2D.OverlapCircle(new Vector3(transform.position.x + 1, transform.position.y), 0.7f, cursorLayer);
+        bool topDirection = Physics2D.OverlapCircle(new Vector3(transform.position.x, transform.position.y + 1), 0.7f, cursorLayer);
+        bool downDirection = Physics2D.OverlapCircle(new Vector3(transform.position.x, transform.position.y - 1), 0.7f, cursorLayer);
         if (leftDirection)
         {
             ResetMousePosition();
@@ -123,9 +123,9 @@ public class PlayerAnimationController : NetworkBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(new Vector3(transform.position.x,transform.position.y + 2),1.4f);
-        Gizmos.DrawWireSphere(new Vector3(transform.position.x,transform.position.y - 2),1.4f);
-        Gizmos.DrawWireSphere(new Vector3(transform.position.x + 2,transform.position.y),1.4f);
-        Gizmos.DrawWireSphere(new Vector3(transform.position.x - 2,transform.position.y),1.4f);
+        Gizmos.DrawWireSphere(new Vector3(transform.position.x,transform.position.y + 1),0.7f);
+        Gizmos.DrawWireSphere(new Vector3(transform.position.x,transform.position.y - 1),0.7f);
+        Gizmos.DrawWireSphere(new Vector3(transform.position.x + 1,transform.position.y),0.7f);
+        Gizmos.DrawWireSphere(new Vector3(transform.position.x - 1,transform.position.y),0.7f);
     }
 }
