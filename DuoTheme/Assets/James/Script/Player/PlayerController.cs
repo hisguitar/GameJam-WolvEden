@@ -16,6 +16,7 @@ public class PlayerController : NetworkBehaviour
 {
     [SerializeField] private List<PlayerStats> playerStats;
     [SerializeField] private Class playerClass;
+    private Class previousClass;
 
     [Header("Health")] 
     [SerializeField] private bool isDead;
@@ -64,6 +65,7 @@ public class PlayerController : NetworkBehaviour
             playerHUD.SetActive(false);
             return;
         }
+        previousClass = playerClass;
         ResetStats();
     }
 
@@ -90,6 +92,7 @@ public class PlayerController : NetworkBehaviour
         }
         ReganStamina();
         UpdateStatsGUI();
+        CheckClassChange();
     }
     private void ReganStamina()
     {
@@ -117,6 +120,15 @@ public class PlayerController : NetworkBehaviour
         else
         {
             _playerAnimationController.HurtAnimation();
+        }
+    }
+
+    private void CheckClassChange()
+    {
+        if (previousClass != playerClass)
+        {
+            ResetStats();
+            previousClass = playerClass;
         }
     }
 
