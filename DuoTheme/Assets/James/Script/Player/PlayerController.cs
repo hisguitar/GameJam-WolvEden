@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Class playerClass;
 
     [Header("Health")] 
+    [SerializeField] private bool isDead;
     [SerializeField] private Image healthBar;
     [SerializeField] private float playerMaxHealth;
     [ReadOnly][SerializeField]private float playerHealth;
@@ -26,9 +27,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float reganSpeed;
     [SerializeField] private float playerMaxStamina;
     [ReadOnly][SerializeField]private float playerStamina;
-    
-    [Header("Movement")]
-    [SerializeField] private float playerSpeed;
+
+    [Header("Movement")] 
+    [SerializeField] private float playerMaxSpeed;
+    [ReadOnly][SerializeField] private float playerSpeed;
 
     [Header("Ref")] 
     private PlayerAnimationController _playerAnimationController;
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
     public float PlayerHealth { get { return playerHealth; } }
     public float PlayerStamina { get { return playerStamina; } }
     public float PlayerSpeed { get { return playerSpeed; } }
+    public bool IsDead { get { return isDead; } }
 
     private void Awake()
     {
@@ -85,7 +88,9 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerDead()
     {
+        GetComponent<Collider2D>().enabled = false;
         _playerAnimationController.DeadAnimation(true);
+        isDead = true;
     }
 
     public void DecreaseStamina(float cost)
@@ -95,6 +100,16 @@ public class PlayerController : MonoBehaviour
         {
             playerStamina = 0;
         }
+    }
+
+    public void ReduceSpeed(float reduceCount)
+    {
+        playerSpeed -= reduceCount;
+    }
+
+    public void SetSpeedDefault()
+    {
+        playerSpeed = playerMaxSpeed;
     }
 
     public void UpdateStatsGUI()
@@ -109,8 +124,9 @@ public class PlayerController : MonoBehaviour
         playerClass = playerStats[(int)playerClass].playerClass;
         playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
         playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
-        playerSpeed = playerStats[(int)playerClass].playerSpeed;
+        playerMaxSpeed = playerStats[(int)playerClass].playerSpeed;
         
+        playerSpeed = playerMaxSpeed;
         playerHealth = playerMaxHealth;
         playerStamina = playerMaxStamina;
         _playerAnimationController.ChangeAnimationClass();
@@ -148,7 +164,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    [Button("Test Danage")]
+    [Button("Test Damage")]
     public void TestDamage()
     {
         ReceiveDamage(50);

@@ -37,6 +37,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private Transform skillPosition;
     [SerializeField] private SkillName normalSkill;
     [SerializeField] private SkillName specialSkill;
+    [SerializeField] private Shield shieldObject;
     
     [Header("Cooldown")]
     [SerializeField] private float normalSkillCooldown,specialSkillCooldown;
@@ -67,6 +68,11 @@ public class PlayerCombat : MonoBehaviour
     
     private void Update()
     {
+        if (_playerController.IsDead)
+        {
+            return;
+        }
+        
         if (oldClass != _playerController.PlayerClass)
         {
             ChangeClass();
@@ -158,6 +164,8 @@ public class PlayerCombat : MonoBehaviour
     }
 
     
+
+    
     public void NormalSlash()
     {
         /*GameObject shieldObject = Instantiate(slash, skillPosition.position, skillPosition.rotation, skillPosition);
@@ -178,16 +186,24 @@ public class PlayerCombat : MonoBehaviour
         slashObject.GetComponent<Damageable>().SetDamage(playerSkill[(int)specialSkill].skillDamage);
     }
     
-    public void ShieldSlam(GameObject shield)
+    public void ShieldSlam()
     {
-        GameObject shieldObject = Instantiate(shield, skillPosition.position, skillPosition.rotation, skillPosition);
-        Destroy(shieldObject,playerSkill[(int)normalSkill].skillCooldown - 0.05f);
+        Collider2D[] enemy = Physics2D.OverlapCircleAll(skillPosition.position, skillRadius, enemyLayer);
+        foreach (var enemies in enemy)
+        {
+            if (enemies.CompareTag("Enemy"))
+            {
+                enemies.GetComponent<BossHealth>().TakeDamage(playerSkill[(int)normalSkill].skillDamage);
+            }
+        }
     }
     
-    public void RaiseShield(GameObject shield)
+    public void RaiseShield()
     {
-        GameObject shieldObject = Instantiate(shield, skillPosition.position, skillPosition.rotation, skillPosition);
-        Destroy(shieldObject,playerSkill[(int)specialSkill].skillCooldown - 0.05f);
+        if (shieldObject.OnActive == false)
+        {
+            shieldObject.ActiveShield();
+        }
     }
 
     private void OnDrawGizmos()

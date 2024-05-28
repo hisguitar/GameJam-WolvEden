@@ -23,7 +23,5 @@ public class PlayerLookAtMouse : MonoBehaviour
         mousePosition = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         var angle = MathF.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
         cursor.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        
-        
     }
 }
