@@ -15,7 +15,7 @@ MonoBehaviour:
   playerClass: 1
   playerMaxHealth: 150
   playerMaxStamina: 100
-  playerSpeed: 4
+  playerSpeed: 2
   normalSkill: 2
   specialSkill: 3
   animation: {fileID: 9100000, guid: 66838da087fb68f4d8c6d0bae4f2fd11, type: 2}

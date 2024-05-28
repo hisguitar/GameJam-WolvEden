@@ -194,6 +194,7 @@ public class PlayerCombat : NetworkBehaviour
             }
         }
     }
+    
     public void SpecialSlash(GameObject slash)
     {
         GameObject slashObject = Instantiate(slash, skillPosition.position, skillPosition.rotation, skillPosition);
