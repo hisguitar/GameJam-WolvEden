@@ -964,7 +964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3644370575
+  GlobalObjectIdHash: 2435362621
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1065,6 +1065,8 @@ MonoBehaviour:
   normalSkill: 0
   specialSkill: 1
   shieldObject: {fileID: 716579167453602417}
+  slashServer: {fileID: 136454539784546740, guid: 30c21424772a5244cbfef60b40e3b5c8, type: 3}
+  slashClient: {fileID: 1788358250242144351, guid: d58b89dd4f28ea14eaf8d233a5b72d63, type: 3}
   normalSkillCooldown: 0
   specialSkillCooldown: 0
   normalSkillImage: {fileID: 49393872020742074}
@@ -1102,11 +1104,11 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 8266408469137523884}
           m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
-          m_MethodName: SpecialSlash
-          m_Mode: 2
+          m_MethodName: SpecialSlashServerRpc
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 136454539784546740, guid: 30c21424772a5244cbfef60b40e3b5c8, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -1122,7 +1124,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 8266408469137523884}
           m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
-          m_MethodName: ShieldSlam
+          m_MethodName: NormalSlash
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2507,14 +2509,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 793945124507488274}
     m_Modifications:
-    - target: {fileID: 1016361603606583289, guid: 5b5a9dbb2eabe3f41b912af06878a742, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3790331306338901036, guid: 5b5a9dbb2eabe3f41b912af06878a742, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6087536530624582225, guid: 5b5a9dbb2eabe3f41b912af06878a742, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2560,17 +2554,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7499027900083341028}
     - target: {fileID: 7616316264346137419, guid: 5b5a9dbb2eabe3f41b912af06878a742, type: 3}
-      propertyPath: shieldTime
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 7616316264346137419, guid: 5b5a9dbb2eabe3f41b912af06878a742, type: 3}
       propertyPath: shieldCanvas
       value: 
       objectReference: {fileID: 2886413712737040366}
-    - target: {fileID: 7616316264346137419, guid: 5b5a9dbb2eabe3f41b912af06878a742, type: 3}
-      propertyPath: shieldRegenTime
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 7616316264346137419, guid: 5b5a9dbb2eabe3f41b912af06878a742, type: 3}
       propertyPath: _playerController
       value: 
@@ -2582,6 +2568,10 @@ PrefabInstance:
     - target: {fileID: 8590899330446990858, guid: 5b5a9dbb2eabe3f41b912af06878a742, type: 3}
       propertyPath: m_Name
       value: RaiseShield
+      objectReference: {fileID: 0}
+    - target: {fileID: 9069584471285530779, guid: 5b5a9dbb2eabe3f41b912af06878a742, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2435362621
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
