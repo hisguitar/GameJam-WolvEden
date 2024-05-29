@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EditorAttributes;
 using Unity.Netcode;
+using UnityEditor;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -51,7 +52,7 @@ public class PlayerController : NetworkBehaviour
     public static event Action<PlayerController> OnPlayerDespawned; 
     private void Awake()
     {
-        _playerAnimationController = GetComponent<PlayerAnimationController>();
+        
     }
     public override void OnNetworkSpawn()
     {
@@ -65,8 +66,9 @@ public class PlayerController : NetworkBehaviour
             playerHUD.SetActive(false);
             return;
         }
+        _playerAnimationController = GetComponent<PlayerAnimationController>();
         previousClass = playerClass;
-        ResetStatsServerRpc();
+        ResetStats();
     }
 
     public override void OnNetworkDespawn()
@@ -158,7 +160,7 @@ public class PlayerController : NetworkBehaviour
         staminaBar.fillAmount = playerStamina / playerMaxStamina;
     }
 
-    [Button("Reset Stats")]
+    [ContextMenu("Reset Stats")]
     public void ResetStats()
     {
         playerClass = playerStats[(int)playerClass].playerClass;
@@ -170,26 +172,27 @@ public class PlayerController : NetworkBehaviour
         playerHealth = playerMaxHealth;
         playerStamina = playerMaxStamina;
         _playerAnimationController.ChangeAnimationClassServerRpc();
+        UpdateStatsGUI();
     }
 
-    [Button("Upgrade Max Health")]
+    [ContextMenu("Upgrade Max Health")]
     public void UpgradeMaxHealth()
     {
         playerMaxHealth += 100;
     }
     
-    [Button("Upgrade Stamina")]
+    [ContextMenu("Upgrade Stamina")]
     public void UpgradeStamina()
     {
         playerMaxStamina += 30;
     }
-    [Button("Upgrade Speed")]
+    [ContextMenu("Upgrade Speed")]
     public void UpgradeSpeed()
     {
         playerSpeed += 0.25f;
     }
     
-    [Button("Change Class")]
+    [ContextMenu("Change Class")]
     public void ChangeClassPlayer()
     {
         if (playerClass == Class.Sword)
@@ -204,13 +207,13 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    [Button("Test Damage")]
+    [ContextMenu("Test Damage")]
     public void TestDamage()
     {
         ReceiveDamage(50);
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void ResetStatsServerRpc()
     {
         ResetStats();
@@ -220,7 +223,7 @@ public class PlayerController : NetworkBehaviour
     [ClientRpc]
     private void ResetStatsClientRpc()
     {
-        if (!IsOwner)
+        if (IsOwner)
         {
             return;
         }

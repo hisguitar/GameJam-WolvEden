@@ -17,6 +17,11 @@ public abstract class BossHealth : NetworkBehaviour
     [SerializeField] private Animator _animator;
     private bool bossActive;
 
+    public override void OnNetworkSpawn()
+    {
+        RestoreBossHpClientRpc();
+    }
+
     private  void Update()
     {
         if (!IsOwner)

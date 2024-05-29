@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class SpecialSlash : NetworkBehaviour
+public class SpecialSlash : MonoBehaviour
 {
     private SpriteRenderer slashSprite;
     private bool onActive;
@@ -32,32 +32,10 @@ public class SpecialSlash : NetworkBehaviour
     {
         this.damage = damage;
     }
-
-    [ServerRpc]
-    public void ActiveSlashServerRpc()
-    {
-        slashSprite.enabled = true;
-        _collider2D.enabled = true;
-        onActive = true;
-        _animator.SetTrigger("SlashOn");
-        ActiveSlashServerRpc();
-    }
-
-    [ServerRpc]
-    public void UnActiveSlashServerRpc()
-    {
-        onActive = false;
-        slashSprite.enabled = false;
-        _collider2D.enabled = false;
-        UnActiveSlashServerRpc();
-    }
+    
     [ClientRpc]
     public void ActiveSlashClientRpc()
     {
-        if (IsOwner)
-        {
-            return;
-        }
         slashSprite.enabled = true;
         _collider2D.enabled = true;
         onActive = true;
@@ -66,10 +44,6 @@ public class SpecialSlash : NetworkBehaviour
     [ClientRpc]
     public void UnActiveSlashClientRpc()
     {
-        if (IsOwner)
-        {
-            return;
-        }
         onActive = false;
         slashSprite.enabled = false;
         _collider2D.enabled = false;

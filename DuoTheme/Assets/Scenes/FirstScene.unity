@@ -680,8 +680,8 @@ GameObject:
   - component: {fileID: 1773213002}
   - component: {fileID: 1773213004}
   - component: {fileID: 1773213003}
-  - component: {fileID: 1773213005}
   - component: {fileID: 1773213006}
+  - component: {fileID: 1773213005}
   m_Layer: 5
   m_Name: PressAnyKeyToStart
   m_TagString: Untagged
@@ -818,7 +818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Bootstrap
-  animator: {fileID: 0}
+  animator: {fileID: 1773213006}
 --- !u!95 &1773213006
 Animator:
   serializedVersion: 5

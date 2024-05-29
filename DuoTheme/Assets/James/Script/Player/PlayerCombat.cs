@@ -38,7 +38,7 @@ public class PlayerCombat : NetworkBehaviour
 
     [SerializeField] private float skillRadius;
     [SerializeField] private Transform skillPosition;
-    [SerializeField] private Transform skillRotation;
+    //[SerializeField] private Transform skillRotation;
     [SerializeField] private SkillName normalSkill;
     [SerializeField] private SkillName specialSkill;
     [SerializeField] private Shield shieldObject;
@@ -211,7 +211,7 @@ public class PlayerCombat : NetworkBehaviour
     {
         if (slashObject.OnActive == false)
         {
-            slashObject.ActiveSlashServerRpc();
+            slashObject.ActiveSlashClientRpc();
             slashObject.SetDamage(playerSkill[(int)specialSkill].skillDamage);
         }
     }

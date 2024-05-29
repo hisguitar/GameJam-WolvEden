@@ -23,6 +23,8 @@ public class PlayerLookAtMouse : NetworkBehaviour
 
     private void Update()
     {
+        if(!IsOwner)
+        {return;}
         MouseLook();
     }
 
