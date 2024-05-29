@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerLookAtMouse : NetworkBehaviour
 {
     [SerializeField] private Transform cursor;
+    [SerializeField] private SpriteRenderer cursorSprite;
     [SerializeField] private Transform playerSprite;
     private Vector3 mousePosition;
 
@@ -16,16 +17,12 @@ public class PlayerLookAtMouse : NetworkBehaviour
     {
         if (!IsOwner)
         {
-            cursor.gameObject.SetActive(false);
+            cursorSprite.enabled = false;
         }
     }
 
     private void Update()
     {
-        if (!IsOwner)
-        {
-            return;
-        }
         MouseLook();
     }
 

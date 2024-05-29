@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using EditorAttributes;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -67,7 +68,7 @@ public class Shield : MonoBehaviour
                 {
                     return;
                 }
-                DeActiveShield();
+                DeActiveShieldClientRpc();
             }
              
         }
@@ -75,7 +76,8 @@ public class Shield : MonoBehaviour
 
     }
 
-    public void ActiveShield()
+    [ClientRpc]
+    public void ActiveShieldClientRpc()
     {
         _playerController.ReduceSpeed(_playerController.PlayerSpeed);
         _animationController.OnHoldAnimation();
@@ -84,7 +86,8 @@ public class Shield : MonoBehaviour
         _collider2D.enabled = true;
     }
 
-    private void DeActiveShield()
+    [ClientRpc]
+    private void DeActiveShieldClientRpc()
     {
         _playerController.SetSpeedDefault();
         _animationController.UnHoldAnimation();
@@ -99,7 +102,7 @@ public class Shield : MonoBehaviour
         shieldHealth -= damageToShield;
         if (shieldHealth <= 0)
         {
-            DeActiveShield();
+            DeActiveShieldClientRpc();
             shieldHealth = 0;
         }
     }

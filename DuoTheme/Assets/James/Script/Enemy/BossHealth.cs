@@ -57,6 +57,7 @@ public abstract class BossHealth : NetworkBehaviour
     public void UnActiveBoss()
     {
         bossActive = false;
+        GetComponent<SpriteRenderer>().enabled = false;
         _animator.SetBool("BossActive",false);
     }
 
@@ -66,12 +67,13 @@ public abstract class BossHealth : NetworkBehaviour
         bossHealth = maxBossHealth;
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void TakeDamageServerRpc(float damage)
     {
         bossHealth -= damage;
         if (bossHealth < 0)
         {
+            UnActiveBoss();
             bossHealth = 0;
         }
         UpdateGUI();
@@ -88,6 +90,7 @@ public abstract class BossHealth : NetworkBehaviour
         bossHealth -= damage;
         if (bossHealth < 0)
         {
+            UnActiveBoss();
             bossHealth = 0;
         }
         UpdateGUI();

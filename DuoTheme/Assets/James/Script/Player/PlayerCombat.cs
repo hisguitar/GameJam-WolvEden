@@ -30,32 +30,35 @@ public enum SkillName
     ShieldSlab = 2,
     RaiseShield = 3,
 }
+
 public class PlayerCombat : NetworkBehaviour
 {
-    [Header("Combat Setting")] 
-    [SerializeField] private LayerMask enemyLayer;
+    [Header("Combat Setting")] [SerializeField]
+    private LayerMask enemyLayer;
+
     [SerializeField] private float skillRadius;
     [SerializeField] private Transform skillPosition;
+    [SerializeField] private Transform skillRotation;
     [SerializeField] private SkillName normalSkill;
     [SerializeField] private SkillName specialSkill;
     [SerializeField] private Shield shieldObject;
-    [SerializeField] private GameObject slashServer;
-    [SerializeField] private GameObject slashClient;
+    [SerializeField] private SpecialSlash slashObject;
     
-    [Header("Cooldown")]
-    [SerializeField] private float normalSkillCooldown,specialSkillCooldown;
-    
-    [Header("Image")]
-    [SerializeField] private Image normalSkillImage,normalSkillImageCD, specialSkillImage,specialSkillImageCD;
-    private bool onNormalSkillActive,onSpecialSkillActive;
+
+    [Header("Cooldown")] [SerializeField] private float normalSkillCooldown, specialSkillCooldown;
+
+    [Header("Image")] [SerializeField]
+    private Image normalSkillImage, normalSkillImageCD, specialSkillImage, specialSkillImageCD;
+
+    private bool onNormalSkillActive, onSpecialSkillActive;
     private float lastNormalSkillCooldown, lastSpecialSkillCooldown;
-    
-    [Header("Player Skill")] 
-    [SerializeField] private List<Skill> playerSkill;
+
+    [Header("Player Skill")] [SerializeField]
+    private List<Skill> playerSkill;
+
     private Class oldClass;
-    
-    [Header("Ref")] 
-    private PlayerController _playerController;
+
+    [Header("Ref")] private PlayerController _playerController;
     private PlayerAnimationController _animationController;
 
     private void Awake()
@@ -70,6 +73,7 @@ public class PlayerCombat : NetworkBehaviour
         {
             return;
         }
+
         ChangeClass();
     }
 
@@ -77,25 +81,26 @@ public class PlayerCombat : NetworkBehaviour
     {
         ChangeClass();
     }*/
-    
+
     private void Update()
     {
         if (!IsOwner)
         {
             return;
         }
+
         if (_playerController.IsDead)
         {
             return;
         }
-        
+
         if (oldClass != _playerController.PlayerClass)
         {
             ChangeClass();
         }
-        
+
         CheckCooldown();
-        
+
         if (Input.GetMouseButtonDown(0) && !onNormalSkillActive)
         {
             if (_playerController.PlayerStamina > playerSkill[(int)normalSkill].skillCost)
@@ -111,7 +116,7 @@ public class PlayerCombat : NetworkBehaviour
             {
                 Debug.Log("no Stamina");
             }
-            
+
         }
         else if (Input.GetMouseButtonDown(1) && !onSpecialSkillActive)
         {
@@ -130,6 +135,7 @@ public class PlayerCombat : NetworkBehaviour
             }
         }
     }
+
     private void ChangeClass()
     {
         switch (_playerController.PlayerClass)
@@ -138,9 +144,12 @@ public class PlayerCombat : NetworkBehaviour
                 normalSkill = _playerController.PlayerStats.normalSkill;
                 specialSkill = _playerController.PlayerStats.specialSkill;
                 normalSkillImage.sprite = playerSkill[(int)normalSkill].skillIcon.GetComponent<SpriteRenderer>().sprite;
-                normalSkillImageCD.sprite = playerSkill[(int)normalSkill].skillIcon.GetComponent<SpriteRenderer>().sprite;
-                specialSkillImage.sprite = playerSkill[(int)specialSkill].skillIcon.GetComponent<SpriteRenderer>().sprite;
-                specialSkillImageCD.sprite = playerSkill[(int)specialSkill].skillIcon.GetComponent<SpriteRenderer>().sprite;
+                normalSkillImageCD.sprite =
+                    playerSkill[(int)normalSkill].skillIcon.GetComponent<SpriteRenderer>().sprite;
+                specialSkillImage.sprite =
+                    playerSkill[(int)specialSkill].skillIcon.GetComponent<SpriteRenderer>().sprite;
+                specialSkillImageCD.sprite =
+                    playerSkill[(int)specialSkill].skillIcon.GetComponent<SpriteRenderer>().sprite;
                 break;
             case Class.Shield:
                 normalSkill = SkillName.ShieldSlab;
@@ -151,6 +160,7 @@ public class PlayerCombat : NetworkBehaviour
                 specialSkillImageCD.sprite = playerSkill[(int)specialSkill].skillIcon.sprite;
                 break;
         }
+
         oldClass = oldClass = _playerController.PlayerClass;
     }
 
@@ -179,9 +189,9 @@ public class PlayerCombat : NetworkBehaviour
         }
     }
 
-    
 
-    
+
+
     public void NormalSlash()
     {
         /*GameObject shieldObject = Instantiate(slash, skillPosition.position, skillPosition.rotation, skillPosition);
@@ -197,31 +207,17 @@ public class PlayerCombat : NetworkBehaviour
         }
     }
     
-    [ServerRpc]
-    public void SpecialSlashServerRpc()
+    public void SpecialSlash()
     {
-        GameObject slashObject = Instantiate(slashServer, skillPosition.position, skillPosition.rotation, skillPosition);
-        slashObject.GetComponent<Damageable>().SetDamage(playerSkill[(int)specialSkill].skillDamage);
-        SpecialSlashClientRpc();
-    }
-    [ClientRpc]
-    private void SpecialSlashClientRpc()
-    {
-        if (IsOwner)
+        if (slashObject.OnActive == false)
         {
-            return;
+            slashObject.ActiveSlashServerRpc();
+            slashObject.SetDamage(playerSkill[(int)specialSkill].skillDamage);
         }
-        SpecialSlash();
     }
+    
 
-    private void SpecialSlash()
-    {
-        Instantiate(slashClient, skillPosition.position, skillPosition.rotation, skillPosition);
-    }
-    
-    
-    
-    public void ShieldSlam()
+public void ShieldSlam()
     {
         Collider2D[] enemy = Physics2D.OverlapCircleAll(skillPosition.position, skillRadius, enemyLayer);
         foreach (var enemies in enemy)
@@ -237,7 +233,7 @@ public class PlayerCombat : NetworkBehaviour
     {
         if (shieldObject.OnActive == false)
         {
-            shieldObject.ActiveShield();
+            shieldObject.ActiveShieldClientRpc();
         }
     }
 
