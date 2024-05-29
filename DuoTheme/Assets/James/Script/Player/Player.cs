@@ -25,7 +25,10 @@ public class Player : NetworkBehaviour
             UserData userData =
                 HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId);
 
-            Debug.Log(userData); // Can't even find userData
+            /// If userData is null,
+            /// it is possible that ApprovalCheck() in NetworkServer Not activated,
+            /// the solution is to go to NetBootstrap scene
+            /// and tick Connection Approval of NetworkManager to True.
             PlayerName.Value = userData.userName;
 
             OnPlayerSpawned?.Invoke(this);
