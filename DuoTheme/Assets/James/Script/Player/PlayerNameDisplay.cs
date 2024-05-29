@@ -7,11 +7,8 @@ public class PlayerNameDisplay : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private TMP_Text playerNameText;
 
-
     private void Start()
     {
-        playerNameText.text = PlayerPrefs.GetString(NameSelector.PlayerNameKey, "Player");
-
         HandlePlayerNameChanged(string.Empty, player.PlayerName.Value);
 
         player.PlayerName.OnValueChanged += HandlePlayerNameChanged;

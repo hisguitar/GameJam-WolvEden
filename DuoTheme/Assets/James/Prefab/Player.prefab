@@ -1038,8 +1038,10 @@ MonoBehaviour:
   playerClass: 0
   isDead: 0
   healthBar: {fileID: 6069217674170759416}
-  playerMaxHealth: 100
-  playerHealth: 100
+  playerMaxHealth:
+    m_InternalValue: 0
+  playerHealth:
+    m_InternalValue: 0
   staminaBar: {fileID: 1780739514152262383}
   reganSpeed: 7.5
   playerMaxStamina: 100
@@ -1301,6 +1303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 8714047353480184201}
+  <Health>k__BackingField: {fileID: 6379544274193644350}
   ownerPriority: 15
   PlayerName:
     m_InternalValue:

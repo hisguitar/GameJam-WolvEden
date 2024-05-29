@@ -21,8 +21,8 @@ public class PlayerController : NetworkBehaviour
     [Header("Health")] 
     [SerializeField] private bool isDead;
     [SerializeField] private Image healthBar;
-    [SerializeField] private float playerMaxHealth;
-    [ReadOnly][SerializeField]private float playerHealth;
+    [SerializeField] private NetworkVariable<float> playerMaxHealth = new();
+    [ReadOnly][SerializeField]private NetworkVariable<float> playerHealth = new();
 
     [Header("Stamina")] 
     [SerializeField] private Image staminaBar;
@@ -39,13 +39,14 @@ public class PlayerController : NetworkBehaviour
 
     [Header("Ref")] 
     private PlayerAnimationController _playerAnimationController;
-    
+
     public PlayerStats PlayerStats { get { return playerStats[(int)playerClass]; } }
     public Class PlayerClass { get { return playerClass; } }
-    public float PlayerHealth { get { return playerHealth; } }
+    public float PlayerHealth { get { return playerHealth.Value; } }
     public float PlayerStamina { get { return playerStamina; } }
     public float PlayerSpeed { get { return playerSpeed; } }
     public bool IsDead { get { return isDead; } }
+    public Action<PlayerController> OnDie;
 
     private void Awake()
     {
@@ -72,6 +73,12 @@ public class PlayerController : NetworkBehaviour
         ReganStamina();
         UpdateStatsGUI();
         CheckClassChange();
+
+        // Respawn Player
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            PlayerRespawn();
+        }
     }
     private void ReganStamina()
     {
@@ -86,15 +93,17 @@ public class PlayerController : NetworkBehaviour
     }
     public void ReceiveHealth(float health)
     {
-        playerHealth += health;
+        playerHealth.Value += health;
     }
     public void ReceiveDamage(float damage)
     {
-        playerHealth -= damage;
-        if (playerHealth <= 0)
+        if (isDead) { return; }
+
+        playerHealth.Value -= damage;
+        if (playerHealth.Value <= 0)
         {
             PlayerDead();
-            playerHealth = 0;
+            playerHealth.Value = 0;
         }
         else
         {
@@ -118,6 +127,15 @@ public class PlayerController : NetworkBehaviour
         isDead = true;
     }
 
+    private void PlayerRespawn()
+    {
+        if (isDead == true)
+        {
+            isDead = false;
+            OnDie?.Invoke(this);
+        }
+    }
+
     public void DecreaseStamina(float cost)
     {
         playerStamina -= cost;
@@ -139,7 +157,7 @@ public class PlayerController : NetworkBehaviour
 
     public void UpdateStatsGUI()
     {
-        healthBar.fillAmount = playerHealth / playerMaxHealth;
+        healthBar.fillAmount = playerHealth.Value / playerMaxHealth.Value;
         staminaBar.fillAmount = playerStamina / playerMaxStamina;
     }
 
@@ -147,7 +165,7 @@ public class PlayerController : NetworkBehaviour
     public void ResetStats()
     {
         playerClass = playerStats[(int)playerClass].playerClass;
-        playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
+        playerMaxHealth.Value = playerStats[(int)playerClass].playerMaxHealth;
         playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
         playerMaxSpeed = playerStats[(int)playerClass].playerSpeed;
         
@@ -160,7 +178,7 @@ public class PlayerController : NetworkBehaviour
     [Button("Upgrade Max Health")]
     public void UpgradeMaxHealth()
     {
-        playerMaxHealth += 100;
+        playerMaxHealth.Value += 100;
     }
     
     [Button("Upgrade Stamina")]

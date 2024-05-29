@@ -6,12 +6,13 @@ using UnityEngine;
 
 public class Player : NetworkBehaviour
 {
-    [Header("References")]
-    [SerializeField] private CinemachineVirtualCamera virtualCamera;
-
-    [Header("Settings")]
-    [SerializeField] private int ownerPriority = 15;
+    [Header("Player")]
     public NetworkVariable<FixedString32Bytes> PlayerName = new();
+    [field: SerializeField] public PlayerController Health { get; private set; }
+
+    [Header("Camera")]
+    [SerializeField] private int ownerPriority = 15;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
     public static event Action<Player> OnPlayerSpawned;
     public static event Action<Player> OnPlayerDespawned;
