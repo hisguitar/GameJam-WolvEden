@@ -210,17 +210,17 @@ public class PlayerController : NetworkBehaviour
         ReceiveDamage(50);
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     private void ResetStatsServerRpc()
     {
         ResetStats();
         ResetStatsClientRpc();
     }
 
-    [ClientRpc(RequireOwnership = false)]
+    [ClientRpc]
     private void ResetStatsClientRpc()
     {
-        if (IsOwner)
+        if (!IsOwner)
         {
             return;
         }

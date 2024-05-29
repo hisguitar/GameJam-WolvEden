@@ -77,7 +77,7 @@ public class Shield : MonoBehaviour
 
     public void ActiveShield()
     {
-        _playerController.ReduceSpeed(4f);
+        _playerController.ReduceSpeed(_playerController.PlayerSpeed);
         _animationController.OnHoldAnimation();
         onActive = true;
         shieldSprite.enabled = true;

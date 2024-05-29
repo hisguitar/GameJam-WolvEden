@@ -21,7 +21,7 @@ public abstract class Damageable: MonoBehaviour
     {
         if (other.CompareTag(tagName))
         {
-            other.GetComponent<BossHealth>().TakeDamage(damage);
+            other.GetComponent<BossHealth>().TakeDamageServerRpc(damage);
             Destroy(gameObject);
         }
     }

@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 136454539784546740, guid: 30c21424772a5244cbfef60b40e3b5c8, type: 3}
       propertyPath: m_Name
-      value: Special_Slash Variant
+      value: Special_Slash Client
       objectReference: {fileID: 0}
     - target: {fileID: 3005957562625887597, guid: 30c21424772a5244cbfef60b40e3b5c8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -60,8 +60,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6363050079644317053, guid: 30c21424772a5244cbfef60b40e3b5c8, type: 3}
+    - target: {fileID: 6363050079644317053, guid: 30c21424772a5244cbfef60b40e3b5c8, type: 3}
+      propertyPath: damage
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
