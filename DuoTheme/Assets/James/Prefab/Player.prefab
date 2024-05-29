@@ -1302,9 +1302,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a2ccb3e61433024a9d46b9488d499e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCamera: {fileID: 8714047353480184201}
-  <Health>k__BackingField: {fileID: 6379544274193644350}
-  ownerPriority: 15
   PlayerName:
     m_InternalValue:
       utf8LengthInBytes: 0
@@ -1340,6 +1337,9 @@ MonoBehaviour:
         byte0027: 0
         byte0028: 0
         byte0029: 0
+  <Health>k__BackingField: {fileID: 6379544274193644350}
+  ownerPriority: 15
+  virtualCamera: {fileID: 8714047353480184201}
 --- !u!1 &3891955742521488143
 GameObject:
   m_ObjectHideFlags: 0
