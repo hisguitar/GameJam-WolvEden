@@ -1,5 +1,5 @@
 using TMPro;
-//using Unity.Collections;
+using Unity.Collections;
 using UnityEngine;
 
 public class PlayerNameDisplay : MonoBehaviour
@@ -12,18 +12,18 @@ public class PlayerNameDisplay : MonoBehaviour
     {
         playerNameText.text = PlayerPrefs.GetString(NameSelector.PlayerNameKey, "Player");
 
-        //HandlePlayerNameChanged(string.Empty, player.PlayerName.Value);
+        HandlePlayerNameChanged(string.Empty, player.PlayerName.Value);
 
-        //player.PlayerName.OnValueChanged += HandlePlayerNameChanged;
+        player.PlayerName.OnValueChanged += HandlePlayerNameChanged;
     }
 
-    //private void HandlePlayerNameChanged(FixedString32Bytes oldName, FixedString32Bytes newName)
-    //{
-    //    playerNameText.text = newName.ToString();
-    //}
+    private void HandlePlayerNameChanged(FixedString32Bytes oldName, FixedString32Bytes newName)
+    {
+        playerNameText.text = newName.ToString();
+    }
 
-    //private void OnDestroy()
-    //{
-    //    player.PlayerName.OnValueChanged -= HandlePlayerNameChanged;
-    //}
+    private void OnDestroy()
+    {
+        player.PlayerName.OnValueChanged -= HandlePlayerNameChanged;
+    }
 }

@@ -47,19 +47,12 @@ public class PlayerController : NetworkBehaviour
     public float PlayerSpeed { get { return playerSpeed; } }
     public bool IsDead { get { return isDead; } }
 
-    public static event Action<PlayerController> OnPlayerSpawned; 
-    public static event Action<PlayerController> OnPlayerDespawned; 
     private void Awake()
     {
         _playerAnimationController = GetComponent<PlayerAnimationController>();
     }
     public override void OnNetworkSpawn()
     {
-        if (IsServer)
-        {
-            OnPlayerSpawned?.Invoke(this);
-        }
-
         if (!IsOwner)
         {
             playerHUD.SetActive(false);
@@ -67,14 +60,6 @@ public class PlayerController : NetworkBehaviour
         }
         previousClass = playerClass;
         ResetStatsServerRpc();
-    }
-
-    public override void OnNetworkDespawn()
-    {
-        if (IsServer)
-        {
-            OnPlayerDespawned?.Invoke(this);
-        }
     }
     
     private void Update()
