@@ -19,7 +19,7 @@ public abstract class BossHealth : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        RestoreBossHpClientRpc();
+        RestoreBossHpServerRpc();
     }
 
     private  void Update()
@@ -66,6 +66,12 @@ public abstract class BossHealth : NetworkBehaviour
         _animator.SetBool("BossActive",false);
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    private void RestoreBossHpServerRpc()
+    {
+        bossHealth = maxBossHealth;
+        RestoreBossHpClientRpc();
+    }
     [ClientRpc]
     private void RestoreBossHpClientRpc()
     {

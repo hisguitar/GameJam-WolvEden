@@ -937,13 +937,11 @@ MonoBehaviour:
   playerStats:
   - {fileID: 11400000, guid: 45baf719d3ef1c74db9357a76f24dffc, type: 2}
   - {fileID: 11400000, guid: e4849aa200a08404a8d8780342320464, type: 2}
-  playerClass: 0
+  playerClass: 1
   isDead: 0
   healthBar: {fileID: 3433317969360747856}
-  playerMaxHealth:
-    m_InternalValue: 0
-  playerHealth:
-    m_InternalValue: 0
+  playerMaxHealth: 0
+  playerHealth: 0
   staminaBar: {fileID: 9154774682738286320}
   reganSpeed: 7.5
   playerMaxStamina: 100
@@ -1137,7 +1135,6 @@ MonoBehaviour:
     m_Bits: 8
   skillRadius: 0.62
   skillPosition: {fileID: 2877713199775088277}
-  skillRotation: {fileID: 0}
   normalSkill: 0
   specialSkill: 1
   shieldObject: {fileID: 38702391441281935}
@@ -2716,6 +2713,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005957562625887597, guid: 30c21424772a5244cbfef60b40e3b5c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336823944345814659, guid: 30c21424772a5244cbfef60b40e3b5c8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409331061623938150, guid: 30c21424772a5244cbfef60b40e3b5c8, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6363050079644317053, guid: 30c21424772a5244cbfef60b40e3b5c8, type: 3}

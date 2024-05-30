@@ -26,13 +26,15 @@ public class Shield : MonoBehaviour
     [Header("Ref")] 
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private PlayerAnimationController _animationController;
+    private Animator _animator;
     
     public bool OnActive { get { return onActive; } }
-    private void Awake()
+    private void OnEnable()
     {
         shieldHealth = maxShieldHealth;
         _collider2D = GetComponent<Collider2D>();
         shieldSprite = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -79,6 +81,7 @@ public class Shield : MonoBehaviour
     [ClientRpc]
     public void ActiveShieldClientRpc()
     {
+        _animator.SetBool("ShieldActive",true);
         _playerController.ReduceSpeed(_playerController.PlayerSpeed);
         _animationController.OnHoldAnimation();
         onActive = true;
@@ -89,6 +92,7 @@ public class Shield : MonoBehaviour
     [ClientRpc]
     private void DeActiveShieldClientRpc()
     {
+        _animator.SetBool("ShieldActive",false);
         _playerController.SetSpeedDefault();
         _animationController.UnHoldAnimation();
         onActive = false;
