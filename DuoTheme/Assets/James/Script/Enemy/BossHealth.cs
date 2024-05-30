@@ -13,7 +13,7 @@ public abstract class BossHealth : NetworkBehaviour
     [Header("Boss Target & Area")]
     public LayerMask PlayerLayer;
     public Vector2 AreaBossRadius { get; private set; } = new(11.3f, 7.84f);
-    [SerializeField] private Vector2 offSet = new(-0.52f, 13f);
+    [SerializeField] [Tooltip("Offset of AreaBossRadius(Private variable)")] private Vector2 offSet = new(-0.52f, 13f);
 
     [Header("Boss HP")]
     [SerializeField] private float maxBossHealth = 1000f;
