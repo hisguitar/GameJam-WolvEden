@@ -40,10 +40,16 @@ public class PlayerController : NetworkBehaviour
 
     [Header("Ref")] 
     public SpriteRenderer playerSprite;
-    private PlayerAnimationController _playerAnimationController;
+    public PlayerAnimationController _playerAnimationController;
     
     public PlayerStats PlayerStats { get { return playerStats[(int)playerClass]; } }
-    public Class PlayerClass { get { return playerClass; } }
+
+    public Class PlayerClass
+    {
+        get { return playerClass; }
+        set { playerClass = value; }
+    }
+
     public float PlayerHealth { get { return playerHealth; } }
     public float PlayerStamina { get { return playerStamina; } }
     public float PlayerSpeed { get { return playerSpeed; } }
@@ -67,9 +73,12 @@ public class PlayerController : NetworkBehaviour
             playerHUD.SetActive(false);
             return;
         }
-        _playerAnimationController = GetComponent<PlayerAnimationController>();
+        UserData userData =
+            HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId);
+        playerClass = userData.userClass;
         previousClass = playerClass;
-        ResetStats();
+        Debug.Log("ResetStats");
+        ResetStatsServerRpc();
     }
 
     public override void OnNetworkDespawn()
@@ -124,6 +133,7 @@ public class PlayerController : NetworkBehaviour
     {
         if (previousClass != playerClass)
         {
+            Debug.Log("Class Change");
             ResetStatsServerRpc();
             previousClass = playerClass;
         }
@@ -164,6 +174,7 @@ public class PlayerController : NetworkBehaviour
     [ContextMenu("Reset Stats")]
     public void ResetStats()
     {
+        Debug.Log("Class Change");
         playerClass = playerStats[(int)playerClass].playerClass;
         playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
         playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
@@ -218,17 +229,25 @@ public class PlayerController : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void ResetStatsServerRpc()
     {
-        ResetStats();
+        Debug.Log("Class Change Server RPC");
+        playerClass = playerStats[(int)playerClass].playerClass;
+        playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
+        playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
+        playerMaxSpeed = playerStats[(int)playerClass].playerSpeed;
+        playerSprite.material = playerStats[(int)playerClass].playerMaterial;
+        
+        playerSpeed = playerMaxSpeed;
+        playerHealth = playerMaxHealth;
+        playerStamina = playerMaxStamina;
+        _playerAnimationController.ChangeAnimationClassServerRpc();
+        UpdateStatsGUI();
         ResetStatsClientRpc();
     }
 
     [ClientRpc]
     private void ResetStatsClientRpc()
     {
-        if (IsOwner)
-        {
-            return;
-        }
+        Debug.Log("Class Change Client RPC");
         ResetStats();
     }
 
