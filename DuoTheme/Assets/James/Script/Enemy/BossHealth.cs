@@ -6,16 +6,16 @@ using UnityEngine.UI;
 
 public abstract class BossHealth : NetworkBehaviour
 {
-    [SerializeField] private float maxBossHealth;
-    [ReadOnly][SerializeField] private float bossHealth;
+    [SerializeField] private float maxBossHealth = 1000f;
+    [ReadOnly][SerializeField] private float bossHealth = 0f;
     [SerializeField] private Image healthBar;
-    [SerializeField] private Vector2 offSet;
-    public Vector2 areaBossRadius;
+    [SerializeField] private Vector2 offSet = new(-0.52f, 13f);
+    public Vector2 areaBossRadius = new(11.3f, 7.84f);
     public LayerMask playerLayer;
     [SerializeField] private Animator _animator;
-    [SerializeField] private bool bossActive;
 
     private BossDummy bossDummy;
+    private bool bossActive = false;
 
     public override void OnNetworkSpawn()
     {
