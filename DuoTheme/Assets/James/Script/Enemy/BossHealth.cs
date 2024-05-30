@@ -1,8 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using James.Script;
 using Unity.Collections;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,14 +14,17 @@ public abstract class BossHealth : NetworkBehaviour
     [SerializeField] private Vector2 areaBossRadius;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private Animator _animator;
-    private bool bossActive;
+    [SerializeField] private bool bossActive;
+
+    private BossDummy bossDummy;
 
     public override void OnNetworkSpawn()
     {
         RestoreBossHpServerRpc();
+        bossDummy = GetComponent<BossDummy>();
     }
 
-    private  void Update()
+    private void Update()
     {
         if (!IsOwner)
         {
@@ -49,21 +51,32 @@ public abstract class BossHealth : NetworkBehaviour
         {
             ActiveBoss();
         }
-        
     }
 
     private void ActiveBoss()
     {
         bossActive = true;
         RestoreBossHpClientRpc();
-        _animator.SetBool("BossActive",true);
+        _animator.SetBool("BossActive", true);
+
+        if (bossDummy != null)
+        {
+            bossDummy.StartShooting();
+        }
     }
 
     public void UnActiveBoss()
     {
-        bossActive = false;
-        GetComponent<SpriteRenderer>().enabled = false;
-        _animator.SetBool("BossActive",false);
+        //bossActive = false;
+        //GetComponent<SpriteRenderer>().enabled = false;
+        //_animator.SetBool("BossActive", false);
+
+        //if (bossDummy != null)
+        //{
+        //    bossDummy.StopShooting();
+        //}
+
+        gameObject.SetActive(false);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -72,6 +85,7 @@ public abstract class BossHealth : NetworkBehaviour
         bossHealth = maxBossHealth;
         RestoreBossHpClientRpc();
     }
+
     [ClientRpc]
     private void RestoreBossHpClientRpc()
     {
@@ -109,6 +123,6 @@ public abstract class BossHealth : NetworkBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(offSet,areaBossRadius);
+        Gizmos.DrawWireCube(offSet, areaBossRadius);
     }
 }

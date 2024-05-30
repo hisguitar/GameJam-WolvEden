@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,29 +7,37 @@ namespace James.Script
     {
         [SerializeField] private GameObject bulletObject;
         [SerializeField] private float bulletSpeed;
-        private bool isShoot;
-        
+        [SerializeField] private bool isShoot;
 
         private void FixedUpdate()
         {
-            ShootBullet();
+            if (isShoot)
+            {
+                ShootBullet();
+            }
         }
 
         private void ShootBullet()
         {
-            if (!isShoot)
-            {
-                StartCoroutine(Shoot());
-            }
-            
+            StartCoroutine(Shoot());
         }
-        
+
         IEnumerator Shoot()
         {
-            isShoot = true;
-            GameObject bulletObject = Instantiate(this.bulletObject, transform.position, transform.rotation);
-            bulletObject.GetComponent<Rigidbody2D>().velocity = bulletSpeed * transform.up;
+            isShoot = false;
+            GameObject bulletInstance = Instantiate(bulletObject, transform.position, transform.rotation);
+            bulletInstance.GetComponent<Rigidbody2D>().velocity = bulletSpeed * transform.up;
             yield return new WaitForSeconds(4);
+            isShoot = true;
+        }
+
+        public void StartShooting()
+        {
+            isShoot = true;
+        }
+
+        public void StopShooting()
+        {
             isShoot = false;
         }
 
