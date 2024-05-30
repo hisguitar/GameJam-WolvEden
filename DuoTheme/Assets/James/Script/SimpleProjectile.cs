@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SimpleProjectile : MonoBehaviour
@@ -17,7 +14,14 @@ public class SimpleProjectile : MonoBehaviour
             other.GetComponent<PlayerController>().ReceiveDamage(25);
             Destroy(gameObject);
         }
-        
-        Destroy(gameObject);
+        else if (other.CompareTag("Shield"))
+        {
+            Destroy(gameObject);
+        }
+        // Other cases, don't destroy the bullets.
+        else
+        {
+            return;
+        }
     }
 }
