@@ -77,7 +77,7 @@ public class PlayerController : NetworkBehaviour
             HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId);
         playerClass = userData.userClass;
         previousClass = playerClass;
-        Debug.Log("ResetStats");
+        Debug.Log("Start ResetStats");
         ResetStatsServerRpc();
     }
 
@@ -133,7 +133,6 @@ public class PlayerController : NetworkBehaviour
     {
         if (previousClass != playerClass)
         {
-            Debug.Log("Class Change");
             ResetStatsServerRpc();
             previousClass = playerClass;
         }
@@ -174,7 +173,6 @@ public class PlayerController : NetworkBehaviour
     [ContextMenu("Reset Stats")]
     public void ResetStats()
     {
-        Debug.Log("Class Change");
         playerClass = playerStats[(int)playerClass].playerClass;
         playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
         playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
@@ -229,7 +227,6 @@ public class PlayerController : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void ResetStatsServerRpc()
     {
-        Debug.Log("Class Change Server RPC");
         playerClass = playerStats[(int)playerClass].playerClass;
         playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
         playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;

@@ -92,7 +92,8 @@ public class StartClassSelector : NetworkBehaviour
     public void SelectClassSwordServerRpc()
     {
         swordSelected = true;
-        UserData userData = HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId);
+        UserData userData = 
+            HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId);
         swordText.text = userData.userName;
         userData.userClass = Class.Sword;
         Debug.Log(userData.userClass);
@@ -106,7 +107,8 @@ public class StartClassSelector : NetworkBehaviour
             return;
         }
         swordSelected = true;
-        UserData userData = HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId);
+        UserData userData = 
+            HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId);
         swordText.text = userData.userName;
         userData.userClass = Class.Sword;
         Debug.Log(userData.userClass);
