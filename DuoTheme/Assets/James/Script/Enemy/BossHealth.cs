@@ -1,7 +1,6 @@
 using James.Script;
 using Unity.Collections;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +10,8 @@ public abstract class BossHealth : NetworkBehaviour
     [ReadOnly][SerializeField] private float bossHealth;
     [SerializeField] private Image healthBar;
     [SerializeField] private Vector2 offSet;
-    [SerializeField] private Vector2 areaBossRadius;
-    [SerializeField] private LayerMask playerLayer;
+    public Vector2 areaBossRadius;
+    public LayerMask playerLayer;
     [SerializeField] private Animator _animator;
     [SerializeField] private bool bossActive;
 

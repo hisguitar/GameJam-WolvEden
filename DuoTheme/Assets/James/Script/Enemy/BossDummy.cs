@@ -7,7 +7,10 @@ namespace James.Script
     {
         [SerializeField] private GameObject bulletObject;
         [SerializeField] private float bulletSpeed;
-        [SerializeField] private bool isShoot;
+        [SerializeField] private float firingSpeed;
+
+        private bool isShoot;
+        private Transform attackTarget;
 
         private void FixedUpdate()
         {
@@ -22,13 +25,43 @@ namespace James.Script
             StartCoroutine(Shoot());
         }
 
-        IEnumerator Shoot()
+        private IEnumerator Shoot()
         {
             isShoot = false;
-            GameObject bulletInstance = Instantiate(bulletObject, transform.position, transform.rotation);
-            bulletInstance.GetComponent<Rigidbody2D>().velocity = bulletSpeed * transform.up;
-            yield return new WaitForSeconds(4);
+
+            // Find target
+            attackTarget = FindTarget();
+            if (attackTarget != null)
+            {
+                // Shoot to direction
+                Vector2 direction = (attackTarget.position - transform.position).normalized;
+                GameObject bulletInstance = Instantiate(bulletObject, transform.position, Quaternion.identity);
+
+                // Rotate bullet to direction
+                bulletInstance.transform.up = direction;
+                bulletInstance.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+            }
+
+            yield return new WaitForSeconds(firingSpeed);
             isShoot = true;
+        }
+
+        private Transform FindTarget()
+        {
+            Collider2D[] players = Physics2D.OverlapCircleAll(transform.position, areaBossRadius.x, playerLayer);
+            Transform nearestPlayer = null;
+            float shortestDistance = Mathf.Infinity;
+
+            foreach (Collider2D player in players)
+            {
+                float distance = Vector2.Distance(transform.position, player.transform.position);
+                if (distance < shortestDistance)
+                {
+                    shortestDistance = distance;
+                    nearestPlayer = player.transform;
+                }
+            }
+            return nearestPlayer;
         }
 
         public void StartShooting()
@@ -43,7 +76,7 @@ namespace James.Script
 
         public void OnDie()
         {
-            InactiveBoss();
+
         }
     }
 }
