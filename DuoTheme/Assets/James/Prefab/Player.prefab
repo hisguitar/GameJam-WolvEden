@@ -205,7 +205,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c7df6e594a5f10a408b7327d2068dfc5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -937,7 +937,7 @@ MonoBehaviour:
   playerStats:
   - {fileID: 11400000, guid: 45baf719d3ef1c74db9357a76f24dffc, type: 2}
   - {fileID: 11400000, guid: e4849aa200a08404a8d8780342320464, type: 2}
-  playerClass: 1
+  playerClass: 0
   isDead: 0
   healthBar: {fileID: 3433317969360747856}
   playerMaxHealth: 0
@@ -949,6 +949,7 @@ MonoBehaviour:
   playerMaxSpeed: 0
   playerSpeed: 5
   playerHUD: {fileID: 6526989401451375643}
+  playerSprite: {fileID: 210058225007126184}
 --- !u!114 &2868753955419780216
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88cf30cb0ff79504a81394dfa4621364, type: 3}
   m_Name: PlayerSword
   m_EditorClassIdentifier: 
+  playerMaterial: {fileID: 2100000, guid: 43879ab48198aea4189a068816f50755, type: 2}
   playerClass: 0
   playerMaxHealth: 100
   playerMaxStamina: 100

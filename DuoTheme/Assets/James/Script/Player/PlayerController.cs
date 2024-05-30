@@ -39,6 +39,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private GameObject playerHUD;
 
     [Header("Ref")] 
+    public SpriteRenderer playerSprite;
     private PlayerAnimationController _playerAnimationController;
     
     public PlayerStats PlayerStats { get { return playerStats[(int)playerClass]; } }
@@ -167,6 +168,7 @@ public class PlayerController : NetworkBehaviour
         playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
         playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
         playerMaxSpeed = playerStats[(int)playerClass].playerSpeed;
+        playerSprite.material = playerStats[(int)playerClass].playerMaterial;
         
         playerSpeed = playerMaxSpeed;
         playerHealth = playerMaxHealth;
