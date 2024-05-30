@@ -65,7 +65,7 @@ public abstract class BossHealth : NetworkBehaviour
         }
     }
 
-    public void UnActiveBoss()
+    public void InactiveBoss()
     {
         //bossActive = false;
         //GetComponent<SpriteRenderer>().enabled = false;
@@ -98,7 +98,7 @@ public abstract class BossHealth : NetworkBehaviour
         bossHealth -= damage;
         if (bossHealth < 0)
         {
-            UnActiveBoss();
+            InactiveBoss();
             bossHealth = 0;
         }
         UpdateGUI();
@@ -115,7 +115,7 @@ public abstract class BossHealth : NetworkBehaviour
         bossHealth -= damage;
         if (bossHealth < 0)
         {
-            UnActiveBoss();
+            InactiveBoss();
             bossHealth = 0;
         }
         UpdateGUI();
