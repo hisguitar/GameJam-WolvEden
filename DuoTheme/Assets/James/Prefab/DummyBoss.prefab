@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4244586055
+  GlobalObjectIdHash: 3932189066
   InScenePlacedSourceGlobalObjectIdHash: 4244586055
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -485,16 +485,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2d5e24891bd2944cba2dd6b6b1e9ecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxBossHealth: 1000
-  bossHealth: 0
-  healthBar: {fileID: 4147534525327771330}
-  offSet: {x: -0.52, y: 13}
-  areaBossRadius: {x: 11.3, y: 7.84}
-  playerLayer:
+  PlayerLayer:
     serializedVersion: 2
     m_Bits: 128
+  healthBar: {fileID: 4147534525327771330}
   _animator: {fileID: 5417633237432929165}
-  bossActive: 0
+  offSet: {x: -0.52, y: 13}
+  maxBossHealth: 1000
+  bossHealth: 0
   bulletObject: {fileID: 6552662160762432435, guid: 2c47b18029b2f8248854786ba487c72d, type: 3}
   bulletSpeed: 10
   firingSpeed: 3

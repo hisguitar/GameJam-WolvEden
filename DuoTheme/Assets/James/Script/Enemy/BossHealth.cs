@@ -6,13 +6,18 @@ using UnityEngine.UI;
 
 public abstract class BossHealth : NetworkBehaviour
 {
+    [Header("Reference")]
+    [SerializeField] private Image healthBar;
+    [SerializeField] private Animator _animator;
+
+    [Header("Boss Target & Area")]
+    public LayerMask PlayerLayer;
+    public Vector2 AreaBossRadius { get; private set; } = new(11.3f, 7.84f);
+    [SerializeField] private Vector2 offSet = new(-0.52f, 13f);
+
+    [Header("Boss HP")]
     [SerializeField] private float maxBossHealth = 1000f;
     [ReadOnly][SerializeField] private float bossHealth = 0f;
-    [SerializeField] private Image healthBar;
-    [SerializeField] private Vector2 offSet = new(-0.52f, 13f);
-    public Vector2 areaBossRadius = new(11.3f, 7.84f);
-    public LayerMask playerLayer;
-    [SerializeField] private Animator _animator;
 
     private BossDummy bossDummy;
     private bool bossActive = false;
@@ -25,33 +30,33 @@ public abstract class BossHealth : NetworkBehaviour
 
     private void Update()
     {
-        if (!IsOwner)
-        {
-            return;
-        }
+        if (!IsOwner) {  return; }
 
         UpdateGUI();
         CheckPlayerInArea();
     }
 
-    private void UpdateGUI()
-    {
-        healthBar.fillAmount = bossHealth / maxBossHealth;
-    }
-
+    #region Boss Area
     private void CheckPlayerInArea()
     {
         if (bossActive)
         {
             return;
         }
-        bool playerIn = Physics2D.OverlapBox(offSet, areaBossRadius, 10, playerLayer);
+        bool playerIn = Physics2D.OverlapBox(offSet, AreaBossRadius, 10, PlayerLayer);
         if (playerIn)
         {
             ActiveBoss();
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(offSet, AreaBossRadius);
+    }
+    #endregion
+
+    #region Active & Inactive
     private void ActiveBoss()
     {
         bossActive = true;
@@ -77,7 +82,16 @@ public abstract class BossHealth : NetworkBehaviour
 
         gameObject.SetActive(false);
     }
+    #endregion
 
+    #region Update Boss-hp
+    // Update UI
+    private void UpdateGUI()
+    {
+        healthBar.fillAmount = bossHealth / maxBossHealth;
+    }
+
+    // Restore boss hp to max-hp
     [ServerRpc(RequireOwnership = false)]
     private void RestoreBossHpServerRpc()
     {
@@ -91,6 +105,7 @@ public abstract class BossHealth : NetworkBehaviour
         bossHealth = maxBossHealth;
     }
 
+    // TakeDamage to boss
     [ServerRpc(RequireOwnership = false)]
     public void TakeDamageServerRpc(float damage)
     {
@@ -119,9 +134,5 @@ public abstract class BossHealth : NetworkBehaviour
         }
         UpdateGUI();
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(offSet, areaBossRadius);
-    }
+    #endregion
 }

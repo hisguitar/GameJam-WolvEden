@@ -5,6 +5,7 @@ namespace James.Script
 {
     public class BossDummy : BossHealth, IEnemy
     {
+        [Header("Boss Bullet")]
         [SerializeField] private GameObject bulletObject;
         [SerializeField] private float bulletSpeed;
         [SerializeField] private float firingSpeed;
@@ -48,7 +49,7 @@ namespace James.Script
 
         private Transform FindTarget()
         {
-            Collider2D[] players = Physics2D.OverlapCircleAll(transform.position, areaBossRadius.x, playerLayer);
+            Collider2D[] players = Physics2D.OverlapCircleAll(transform.position, AreaBossRadius.x, PlayerLayer);
             Transform nearestPlayer = null;
             float shortestDistance = Mathf.Infinity;
 
