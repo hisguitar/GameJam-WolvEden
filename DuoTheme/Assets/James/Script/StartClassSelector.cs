@@ -29,6 +29,7 @@ public class StartClassSelector : NetworkBehaviour
     private bool swordSelected, shieldSelected;
 
     private UserData _hostData = new UserData();
+    private bool hostSelected;
     private UserData _clientData = new UserData(); 
 
     private void Awake()
@@ -123,14 +124,15 @@ public class StartClassSelector : NetworkBehaviour
     public void SelectClassSwordServerRpc()
     {
         swordSelected = true;
-        if (IsOwner)
+        if (!hostSelected)
         {
             string playerName  = _hostData.userName;
             swordText.text = playerName;
             _hostData.userClass = Class.Sword;
+            hostSelected = true;
             SelectClassSwordOwnerClientRpc(playerName);
         }
-        else if (!IsOwner)
+        else if (hostSelected)
         {
             string playerName  = _clientData.userName;
             swordText.text = playerName;
@@ -144,6 +146,7 @@ public class StartClassSelector : NetworkBehaviour
         swordSelected = true;
         swordText.text = namePlayer;
         _hostData.userClass = Class.Sword;
+        hostSelected = true;
     }
     [ClientRpc(RequireOwnership = false)]
     private void SelectClassSwordNotOwnerClientRpc(string namePlayer)
@@ -158,14 +161,15 @@ public class StartClassSelector : NetworkBehaviour
     public void SelectClassShieldServerRpc()
     {
         shieldSelected = true;
-        if (IsOwner)
+        if (!hostSelected)
         {
             string playerName  = _hostData.userName;
             shieldText.text = playerName;
             _hostData.userClass = Class.Shield;
+            hostSelected = true;
             SelectClassShieldOwnerClientRpc(playerName);
         }
-        else if (!IsOwner)
+        else if (hostSelected)
         {
             string playerName  = _clientData.userName;
             shieldText.text = playerName;
@@ -179,6 +183,7 @@ public class StartClassSelector : NetworkBehaviour
         shieldSelected = true;
         shieldText.text = namePlayer;
         _hostData.userClass = Class.Shield;
+        hostSelected = true;
     }
     [ClientRpc(RequireOwnership = false)]
     private void SelectClassShieldNotOwnerClientRpc(string namePlayer)
