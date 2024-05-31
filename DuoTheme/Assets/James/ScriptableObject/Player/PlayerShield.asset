@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88cf30cb0ff79504a81394dfa4621364, type: 3}
   m_Name: PlayerShield
   m_EditorClassIdentifier: 
+  playerMaterial: {fileID: 2100000, guid: c7df6e594a5f10a408b7327d2068dfc5, type: 2}
   playerClass: 1
   playerMaxHealth: 150
   playerMaxStamina: 100

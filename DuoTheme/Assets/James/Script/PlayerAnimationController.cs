@@ -139,7 +139,7 @@ public class PlayerAnimationController : NetworkBehaviour
     [ClientRpc(RequireOwnership = false)]
     public void ChangeAnimationClassClientRpc()
     {
-        if (!IsOwner)
+        if (IsOwner)
         {
             return;
         }
