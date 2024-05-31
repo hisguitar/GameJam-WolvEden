@@ -23,7 +23,7 @@ public class HostGameManager : IDisposable
     public NetworkServer NetworkServer { get; private set; }
 
     private const int MaxConnections = 2;
-    private const string GameSceneName = "SelectClass";
+    private const string GameSceneName = "Game";
 
     public async Task StartHostAsync()
     {
@@ -93,7 +93,7 @@ public class HostGameManager : IDisposable
         NetworkManager.Singleton.NetworkConfig.ConnectionData = payloadBytes;
         NetworkManager.Singleton.StartHost();
         NetworkServer.OnClientLeft += HandleClientLeft;
-        NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 
     private IEnumerator HeartbeatLobby(float waitTimeSeconds)

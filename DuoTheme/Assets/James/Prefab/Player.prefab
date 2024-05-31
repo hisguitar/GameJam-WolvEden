@@ -1179,8 +1179,8 @@ GameObject:
   - component: {fileID: 4680917541364692435}
   - component: {fileID: 7728657856249806793}
   - component: {fileID: 3457139581056385888}
-  - component: {fileID: 4450328336590732557}
   - component: {fileID: 2868753955419780216}
+  - component: {fileID: 4450328336590732557}
   - component: {fileID: 7641876936234024119}
   - component: {fileID: 7016732967674824769}
   - component: {fileID: 5311313332089130978}
@@ -1309,36 +1309,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4450328336590732557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4056565228135726250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88c3e2aeb0fbbda4eadfd661902629fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStats:
-  - {fileID: 11400000, guid: 45baf719d3ef1c74db9357a76f24dffc, type: 2}
-  - {fileID: 11400000, guid: e4849aa200a08404a8d8780342320464, type: 2}
-  playerClass: 0
-  isDead: 0
-  healthBar: {fileID: 3433317969360747856}
-  playerMaxHealth: 0
-  playerHealth: 0
-  staminaBar: {fileID: 9154774682738286320}
-  reganSpeed: 7.5
-  playerMaxStamina: 100
-  playerStamina: 100
-  playerMaxSpeed: 0
-  playerSpeed: 5
-  playerHUD: {fileID: 6526989401451375643}
-  respawnPanel: {fileID: 360029443335509083}
-  playerSprite: {fileID: 210058225007126184}
-  _playerAnimationController: {fileID: 5311313332089130978}
 --- !u!114 &2868753955419780216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1389,6 +1359,36 @@ MonoBehaviour:
   <Health>k__BackingField: {fileID: 4450328336590732557}
   ownerPriority: 15
   virtualCamera: {fileID: 1339870235081084994}
+--- !u!114 &4450328336590732557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4056565228135726250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88c3e2aeb0fbbda4eadfd661902629fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats:
+  - {fileID: 11400000, guid: 45baf719d3ef1c74db9357a76f24dffc, type: 2}
+  - {fileID: 11400000, guid: e4849aa200a08404a8d8780342320464, type: 2}
+  playerClass: 0
+  isDead: 0
+  healthBar: {fileID: 3433317969360747856}
+  playerMaxHealth: 0
+  playerHealth: 0
+  staminaBar: {fileID: 9154774682738286320}
+  reganSpeed: 7.5
+  playerMaxStamina: 100
+  playerStamina: 100
+  playerMaxSpeed: 0
+  playerSpeed: 5
+  playerHUD: {fileID: 6526989401451375643}
+  respawnPanel: {fileID: 360029443335509083}
+  playerSprite: {fileID: 210058225007126184}
+  _playerAnimationController: {fileID: 5311313332089130978}
 --- !u!114 &7641876936234024119
 MonoBehaviour:
   m_ObjectHideFlags: 0

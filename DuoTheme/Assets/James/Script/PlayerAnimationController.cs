@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class PlayerAnimationController : NetworkBehaviour
 {
+    
     [SerializeField] private LayerMask cursorLayer;
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Animator animator;
@@ -67,7 +68,16 @@ public class PlayerAnimationController : NetworkBehaviour
 
     public void ChangeAnimationClass()
     {
-        animator.runtimeAnimatorController = _playerController.PlayerStats.animation;
+        if (_playerController.PlayerClass == Class.Sword)
+        {
+            animator.SetLayerWeight(1,0);
+           
+        }
+        else if (_playerController.PlayerClass == Class.Shield)
+        {
+            animator.SetLayerWeight(1,1);
+        }
+        
     }
     public void SetMouseDirection()
     {
@@ -137,12 +147,8 @@ public class PlayerAnimationController : NetworkBehaviour
     }
 
     [ClientRpc(RequireOwnership = false)]
-    public void ChangeAnimationClassClientRpc()
+    private void ChangeAnimationClassClientRpc()
     {
-        if (IsOwner)
-        {
-            return;
-        }
         ChangeAnimationClass();
     }
 }
