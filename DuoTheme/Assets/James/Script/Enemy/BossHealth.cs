@@ -9,6 +9,7 @@ public abstract class BossHealth : NetworkBehaviour
     [Header("Reference")]
     [SerializeField] private Image healthBar;
     [SerializeField] private Animator _animator;
+    [SerializeField] private GameObject clearPanel;
 
     [Header("Boss Target & Area")]
     public LayerMask PlayerLayer;
@@ -57,8 +58,9 @@ public abstract class BossHealth : NetworkBehaviour
     #endregion
 
     #region Active & Inactive
-    private void ActiveBoss()
+    public void ActiveBoss()
     {
+        gameObject.SetActive(true);
         bossActive = true;
         RestoreBossHpClientRpc();
         _animator.SetBool("BossActive", true);
@@ -81,6 +83,7 @@ public abstract class BossHealth : NetworkBehaviour
         //}
 
         gameObject.SetActive(false);
+        clearPanel.SetActive(true);
     }
     #endregion
 
