@@ -340,37 +340,37 @@ MonoBehaviour:
     volume: 1
     audioSource: {fileID: 0}
   - soundName: 1
-    clip: {fileID: 8300000, guid: f65fe321c94e8ad4dbdbbffac982c2ee, type: 3}
-    loop: 0
-    volume: 1
-    audioSource: {fileID: 0}
-  - soundName: 2
-    clip: {fileID: 8300000, guid: 1ff2c256c8b22024b81e142e13007cb4, type: 3}
-    loop: 0
-    volume: 1
-    audioSource: {fileID: 0}
-  - soundName: 3
     clip: {fileID: 8300000, guid: 3ea300ae5bf91df4ab46f7b2ab4984c7, type: 3}
     loop: 1
     volume: 1
     audioSource: {fileID: 0}
-  - soundName: 4
+  - soundName: 2
     clip: {fileID: 8300000, guid: 736fd3e5a24138240a126af6b468892b, type: 3}
     loop: 0
     volume: 1
     audioSource: {fileID: 0}
-  - soundName: 5
-    clip: {fileID: 8300000, guid: 800be08cda6f6cd4c9521c016cda87db, type: 3}
+  - soundName: 3
+    clip: {fileID: 8300000, guid: f65fe321c94e8ad4dbdbbffac982c2ee, type: 3}
     loop: 0
     volume: 1
     audioSource: {fileID: 0}
-  - soundName: 6
+  - soundName: 4
+    clip: {fileID: 8300000, guid: 1ff2c256c8b22024b81e142e13007cb4, type: 3}
+    loop: 0
+    volume: 1
+    audioSource: {fileID: 0}
+  - soundName: 5
     clip: {fileID: 8300000, guid: da5e8a0752935f54c90d7d5c3fb68b31, type: 3}
     loop: 0
     volume: 1
     audioSource: {fileID: 0}
-  - soundName: 7
+  - soundName: 6
     clip: {fileID: 8300000, guid: 0a0b6562e1a433f4d8ac58e2c2c233c9, type: 3}
+    loop: 0
+    volume: 1
+    audioSource: {fileID: 0}
+  - soundName: 7
+    clip: {fileID: 8300000, guid: 800be08cda6f6cd4c9521c016cda87db, type: 3}
     loop: 0
     volume: 1
     audioSource: {fileID: 0}
@@ -864,15 +864,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6238894887430038145, guid: 13d1fce4ba7926044b83b42fbae17a90, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1098.3446
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6238894887430038145, guid: 13d1fce4ba7926044b83b42fbae17a90, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 529.07983
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6238894887430038145, guid: 13d1fce4ba7926044b83b42fbae17a90, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.1600758
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6238894887430038145, guid: 13d1fce4ba7926044b83b42fbae17a90, type: 3}
       propertyPath: m_LocalRotation.w

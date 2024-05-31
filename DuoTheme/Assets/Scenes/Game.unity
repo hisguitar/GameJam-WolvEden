@@ -931,7 +931,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1610443764543214244, guid: 13d1fce4ba7926044b83b42fbae17a90, type: 3}
       propertyPath: soundName
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6238894887430038145, guid: 13d1fce4ba7926044b83b42fbae17a90, type: 3}
       propertyPath: m_LocalPosition.x

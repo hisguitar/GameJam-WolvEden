@@ -8,14 +8,14 @@ public class SoundManager : SingletonPersistent<SoundManager>
     // List of sounds
     public enum SoundName
     {
-        ThemeSong,
+        LobbyMusic,
+        DungeonMusic,
+        RushIn,
         ChangeScene,
         ToggleWindow,
-        EnterDungeon,
-        RushIn,
-        LaserGun,
         Slash,
         WhooshSlash,
+        LaserGun,
     }
 
     // For setting sound
