@@ -12,7 +12,8 @@ public class SoundManager : SingletonPersistent<SoundManager>
         ChangeScene,
         ToggleWindow,
         EnterDungeon,
-        RushIn
+        RushIn,
+        LaserGun,
     }
 
     // For setting sound

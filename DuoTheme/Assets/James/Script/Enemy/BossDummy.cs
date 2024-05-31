@@ -130,6 +130,7 @@ namespace James.Script
 
         private void ShootBullet(Vector2 direction)
         {
+            SoundManager.Instance.Play(SoundManager.SoundName.LaserGun);
             GameObject bulletInstance = Instantiate(bulletObject, transform.position, Quaternion.identity);
 
             // Rotate bullet to direction
