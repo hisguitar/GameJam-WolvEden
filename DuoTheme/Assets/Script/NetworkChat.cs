@@ -8,14 +8,14 @@ public class NetworkChat : NetworkBehaviour
     [SerializeField] private int maxMessages = 25;
     [SerializeField] private GameObject messageTextPrefab, chatPanel;
     [SerializeField] private TMP_InputField textInput;
-    [SerializeField] private Color playerMessage, info;
+    [SerializeField] private Color playerMessage, info, playerAction;
     private readonly List<Message> messageList = new();
     private string playerName;
 
     private void Start()
     {
         playerName = PlayerPrefs.GetString(NameSelector.PlayerNameKey, "Player");
-        SendMessageServerRpc("Your join code is '" + PlayerPrefs.GetString("JoinCode") + "', You can use this code to invite friends.", Message.MessageType.info);
+        SendMessageServerRpc("[System] Your join code is '" + PlayerPrefs.GetString("JoinCode") + "', You can use this code to invite friends.", Message.MessageType.info);
     }
 
     private void Update()
@@ -42,15 +42,24 @@ public class NetworkChat : NetworkBehaviour
             }
         }
 
-        // Press 'Spacebar' to test info message
-        //if (!textInput.isFocused)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Space))
-        //    {
-        //        SendMessageServerRpc("You pressed the space key!", Message.MessageType.info);
-        //        Debug.Log("Space");
-        //    }
-        //}
+        // Press 'Spacebar' to test playerAction message
+        if (!textInput.isFocused)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SendMessageServerRpc("[System] " + playerName + " dashed!", Message.MessageType.playerAction);
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                SendMessageServerRpc("[System] " + playerName + " attacked!", Message.MessageType.playerAction);
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                SendMessageServerRpc("[System] " + playerName + " used ability!", Message.MessageType.playerAction);
+            }
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -95,6 +104,10 @@ public class NetworkChat : NetworkBehaviour
             case Message.MessageType.info:
                 color = info;
                 break;
+
+                    case Message.MessageType.playerAction:
+                color = playerAction;
+                break;
         }
 
         return color;
@@ -116,6 +129,7 @@ public class Message
     public enum MessageType
     {
         playerMessage,
-        info
+        info,
+        playerAction
     }
 }
