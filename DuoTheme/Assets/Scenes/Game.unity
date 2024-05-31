@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 51165963}
   - component: {fileID: 51165962}
   m_Layer: 5
-  m_Name: Next Floor
+  m_Name: NextFloorButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -238,7 +238,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 51165963}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 747931242}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 695778106}
+        m_TargetAssemblyTypeName: RespawnHandler, Assembly-CSharp
+        m_MethodName: MoveAllPlayersToSpawnPoints
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1597720875}
+        m_TargetAssemblyTypeName: BossHealth, Assembly-CSharp
+        m_MethodName: ActiveBoss
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &51165963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1061,7 +1097,7 @@ GameObject:
   - component: {fileID: 433455805}
   - component: {fileID: 433455804}
   m_Layer: 5
-  m_Name: Give Up
+  m_Name: GiveUpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1130,7 +1166,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 433455805}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 446557721}
+        m_TargetAssemblyTypeName: GameHUD, Assembly-CSharp
+        m_MethodName: LeaveGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Menu
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &433455805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1269,11 +1317,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1104966462}
-  m_Father: {fileID: 900470378}
+  m_Father: {fileID: 1807901788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 77}
+  m_AnchoredPosition: {x: 0, y: 27}
   m_SizeDelta: {x: 425, y: 220}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &580370055
@@ -1428,7 +1476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &747931243
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1595,8 +1643,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 580370054}
-  - {fileID: 1339867727}
+  - {fileID: 1807901788}
   m_Father: {fileID: 315661365}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2241,11 +2288,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1027194017}
-  m_Father: {fileID: 900470378}
+  m_Father: {fileID: 1807901788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 50}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 425, y: 30}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1339867728
@@ -10510,6 +10557,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 867854050
       objectReference: {fileID: 0}
+    - target: {fileID: 2154317104832202557, guid: 79e31f08b4955d94cb7439f64e7df6cf, type: 3}
+      propertyPath: clearPanel
+      value: 
+      objectReference: {fileID: 747931242}
     - target: {fileID: 7278411258574537065, guid: 79e31f08b4955d94cb7439f64e7df6cf, type: 3}
       propertyPath: m_Name
       value: DummyBoss
@@ -10559,6 +10610,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79e31f08b4955d94cb7439f64e7df6cf, type: 3}
+--- !u!114 &1597720875 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2154317104832202557, guid: 79e31f08b4955d94cb7439f64e7df6cf, type: 3}
+  m_PrefabInstance: {fileID: 1597720874}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2d5e24891bd2944cba2dd6b6b1e9ecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1641409959
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10799,6 +10861,43 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2068480406}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1807901787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1807901788}
+  m_Layer: 5
+  m_Name: ChatGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1807901788
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807901787}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 580370054}
+  - {fileID: 1339867727}
+  m_Father: {fileID: 900470378}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 200}
+  m_SizeDelta: {x: 425, y: 247}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &1959475364
 GameObject:
   m_ObjectHideFlags: 0

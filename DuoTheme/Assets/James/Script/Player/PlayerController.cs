@@ -19,7 +19,8 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private Class playerClass;
     private Class previousClass;
 
-    [Header("Health")] 
+    [Header("Health")]
+    public Action<PlayerController> OnDie;
     [SerializeField] private bool isDead;
     [SerializeField] private Image healthBar;
     [SerializeField] private float playerMaxHealth;
@@ -37,6 +38,7 @@ public class PlayerController : NetworkBehaviour
 
     [Header("GUI")] 
     [SerializeField] private GameObject playerHUD;
+    [SerializeField] private GameObject respawnPanel;
 
     [Header("Ref")] 
     public SpriteRenderer playerSprite;
@@ -143,6 +145,22 @@ public class PlayerController : NetworkBehaviour
         GetComponent<Collider2D>().enabled = false;
         _playerAnimationController.DeadAnimation(true);
         isDead = true;
+        if (isDead)
+        {
+            if (IsOwner)
+            {
+                respawnPanel.SetActive(true);
+            }
+        }
+    }
+
+    public void PlayerRespawn()
+    {
+        if (IsOwner)
+        {
+            respawnPanel.SetActive(false);
+            OnDie?.Invoke(this);
+        }
     }
 
     public void DecreaseStamina(float cost)

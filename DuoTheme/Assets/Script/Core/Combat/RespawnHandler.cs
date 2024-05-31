@@ -27,12 +27,12 @@ public class RespawnHandler : NetworkBehaviour
 
     private void HandlePlayerSpawned(Player player)
     {
-        //player.Health.OnDie += (health) => HandlePlayerDie(player);
+        player.Health.OnDie += (health) => HandlePlayerDie(player);
     }
 
     private void HandlePlayerDespawned(Player player)
     {
-        //player.Health.OnDie -= (health) => HandlePlayerDie(player);
+        player.Health.OnDie -= (health) => HandlePlayerDie(player);
     }
 
     private void HandlePlayerDie(Player player)
@@ -50,5 +50,19 @@ public class RespawnHandler : NetworkBehaviour
         Player playerInstance = Instantiate(
             playerPrefab, SpawnPoint.GetRandomSpawnPos(), Quaternion.identity);
         playerInstance.NetworkObject.SpawnAsPlayerObject(ownerClientId);
+    }
+
+    public void MoveAllPlayersToSpawnPoints()
+    {
+        if (!IsServer) { return; }
+
+        Player[] players = FindObjectsByType<Player>(FindObjectsSortMode.None);
+        foreach (Player player in players)
+        {
+            Vector3 spawnPosition = SpawnPoint.GetRandomSpawnPos();
+            player.transform.position = spawnPosition;
+            // Optionally reset rotation or other parameters
+            player.transform.rotation = Quaternion.identity;
+        }
     }
 }
