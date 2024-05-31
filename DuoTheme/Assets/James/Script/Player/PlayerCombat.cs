@@ -105,6 +105,7 @@ public class PlayerCombat : NetworkBehaviour
         {
             if (_playerController.PlayerStamina > playerSkill[(int)normalSkill].skillCost)
             {
+                SoundManager.Instance.Play(SoundManager.SoundName.Slash);
                 onNormalSkillActive = true;
                 _playerController.DecreaseStamina(playerSkill[(int)normalSkill].skillCost);
                 playerSkill[(int)normalSkill].ActiveSkill();
@@ -122,6 +123,7 @@ public class PlayerCombat : NetworkBehaviour
         {
             if (_playerController.PlayerStamina > playerSkill[(int)specialSkill].skillCost)
             {
+                SoundManager.Instance.Play(SoundManager.SoundName.WhooshSlash);
                 onSpecialSkillActive = true;
                 _playerController.DecreaseStamina(playerSkill[(int)specialSkill].skillCost);
                 playerSkill[(int)specialSkill].ActiveSkill();
