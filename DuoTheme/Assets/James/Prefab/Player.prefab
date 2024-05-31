@@ -458,7 +458,7 @@ Animator:
   m_GameObject: {fileID: 2104518134851066211}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 66838da087fb68f4d8c6d0bae4f2fd11, type: 2}
+  m_Controller: {fileID: 9100000, guid: d622341d2adc7ac4e82ccac9d75a5272, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -484,28 +484,56 @@ MonoBehaviour:
   TransitionStateInfoList:
   - IsCrossFadeExit: 0
     Layer: 0
+    OriginatingState: 132030995
+    DestinationState: 2137540949
+    TransitionDuration: 0
+    TriggerNameHash: -1614611405
+    TransitionIndex: 0
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 132030995
+    DestinationState: -949705666
+    TransitionDuration: 0
+    TriggerNameHash: -720101083
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
     OriginatingState: 1001749583
+    DestinationState: 2137540949
+    TransitionDuration: 0
+    TriggerNameHash: -1614611405
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 1001749583
+    DestinationState: -949705666
+    TransitionDuration: 0
+    TriggerNameHash: -720101083
+    TransitionIndex: 2
+  - IsCrossFadeExit: 0
+    Layer: 1
+    OriginatingState: 132030995
     DestinationState: -949705666
     TransitionDuration: 0
     TriggerNameHash: -720101083
     TransitionIndex: 0
   - IsCrossFadeExit: 0
-    Layer: 0
+    Layer: 1
+    OriginatingState: 132030995
+    DestinationState: 2137540949
+    TransitionDuration: 0
+    TriggerNameHash: -1614611405
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 1
     OriginatingState: 1001749583
     DestinationState: 2137540949
     TransitionDuration: 0
     TriggerNameHash: -1614611405
     TransitionIndex: 1
   - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 132030995
-    DestinationState: 2137540949
-    TransitionDuration: 0
-    TriggerNameHash: -1614611405
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 132030995
+    Layer: 1
+    OriginatingState: 1001749583
     DestinationState: -949705666
     TransitionDuration: 0
     TriggerNameHash: -720101083
@@ -1386,8 +1414,6 @@ MonoBehaviour:
   playerMaxSpeed: 0
   playerSpeed: 5
   playerHUD: {fileID: 6526989401451375643}
-  respawnPanel: {fileID: 360029443335509083}
-  playerSprite: {fileID: 210058225007126184}
   _playerAnimationController: {fileID: 5311313332089130978}
 --- !u!114 &7641876936234024119
 MonoBehaviour:
@@ -1515,7 +1541,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - skillName: Khod Slash
-    skillDamage: 50
+    skillDamage: 10000
     skillCost: 30
     skillCooldown: 4
     skillIcon: {fileID: 7035696078084883712, guid: c961534eae7dbca4aa56967d6fcb34b2, type: 3}
