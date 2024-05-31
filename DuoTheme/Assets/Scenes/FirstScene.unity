@@ -832,6 +832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac5bbf136ee47c43a38ba91ca27d248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: Bootstrap
   animator: {fileID: 1773213006}
 --- !u!95 &1773213006
 Animator:
