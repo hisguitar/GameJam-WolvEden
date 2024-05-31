@@ -9,12 +9,12 @@ public abstract class BossHealth : NetworkBehaviour
     [Header("Reference")]
     [SerializeField] private Image healthBar;
     [SerializeField] private Animator _animator;
+    [SerializeField] private GameObject clearPanel;
 
     [Header("Boss Target & Area")]
     public LayerMask PlayerLayer;
     public Vector2 AreaBossRadius { get; private set; } = new(11.3f, 7.84f);
-    [SerializeField] [Tooltip("Offset of AreaBossRadius(Private variable)")] 
-    private Vector2 offSet = new(-0.52f, 13f);
+    [SerializeField] [Tooltip("Offset of AreaBossRadius(Private variable)")] private Vector2 offSet = new(-0.52f, 13f);
 
     [Header("Boss HP")]
     [SerializeField] private float maxBossHealth = 1000f;
@@ -58,8 +58,9 @@ public abstract class BossHealth : NetworkBehaviour
     #endregion
 
     #region Active & Inactive
-    private void ActiveBoss()
+    public void ActiveBoss()
     {
+        gameObject.SetActive(true);
         bossActive = true;
         RestoreBossHpClientRpc();
         _animator.SetBool("BossActive", true);
@@ -82,6 +83,7 @@ public abstract class BossHealth : NetworkBehaviour
         //}
 
         gameObject.SetActive(false);
+        clearPanel.SetActive(true);
     }
     #endregion
 
