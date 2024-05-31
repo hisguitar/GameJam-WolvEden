@@ -14,6 +14,8 @@ public class SoundManager : SingletonPersistent<SoundManager>
         EnterDungeon,
         RushIn,
         LaserGun,
+        Slash,
+        WhooshSlash,
     }
 
     // For setting sound
