@@ -23,7 +23,7 @@ public class HostGameManager : IDisposable
     public NetworkServer NetworkServer { get; private set; }
 
     private const int MaxConnections = 2;
-    private const string GameSceneName = "SelectClass";
+    private const string GameSceneName = "Game";
 
     public async Task StartHostAsync()
     {

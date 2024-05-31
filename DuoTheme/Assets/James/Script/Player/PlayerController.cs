@@ -75,10 +75,7 @@ public class PlayerController : NetworkBehaviour
 
         if (IsOwner)
         { 
-            SetDataServerRpc();
-            Debug.Log("Start ResetStats");
             ResetStatsServerRpc();
-            //StartClassSelector.Instance.PlayerList.Add(this);
         }
     }
     public override void OnNetworkDespawn()
@@ -95,7 +92,6 @@ public class PlayerController : NetworkBehaviour
         {
             return;
         }
-        SetDataServerRpc();
         ReganStamina();
         UpdateStatsGUI();
         CheckClassChange();
@@ -242,40 +238,9 @@ public class PlayerController : NetworkBehaviour
     [ClientRpc]
     private void ResetStatsClientRpc()
     {
-        Debug.Log("Class Change Client RPC");
         ResetStats();
     }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void SetDataServerRpc()
-    {
-        if (IsOwner)
-        {
-            playerClass = StartClassSelector.Instance._hostData.userClass;
-            previousClass = playerClass;
-        }
-        else if (!IsOwner)
-        {
-            playerClass = StartClassSelector.Instance._clientData.userClass;
-            previousClass = playerClass;
-        }
-        SetDataClientRpc();
-    }
-
-    [ClientRpc(RequireOwnership = false)]
-    private void SetDataClientRpc()
-    {
-        if (IsOwner)
-        {
-            playerClass = StartClassSelector.Instance._hostData.userClass;
-            previousClass = playerClass;
-        }
-        else if (!IsOwner)
-        {
-            playerClass = StartClassSelector.Instance._clientData.userClass;
-            previousClass = playerClass;
-        }
-    }
+    
     
 
     
