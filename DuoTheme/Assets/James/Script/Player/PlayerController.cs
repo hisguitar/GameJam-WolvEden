@@ -7,6 +7,7 @@ using Unity.Netcode;
 using UnityEditor;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum Class
 {
@@ -39,7 +40,6 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private GameObject playerHUD;
 
     [Header("Ref")] 
-    public SpriteRenderer playerSprite;
     public PlayerAnimationController _playerAnimationController;
     private UserData userData;
     
@@ -58,10 +58,7 @@ public class PlayerController : NetworkBehaviour
 
     public static event Action<PlayerController> OnPlayerSpawned; 
     public static event Action<PlayerController> OnPlayerDespawned; 
-    private void Awake()
-    {
-        
-    }
+    
     public override void OnNetworkSpawn()
     {
         if (IsServer)
@@ -81,9 +78,9 @@ public class PlayerController : NetworkBehaviour
             SetDataServerRpc();
             Debug.Log("Start ResetStats");
             ResetStatsServerRpc();
+            //StartClassSelector.Instance.PlayerList.Add(this);
         }
     }
-
     public override void OnNetworkDespawn()
     {
         if (IsServer)
@@ -98,7 +95,7 @@ public class PlayerController : NetworkBehaviour
         {
             return;
         }
-        
+        SetDataServerRpc();
         ReganStamina();
         UpdateStatsGUI();
         CheckClassChange();
@@ -180,7 +177,6 @@ public class PlayerController : NetworkBehaviour
         playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
         playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
         playerMaxSpeed = playerStats[(int)playerClass].playerSpeed;
-        playerSprite.material = playerStats[(int)playerClass].playerMaterial;
         
         playerSpeed = playerMaxSpeed;
         playerHealth = playerMaxHealth;
@@ -234,7 +230,6 @@ public class PlayerController : NetworkBehaviour
         playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
         playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
         playerMaxSpeed = playerStats[(int)playerClass].playerSpeed;
-        playerSprite.material = playerStats[(int)playerClass].playerMaterial;
         
         playerSpeed = playerMaxSpeed;
         playerHealth = playerMaxHealth;
@@ -254,9 +249,32 @@ public class PlayerController : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void SetDataServerRpc()
     {
-        userData = HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId);
-        playerClass = userData.userClass;
-        previousClass = playerClass;
+        if (IsOwner)
+        {
+            playerClass = StartClassSelector.Instance._hostData.userClass;
+            previousClass = playerClass;
+        }
+        else if (!IsOwner)
+        {
+            playerClass = StartClassSelector.Instance._clientData.userClass;
+            previousClass = playerClass;
+        }
+        SetDataClientRpc();
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    private void SetDataClientRpc()
+    {
+        if (IsOwner)
+        {
+            playerClass = StartClassSelector.Instance._hostData.userClass;
+            previousClass = playerClass;
+        }
+        else if (!IsOwner)
+        {
+            playerClass = StartClassSelector.Instance._clientData.userClass;
+            previousClass = playerClass;
+        }
     }
     
 

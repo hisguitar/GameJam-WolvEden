@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class StartClassSelector : NetworkBehaviour
 {
+    private static StartClassSelector instance;
     [SerializeField] private GameObject selectorCanvas;
     [SerializeField] private Button startButton;
     [Space(2)]
@@ -28,13 +29,24 @@ public class StartClassSelector : NetworkBehaviour
     private const string GameSceneName = "Game";
     private bool swordSelected, shieldSelected;
 
-    private UserData _hostData = new UserData();
+    public UserData _hostData = new UserData();
     private bool hostSelected;
-    private UserData _clientData = new UserData(); 
+    public UserData _clientData = new UserData();
 
-    private void Awake()
+    public static StartClassSelector Instance 
     {
-        
+        get
+        {
+            if (instance != null) { return instance; }
+            instance = FindFirstObjectByType<StartClassSelector>();
+
+            if (instance == null)
+            {
+                // Debug.LogError("No HostSingleton in the scene!");
+                return null;
+            }
+            return instance;
+        }
     }
 
     public override void OnNetworkSpawn()
@@ -106,18 +118,22 @@ public class StartClassSelector : NetworkBehaviour
     public void StartGameServerRpc()
     {
         selectorCanvas.SetActive(false);
+        PlayerOne.Instance.playerController.ResetStatsServerRpc();
+        PlayerTwo.Instance.playerController.ResetStatsServerRpc();
+        StartGameClientRpc();
         if (IsServer)
         {
             NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, LoadSceneMode.Single);
         }
-        StartGameClientRpc();
     }
 
     [ClientRpc(RequireOwnership = false)]
     private void StartGameClientRpc()
     {
         selectorCanvas.SetActive(false);
-        
+        PlayerOne.Instance.playerController.ResetStatsServerRpc();
+        PlayerTwo.Instance.playerController.ResetStatsServerRpc();
+        StartGameClientRpc();
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -240,6 +256,5 @@ public class StartClassSelector : NetworkBehaviour
     {
         acShieldUi.SetActive(false);
     }
-    
     
 }

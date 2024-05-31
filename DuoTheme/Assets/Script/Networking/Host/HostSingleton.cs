@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HostSingleton : MonoBehaviour
 {
-    public static HostSingleton instance;
+    private static HostSingleton instance;
 
     public HostGameManager GameManager { get; private set; }
 
