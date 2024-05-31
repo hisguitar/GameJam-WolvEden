@@ -27,9 +27,19 @@ public class StartClassSelector : NetworkBehaviour
     public bool selectedSuccess;
     private const string GameSceneName = "Game";
     private bool swordSelected, shieldSelected;
+
+    private UserData _hostData = new UserData();
+    private UserData _clientData = new UserData(); 
+
+    private void Awake()
+    {
+        
+    }
+
     public override void OnNetworkSpawn()
     {
-        base.OnNetworkSpawn();
+        SetDataServerRpc();
+        DontDestroyOnLoad(gameObject);
     }
 
     public override void OnNetworkDespawn()
@@ -48,6 +58,22 @@ public class StartClassSelector : NetworkBehaviour
             UnStartInteractableServerRpc();
         }
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetDataServerRpc()
+    {
+        _hostData.userName = "P1";
+        _clientData.userName = "P2";
+        SetDataClientRpc();
+    }
+    
+    [ClientRpc(RequireOwnership = false)]
+    private void SetDataClientRpc()
+    {
+        _hostData.userName = "P1";
+        _clientData.userName = "P2";
+    }
+    
 
     [ServerRpc(RequireOwnership = false)]
     private void StartInteractableServerRpc()
@@ -78,40 +104,53 @@ public class StartClassSelector : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void StartGameServerRpc()
     {
-        NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, LoadSceneMode.Single);
+        selectorCanvas.SetActive(false);
+        if (IsServer)
+        {
+            NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, LoadSceneMode.Single);
+        }
         StartGameClientRpc();
     }
 
     [ClientRpc(RequireOwnership = false)]
     private void StartGameClientRpc()
     {
-        NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, LoadSceneMode.Single);
+        selectorCanvas.SetActive(false);
+        
     }
 
     [ServerRpc(RequireOwnership = false)]
     public void SelectClassSwordServerRpc()
     {
         swordSelected = true;
-        UserData userData = 
-            HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId);
-        swordText.text = userData.userName;
-        userData.userClass = Class.Sword;
-        Debug.Log(userData.userClass);
-        SelectClassSwordClientRpc();
+        if (IsOwner)
+        {
+            string playerName  = _hostData.userName;
+            swordText.text = playerName;
+            _hostData.userClass = Class.Sword;
+            SelectClassSwordOwnerClientRpc(playerName);
+        }
+        else if (!IsOwner)
+        {
+            string playerName  = _clientData.userName;
+            swordText.text = playerName;
+            _clientData.userClass = Class.Sword;
+            SelectClassSwordNotOwnerClientRpc(playerName);
+        }
     }
     [ClientRpc(RequireOwnership = false)]
-    private void SelectClassSwordClientRpc()
+    private void SelectClassSwordOwnerClientRpc(string namePlayer)
     {
-        if (!IsOwner)
-        {
-            return;
-        }
         swordSelected = true;
-        UserData userData = 
-            HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId);
-        swordText.text = userData.userName;
-        userData.userClass = Class.Sword;
-        Debug.Log(userData.userClass);
+        swordText.text = namePlayer;
+        _hostData.userClass = Class.Sword;
+    }
+    [ClientRpc(RequireOwnership = false)]
+    private void SelectClassSwordNotOwnerClientRpc(string namePlayer)
+    {
+        swordSelected = true;
+        swordText.text = namePlayer;
+        _clientData.userClass = Class.Sword;
     }
     
 
@@ -119,25 +158,34 @@ public class StartClassSelector : NetworkBehaviour
     public void SelectClassShieldServerRpc()
     {
         shieldSelected = true;
-        UserData userData =
-            HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId);
-        shieldText.text = userData.userName;
-        userData.userClass = Class.Shield;
-        Debug.Log(userData.userClass);
+        if (IsOwner)
+        {
+            string playerName  = _hostData.userName;
+            shieldText.text = playerName;
+            _hostData.userClass = Class.Shield;
+            SelectClassShieldOwnerClientRpc(playerName);
+        }
+        else if (!IsOwner)
+        {
+            string playerName  = _clientData.userName;
+            shieldText.text = playerName;
+            _clientData.userClass = Class.Shield;
+            SelectClassShieldNotOwnerClientRpc(playerName);
+        }
     }
     [ClientRpc(RequireOwnership = false)]
-    private void SelectClassShieldClientRpc()
+    private void SelectClassShieldOwnerClientRpc(string namePlayer)
     {
-        if (!IsOwner)
-        {
-            return;
-        }
         shieldSelected = true;
-        UserData userData =
-            HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId);
-        shieldText.text = userData.userName;
-        userData.userClass = Class.Shield;
-        Debug.Log(userData.userClass);
+        shieldText.text = namePlayer;
+        _hostData.userClass = Class.Shield;
+    }
+    [ClientRpc(RequireOwnership = false)]
+    private void SelectClassShieldNotOwnerClientRpc(string namePlayer)
+    {
+        shieldSelected = true;
+        shieldText.text = namePlayer;
+        _clientData.userClass = Class.Shield;
     }
     
     
@@ -187,5 +235,6 @@ public class StartClassSelector : NetworkBehaviour
     {
         acShieldUi.SetActive(false);
     }
+    
     
 }

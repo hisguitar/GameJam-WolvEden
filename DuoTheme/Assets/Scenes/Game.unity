@@ -1236,6 +1236,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectorCanvas: {fileID: 0}
+  startButton: {fileID: 0}
+  swordText: {fileID: 0}
+  swordButton: {fileID: 0}
+  acSwordUi: {fileID: 0}
+  unSwordUi: {fileID: 0}
+  shieldText: {fileID: 0}
+  shieldButton: {fileID: 0}
+  acShieldUi: {fileID: 0}
+  unShieldUi: {fileID: 0}
+  selectedSuccess: 0
 --- !u!1 &900470377
 GameObject:
   m_ObjectHideFlags: 0
@@ -10217,7 +10227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1959475365
 MonoBehaviour:
   m_ObjectHideFlags: 0

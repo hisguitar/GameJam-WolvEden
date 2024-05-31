@@ -15,6 +15,7 @@ public class ClientGameManager : IDisposable
 {
     private JoinAllocation allocation;
     private NetworkClient networkClient;
+    public UserData userData;
 
     private const string MenuSceneName = "Menu";
     public async Task<bool> InitAsync()
@@ -48,7 +49,7 @@ public class ClientGameManager : IDisposable
             RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
             transport.SetRelayServerData(relayServerData);
 
-            UserData userData = new UserData
+            userData = new UserData
             {
                 userName = PlayerPrefs.GetString(NameSelector.PlayerNameKey, "Missing Name"),
                 userAuthId = AuthenticationService.Instance.PlayerId,

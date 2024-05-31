@@ -41,6 +41,7 @@ public class PlayerController : NetworkBehaviour
     [Header("Ref")] 
     public SpriteRenderer playerSprite;
     public PlayerAnimationController _playerAnimationController;
+    private UserData userData;
     
     public PlayerStats PlayerStats { get { return playerStats[(int)playerClass]; } }
 
@@ -72,13 +73,15 @@ public class PlayerController : NetworkBehaviour
         {
             playerHUD.SetActive(false);
             return;
+            
         }
-        UserData userData =
-            HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId);
-        playerClass = userData.userClass;
-        previousClass = playerClass;
-        Debug.Log("Start ResetStats");
-        ResetStatsServerRpc();
+
+        if (IsOwner)
+        { 
+            SetDataServerRpc();
+            Debug.Log("Start ResetStats");
+            ResetStatsServerRpc();
+        }
     }
 
     public override void OnNetworkDespawn()
@@ -225,7 +228,7 @@ public class PlayerController : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void ResetStatsServerRpc()
+    public void ResetStatsServerRpc()
     {
         playerClass = playerStats[(int)playerClass].playerClass;
         playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
@@ -247,6 +250,15 @@ public class PlayerController : NetworkBehaviour
         Debug.Log("Class Change Client RPC");
         ResetStats();
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetDataServerRpc()
+    {
+        userData = HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId);
+        playerClass = userData.userClass;
+        previousClass = playerClass;
+    }
+    
 
     
 }
