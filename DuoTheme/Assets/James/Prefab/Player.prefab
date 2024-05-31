@@ -1365,7 +1365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1386259499
+  GlobalObjectIdHash: 2084691662
   InScenePlacedSourceGlobalObjectIdHash: 2084691662
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1592,7 +1592,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - skillName: Khod Slash
-    skillDamage: 1100
+    skillDamage: 50
     skillCost: 30
     skillCooldown: 4
     skillIcon: {fileID: 7035696078084883712, guid: c961534eae7dbca4aa56967d6fcb34b2, type: 3}
