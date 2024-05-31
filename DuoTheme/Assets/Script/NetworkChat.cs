@@ -43,14 +43,14 @@ public class NetworkChat : NetworkBehaviour
         }
 
         // Press 'Spacebar' to test info message
-        //if (!textInput.isFocused)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Space))
-        //    {
-        //        SendMessageServerRpc("You pressed the space key!", Message.MessageType.info);
-        //        Debug.Log("Space");
-        //    }
-        //}
+        if (!textInput.isFocused)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SendMessageServerRpc("You pressed the space key!", Message.MessageType.info);
+                Debug.Log("Space");
+            }
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
