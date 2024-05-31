@@ -20,8 +20,8 @@ namespace James.Script
         [SerializeField] [Tooltip("Normally starts at 0")] private int bulletCount;
         private bool alternatePattern = false;
         private bool isShoot;
-        private Transform attackTarget;
         private EnemyState state;
+        private Transform attackTarget;
 
         private void FixedUpdate()
         {
@@ -30,7 +30,7 @@ namespace James.Script
 
         private void EnemyLogic()
         {
-            // Various state effects
+            #region Various state effects
             switch (state)
             {
                 case EnemyState.Inactive:
@@ -48,8 +48,9 @@ namespace James.Script
                     StartCoroutine(ShootMultipleDirections());
                     break;
             }
+            #endregion
 
-            // Conditions to change stats
+            #region Conditions to change stats
             if (!isShoot)
             {
                 state = EnemyState.Inactive;
@@ -69,6 +70,7 @@ namespace James.Script
                     state = EnemyState.Phase3;
                 }
             }
+            #endregion
         }
 
         #region Find and Attack target
@@ -82,13 +84,27 @@ namespace James.Script
             {
                 // Shoot to direction
                 Vector2 direction = (attackTarget.position - transform.position).normalized;
-                GameObject bulletInstance = Instantiate(bulletObject, transform.position, Quaternion.identity);
+                ShootBullet(direction);
                 bulletCount++; // +1 bullet count;
-
-                // Rotate bullet to direction
-                bulletInstance.transform.up = direction;
-                bulletInstance.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
             }
+
+            yield return new WaitForSeconds(firingSpeed);
+            isShoot = true;
+        }
+
+        private IEnumerator ShootMultipleDirections()
+        {
+            isShoot = false;
+            float[] angles = alternatePattern ? new float[] { 22.5f, 67.5f, 112.5f, 157.5f, 202.5f, 247.5f, 292.5f, 337.5f }
+                                              : new float[] { 0f, 45f, 90f, 135f, 180f, 225f, 270f, 315f };
+            foreach (float angle in angles)
+            {
+                Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+                ShootBullet(direction);
+            }
+
+            alternatePattern = !alternatePattern; // Toggle pattern
+            bulletCount += angles.Length; // +7 bullet count;
 
             yield return new WaitForSeconds(firingSpeed);
             isShoot = true;
@@ -112,26 +128,13 @@ namespace James.Script
             return nearestPlayer;
         }
 
-        private IEnumerator ShootMultipleDirections()
+        private void ShootBullet(Vector2 direction)
         {
-            isShoot = false;
-            float[] angles = alternatePattern ? new float[] { 22.5f, 67.5f, 112.5f, 157.5f, 202.5f, 247.5f, 292.5f, 337.5f }
-                                              : new float[] { 0f, 45f, 90f, 135f, 180f, 225f, 270f, 315f };
-            foreach (float angle in angles)
-            {
-                Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
-                GameObject bulletInstance = Instantiate(bulletObject, transform.position, Quaternion.identity);
+            GameObject bulletInstance = Instantiate(bulletObject, transform.position, Quaternion.identity);
 
-                // Rotate bullet to direction
-                bulletInstance.transform.up = direction;
-                bulletInstance.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
-            }
-
-            alternatePattern = !alternatePattern; // Toggle pattern
-            bulletCount += angles.Length; // +1 bullet count;
-
-            yield return new WaitForSeconds(firingSpeed);
-            isShoot = true;
+            // Rotate bullet to direction
+            bulletInstance.transform.up = direction;
+            bulletInstance.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
         }
         #endregion
 
