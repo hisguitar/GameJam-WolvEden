@@ -8,6 +8,7 @@ namespace James.Script
         Inactive,
         Phase1,
         Phase2,
+        Phase3,
     }
 
     public class BossDummy : BossHealth, IEnemy
@@ -17,6 +18,7 @@ namespace James.Script
         [SerializeField] private float bulletSpeed = 10f;
         [SerializeField] private float firingSpeed = 3f;
         [SerializeField] [Tooltip("Normally starts at 0")] private int bulletCount;
+        private bool alternatePattern = false;
         private bool isShoot;
         private Transform attackTarget;
         private EnemyState state;
@@ -41,6 +43,10 @@ namespace James.Script
                     firingSpeed = 1.5f;
                     StartCoroutine(Shoot());
                     break;
+                case EnemyState.Phase3:
+                    firingSpeed = 1.75f;
+                    StartCoroutine(ShootMultipleDirections());
+                    break;
             }
 
             // Conditions to change stats
@@ -54,9 +60,13 @@ namespace James.Script
                 {
                     state = EnemyState.Phase1;
                 }
-                else
+                else if (bulletCount < 32)
                 {
                     state = EnemyState.Phase2;
+                }
+                else
+                {
+                    state = EnemyState.Phase3;
                 }
             }
         }
@@ -100,6 +110,28 @@ namespace James.Script
                 }
             }
             return nearestPlayer;
+        }
+
+        private IEnumerator ShootMultipleDirections()
+        {
+            isShoot = false;
+            float[] angles = alternatePattern ? new float[] { 22.5f, 67.5f, 112.5f, 157.5f, 202.5f, 247.5f, 292.5f, 337.5f }
+                                              : new float[] { 0f, 45f, 90f, 135f, 180f, 225f, 270f, 315f };
+            foreach (float angle in angles)
+            {
+                Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+                GameObject bulletInstance = Instantiate(bulletObject, transform.position, Quaternion.identity);
+
+                // Rotate bullet to direction
+                bulletInstance.transform.up = direction;
+                bulletInstance.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+            }
+
+            alternatePattern = !alternatePattern; // Toggle pattern
+            bulletCount += angles.Length; // +1 bullet count;
+
+            yield return new WaitForSeconds(firingSpeed);
+            isShoot = true;
         }
         #endregion
 
