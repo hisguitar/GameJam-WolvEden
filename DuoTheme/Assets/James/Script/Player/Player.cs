@@ -48,4 +48,5 @@ public class Player : NetworkBehaviour
             OnPlayerDespawned?.Invoke(this);
         }
     }
+    
 }

@@ -166,6 +166,8 @@ public class PlayerController : NetworkBehaviour
         staminaBar.fillAmount = playerStamina / playerMaxStamina;
     }
 
+    #region State Adjuster
+
     [ContextMenu("Reset Stats")]
     public void ResetStats()
     {
@@ -222,16 +224,6 @@ public class PlayerController : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ResetStatsServerRpc()
     {
-        playerClass = playerStats[(int)playerClass].playerClass;
-        playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
-        playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
-        playerMaxSpeed = playerStats[(int)playerClass].playerSpeed;
-        
-        playerSpeed = playerMaxSpeed;
-        playerHealth = playerMaxHealth;
-        playerStamina = playerMaxStamina;
-        _playerAnimationController.ChangeAnimationClassServerRpc();
-        UpdateStatsGUI();
         ResetStatsClientRpc();
     }
 
@@ -241,8 +233,9 @@ public class PlayerController : NetworkBehaviour
         ResetStats();
     }
     
-    
+    #endregion
 
-    
+
+    public event Action<object> OnDie;
 }
 
