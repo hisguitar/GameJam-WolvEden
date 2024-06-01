@@ -67,7 +67,15 @@ public class PlayerAnimationController : NetworkBehaviour
 
     public void ChangeAnimationClass()
     {
-        animator.runtimeAnimatorController = _playerController.PlayerStats.animation;
+        if (_playerController.PlayerClass == Class.Sword)
+        {
+            animator.SetLayerWeight(1,0);
+        }
+        else if (_playerController.PlayerClass == Class.Shield)
+        {
+            animator.SetLayerWeight(1,1);
+        }
+        
     }
     public void SetMouseDirection()
     {
