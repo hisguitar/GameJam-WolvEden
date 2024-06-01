@@ -7,6 +7,7 @@ using Unity.Netcode;
 using UnityEditor;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum Class
 {
@@ -19,8 +20,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private Class playerClass;
     private Class previousClass;
 
-    [Header("Health")]
-    public Action<PlayerController> OnDie;
+    [Header("Health")] 
     [SerializeField] private bool isDead;
     [SerializeField] private Image healthBar;
     [SerializeField] private float playerMaxHealth;
@@ -38,11 +38,10 @@ public class PlayerController : NetworkBehaviour
 
     [Header("GUI")] 
     [SerializeField] private GameObject playerHUD;
-    [SerializeField] private GameObject respawnPanel;
 
     [Header("Ref")] 
-    public SpriteRenderer playerSprite;
     public PlayerAnimationController _playerAnimationController;
+    private UserData userData;
     
     public PlayerStats PlayerStats { get { return playerStats[(int)playerClass]; } }
 
@@ -59,10 +58,7 @@ public class PlayerController : NetworkBehaviour
 
     public static event Action<PlayerController> OnPlayerSpawned; 
     public static event Action<PlayerController> OnPlayerDespawned; 
-    private void Awake()
-    {
-        
-    }
+    
     public override void OnNetworkSpawn()
     {
         if (IsServer)
@@ -74,15 +70,14 @@ public class PlayerController : NetworkBehaviour
         {
             playerHUD.SetActive(false);
             return;
+            
         }
-        UserData userData =
-            HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId);
-        playerClass = userData.userClass;
-        previousClass = playerClass;
-        Debug.Log("Start ResetStats");
-        ResetStatsServerRpc();
-    }
 
+        if (IsOwner)
+        { 
+            ResetStatsServerRpc();
+        }
+    }
     public override void OnNetworkDespawn()
     {
         if (IsServer)
@@ -97,7 +92,6 @@ public class PlayerController : NetworkBehaviour
         {
             return;
         }
-        
         ReganStamina();
         UpdateStatsGUI();
         CheckClassChange();
@@ -145,22 +139,6 @@ public class PlayerController : NetworkBehaviour
         GetComponent<Collider2D>().enabled = false;
         _playerAnimationController.DeadAnimation(true);
         isDead = true;
-        if (isDead)
-        {
-            if (IsOwner)
-            {
-                respawnPanel.SetActive(true);
-            }
-        }
-    }
-
-    public void PlayerRespawn()
-    {
-        if (IsOwner)
-        {
-            respawnPanel.SetActive(false);
-            OnDie?.Invoke(this);
-        }
     }
 
     public void DecreaseStamina(float cost)
@@ -188,6 +166,8 @@ public class PlayerController : NetworkBehaviour
         staminaBar.fillAmount = playerStamina / playerMaxStamina;
     }
 
+    #region State Adjuster
+
     [ContextMenu("Reset Stats")]
     public void ResetStats()
     {
@@ -195,7 +175,6 @@ public class PlayerController : NetworkBehaviour
         playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
         playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
         playerMaxSpeed = playerStats[(int)playerClass].playerSpeed;
-        playerSprite.material = playerStats[(int)playerClass].playerMaterial;
         
         playerSpeed = playerMaxSpeed;
         playerHealth = playerMaxHealth;
@@ -243,29 +222,20 @@ public class PlayerController : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void ResetStatsServerRpc()
+    public void ResetStatsServerRpc()
     {
-        playerClass = playerStats[(int)playerClass].playerClass;
-        playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
-        playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
-        playerMaxSpeed = playerStats[(int)playerClass].playerSpeed;
-        playerSprite.material = playerStats[(int)playerClass].playerMaterial;
-        
-        playerSpeed = playerMaxSpeed;
-        playerHealth = playerMaxHealth;
-        playerStamina = playerMaxStamina;
-        _playerAnimationController.ChangeAnimationClassServerRpc();
-        UpdateStatsGUI();
         ResetStatsClientRpc();
     }
 
     [ClientRpc]
     private void ResetStatsClientRpc()
     {
-        Debug.Log("Class Change Client RPC");
         ResetStats();
     }
-
     
+    #endregion
+
+
+    public event Action<object> OnDie;
 }
 
