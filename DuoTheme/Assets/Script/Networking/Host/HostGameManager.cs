@@ -23,7 +23,7 @@ public class HostGameManager : IDisposable
     public NetworkServer NetworkServer { get; private set; }
 
     private const int MaxConnections = 2;
-    private const string GameSceneName = "Game";
+    private const string GameSceneName = "Lobby";
 
     public async Task StartHostAsync()
     {
@@ -81,19 +81,24 @@ public class HostGameManager : IDisposable
 
         NetworkServer = new NetworkServer(NetworkManager.Singleton);
 
+        /*Class thisClass = Class.Sword;
+        PlayerPrefs.SetString("PlayerClassSelected",thisClass.ToString());*/
         UserData userData = new UserData
         {
             userName = PlayerPrefs.GetString(NameSelector.PlayerNameKey, "Missing Name"),
             userAuthId = AuthenticationService.Instance.PlayerId,
-            //userColorIndex = PlayerPrefs.GetInt(ColorSelector.PlayerColorKey, 0)
-        };
+            //userClass = (Class)System.Enum.Parse(typeof(Class),PlayerPrefs.GetString("PlayerClassSelected"))
+        }; 
         string payload = JsonUtility.ToJson(userData);
         byte[] payloadBytes = Encoding.UTF8.GetBytes(payload);
 
         NetworkManager.Singleton.NetworkConfig.ConnectionData = payloadBytes;
         NetworkManager.Singleton.StartHost();
+        
+        transport.SetRelayServerData(relayServerData);
+        
         NetworkServer.OnClientLeft += HandleClientLeft;
-        NetworkManager.Singleton.SceneManager.LoadScene("Game", LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, LoadSceneMode.Single);
     }
 
     private IEnumerator HeartbeatLobby(float waitTimeSeconds)
@@ -106,7 +111,7 @@ public class HostGameManager : IDisposable
         }
     }
 
-    public async void Dispose()
+    public void Dispose()
     {
         Shutdown();
     }

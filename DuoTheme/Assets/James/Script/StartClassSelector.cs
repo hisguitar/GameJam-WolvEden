@@ -78,6 +78,7 @@ public class StartClassSelector : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void StartGameServerRpc()
     {
+        //HostSingleton.Instance.GameManager.NetworkServer.ApprovalCheck();
         NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, LoadSceneMode.Single);
         StartGameClientRpc();
     }

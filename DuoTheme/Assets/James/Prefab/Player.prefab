@@ -373,7 +373,6 @@ GameObject:
   - component: {fileID: 7014419414886190468}
   - component: {fileID: 210058225007126184}
   - component: {fileID: 1981587083207681325}
-  - component: {fileID: 7169200490272733202}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -469,76 +468,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7169200490272733202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2104518134851066211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69f77017899ea814f90aa17c5ca180a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TransitionStateInfoList:
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 132030995
-    DestinationState: 2137540949
-    TransitionDuration: 0
-    TriggerNameHash: -1614611405
-    TransitionIndex: 0
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 132030995
-    DestinationState: -949705666
-    TransitionDuration: 0
-    TriggerNameHash: -720101083
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 1001749583
-    DestinationState: 2137540949
-    TransitionDuration: 0
-    TriggerNameHash: -1614611405
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 0
-    OriginatingState: 1001749583
-    DestinationState: -949705666
-    TransitionDuration: 0
-    TriggerNameHash: -720101083
-    TransitionIndex: 2
-  - IsCrossFadeExit: 0
-    Layer: 1
-    OriginatingState: 132030995
-    DestinationState: -949705666
-    TransitionDuration: 0
-    TriggerNameHash: -720101083
-    TransitionIndex: 0
-  - IsCrossFadeExit: 0
-    Layer: 1
-    OriginatingState: 132030995
-    DestinationState: 2137540949
-    TransitionDuration: 0
-    TriggerNameHash: -1614611405
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 1
-    OriginatingState: 1001749583
-    DestinationState: 2137540949
-    TransitionDuration: 0
-    TriggerNameHash: -1614611405
-    TransitionIndex: 1
-  - IsCrossFadeExit: 0
-    Layer: 1
-    OriginatingState: 1001749583
-    DestinationState: -949705666
-    TransitionDuration: 0
-    TriggerNameHash: -720101083
-    TransitionIndex: 2
-  m_Animator: {fileID: 1981587083207681325}
 --- !u!1 &2179158982983625593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,6 +1144,7 @@ GameObject:
   - component: {fileID: 1136894949058495052}
   - component: {fileID: 2655802238665867894}
   - component: {fileID: 1356165459549528696}
+  - component: {fileID: 5965496227210332842}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -1614,6 +1544,76 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2868753955419780216}
   playerNameText: {fileID: 1893820358411000096}
+--- !u!114 &5965496227210332842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4056565228135726250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f77017899ea814f90aa17c5ca180a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 132030995
+    DestinationState: 2137540949
+    TransitionDuration: 0
+    TriggerNameHash: -1614611405
+    TransitionIndex: 0
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 132030995
+    DestinationState: -949705666
+    TransitionDuration: 0
+    TriggerNameHash: -720101083
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 1001749583
+    DestinationState: 2137540949
+    TransitionDuration: 0
+    TriggerNameHash: -1614611405
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 1001749583
+    DestinationState: -949705666
+    TransitionDuration: 0
+    TriggerNameHash: -720101083
+    TransitionIndex: 2
+  - IsCrossFadeExit: 0
+    Layer: 1
+    OriginatingState: 1001749583
+    DestinationState: -949705666
+    TransitionDuration: 0
+    TriggerNameHash: -720101083
+    TransitionIndex: 0
+  - IsCrossFadeExit: 0
+    Layer: 1
+    OriginatingState: 1001749583
+    DestinationState: 2137540949
+    TransitionDuration: 0
+    TriggerNameHash: -1614611405
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 1
+    OriginatingState: 132030995
+    DestinationState: 2137540949
+    TransitionDuration: 0
+    TriggerNameHash: -1614611405
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 1
+    OriginatingState: 132030995
+    DestinationState: -949705666
+    TransitionDuration: 0
+    TriggerNameHash: -720101083
+    TransitionIndex: 2
+  m_Animator: {fileID: 1981587083207681325}
 --- !u!1 &4232128868859741310
 GameObject:
   m_ObjectHideFlags: 0

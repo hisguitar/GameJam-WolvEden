@@ -74,7 +74,7 @@ public class PlayerController : NetworkBehaviour
         }
 
         if (IsOwner)
-        { 
+        {
             ResetStatsServerRpc();
         }
     }
@@ -224,6 +224,16 @@ public class PlayerController : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ResetStatsServerRpc()
     {
+        playerClass = HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId).userClass;
+        playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
+        playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
+        playerMaxSpeed = playerStats[(int)playerClass].playerSpeed;
+        
+        playerSpeed = playerMaxSpeed;
+        playerHealth = playerMaxHealth;
+        playerStamina = playerMaxStamina;
+        _playerAnimationController.ChangeAnimationClassServerRpc();
+        UpdateStatsGUI();
         ResetStatsClientRpc();
     }
 

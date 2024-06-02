@@ -14,6 +14,8 @@ public class RespawnHandler : NetworkBehaviour
         {
             HandlePlayerSpawned(player);
         }
+        StartCoroutine(RespawnPlayer(OwnerClientId));
+        StartCoroutine(RespawnPlayer(1));
         Player.OnPlayerSpawned += HandlePlayerSpawned;
         Player.OnPlayerDespawned += HandlePlayerDespawned;
     }
