@@ -57,8 +57,9 @@ public class PlayerController : NetworkBehaviour
     public bool IsDead { get { return isDead; } }
 
     public static event Action<PlayerController> OnPlayerSpawned; 
-    public static event Action<PlayerController> OnPlayerDespawned; 
+    public static event Action<PlayerController> OnPlayerDespawned;
     
+
     public override void OnNetworkSpawn()
     {
         if (IsServer)
@@ -179,7 +180,7 @@ public class PlayerController : NetworkBehaviour
         playerSpeed = playerMaxSpeed;
         playerHealth = playerMaxHealth;
         playerStamina = playerMaxStamina;
-        _playerAnimationController.ChangeAnimationClassServerRpc();
+        _playerAnimationController.ChangeAnimationClassClientRpc();
         UpdateStatsGUI();
     }
 

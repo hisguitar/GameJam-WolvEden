@@ -23,7 +23,7 @@ public class PlayerAnimationController : NetworkBehaviour
 
     private void Start()
     {
-        ChangeAnimationClass();
+        ChangeAnimationClassServerRpc();
     }
 
     private void Update()
@@ -65,7 +65,7 @@ public class PlayerAnimationController : NetworkBehaviour
     }
     
 
-    public void ChangeAnimationClass()
+    private void ChangeAnimationClass()
     {
         if (_playerController.PlayerClass == Class.Sword)
         {
@@ -140,17 +140,20 @@ public class PlayerAnimationController : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ChangeAnimationClassServerRpc()
     {
-        ChangeAnimationClass();
+        if (_playerController.PlayerClass == Class.Sword)
+        {
+            animator.SetLayerWeight(1,0);
+        }
+        else if (_playerController.PlayerClass == Class.Shield)
+        {
+            animator.SetLayerWeight(1,1);
+        }
         ChangeAnimationClassClientRpc();
     }
 
     [ClientRpc(RequireOwnership = false)]
     public void ChangeAnimationClassClientRpc()
     {
-        if (IsOwner)
-        {
-            return;
-        }
         ChangeAnimationClass();
     }
 }
