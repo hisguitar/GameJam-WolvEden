@@ -52,7 +52,7 @@ public class ClientGameManager : IDisposable
             {
                 userName = PlayerPrefs.GetString(NameSelector.PlayerNameKey, "Missing Name"),
                 userAuthId = AuthenticationService.Instance.PlayerId,
-                //userColorIndex = PlayerPrefs.GetInt(ColorSelector.PlayerColorKey, 0)
+                userClass = Class.Nobody
             };
             string payload = JsonUtility.ToJson(userData);
             byte[] payloadBytes = Encoding.UTF8.GetBytes(payload);

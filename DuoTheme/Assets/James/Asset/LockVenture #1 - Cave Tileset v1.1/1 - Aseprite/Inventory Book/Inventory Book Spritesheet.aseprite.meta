@@ -1,0 +1,416 @@
+fileFormatVersion: 2
+guid: b97fab9dd02d4504c8885cc6a8f2dec6
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: Inventory Book Spritesheet_Frame_0
+    originalName: 
+    pivot: {x: 0.5066198, y: -0.031016884}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 4834
+      height: 2547
+    spriteID: d497abab28f61e84c9ac8876ca8df5d6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: Inventory Book Spritesheet_Frame_1
+    originalName: 
+    pivot: {x: 0.5066198, y: -0.031016884}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2559
+      width: 4834
+      height: 2547
+    spriteID: 6b840a74f1bf18a499d7519e875e566f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 2559}
+  - name: Inventory Book Spritesheet_Frame_2
+    originalName: 
+    pivot: {x: 0.51085144, y: -0.039662447}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 5114
+      width: 4792
+      height: 2370
+    spriteID: 55448c428de635f44b60e61490b2784f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 5114}
+  - name: Inventory Book Spritesheet_Frame_3
+    originalName: 
+    pivot: {x: 0.5059121, y: -0.30675468}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 7492
+      width: 4736
+      height: 1969
+    spriteID: ccc61ba861ad9e64d8db57fd5bd317e5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 7492}
+  - name: Inventory Book Spritesheet_Frame_4
+    originalName: 
+    pivot: {x: 0.5059372, y: -0.33752048}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 9469
+      width: 4716
+      height: 1831
+    spriteID: 080075c6457ff1a458868ceced46bbe9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 9469}
+  - name: Inventory Book Spritesheet_Frame_5
+    originalName: 
+    pivot: {x: 1.0579064, y: -0.9460993}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4748
+      y: 8198
+      width: 2245
+      height: 705
+    spriteID: 9b254c54f09a60749a3d8f604a6152fa
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4748, y: 8198}
+  - name: Inventory Book Spritesheet_Frame_6
+    originalName: 
+    pivot: {x: 1.0298507, y: -0.9111748}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4748
+      y: 7492
+      width: 2278
+      height: 698
+    spriteID: db2d23090940b8b45814bd4ad4cb6d51
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4748, y: 7492}
+  - name: Inventory Book Spritesheet_Frame_7
+    originalName: 
+    pivot: {x: 1.0313315, y: -0.8976157}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4728
+      y: 9469
+      width: 2298
+      height: 713
+    spriteID: eeb349764eb41b9438d9d310673aa03c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4728, y: 9469}
+  - name: Inventory Book Spritesheet_Frame_8
+    originalName: 
+    pivot: {x: 1.0548618, y: -0.8751714}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4728
+      y: 10190
+      width: 2242
+      height: 729
+    spriteID: 076825871eb806d44a1ab4c114f5383f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4728, y: 10190}
+  - name: Inventory Book Spritesheet_Frame_9
+    originalName: 
+    pivot: {x: 1.070632, y: -1.8499999}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4748
+      y: 8911
+      width: 2152
+      height: 480
+    spriteID: c2299a688ba1ce847a621adf4bb6a1e5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4748, y: 8911}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: 1664621857
+    name: Inventory Book Spritesheet
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: Inventory Book Spritesheet_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 47
+        y: 79
+        width: 4834
+        height: 2547
+      spriteId: d497abab28f61e84c9ac8876ca8df5d6
+    - name: Inventory Book Spritesheet_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 47
+        y: 79
+        width: 4834
+        height: 2547
+      spriteId: 6b840a74f1bf18a499d7519e875e566f
+    - name: Inventory Book Spritesheet_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 48
+        y: 94
+        width: 4792
+        height: 2370
+      spriteId: 55448c428de635f44b60e61490b2784f
+    - name: Inventory Book Spritesheet_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 100
+        y: 604
+        width: 4736
+        height: 1969
+      spriteId: ccc61ba861ad9e64d8db57fd5bd317e5
+    - name: Inventory Book Spritesheet_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 110
+        y: 618
+        width: 4716
+        height: 1831
+      spriteId: 080075c6457ff1a458868ceced46bbe9
+    - name: Inventory Book Spritesheet_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 121
+        y: 667
+        width: 2245
+        height: 705
+      spriteId: 9b254c54f09a60749a3d8f604a6152fa
+    - name: Inventory Book Spritesheet_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 150
+        y: 636
+        width: 2278
+        height: 698
+      spriteId: db2d23090940b8b45814bd4ad4cb6d51
+    - name: Inventory Book Spritesheet_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 126
+        y: 640
+        width: 2298
+        height: 713
+      spriteId: eeb349764eb41b9438d9d310673aa03c
+    - name: Inventory Book Spritesheet_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 131
+        y: 638
+        width: 2242
+        height: 729
+      spriteId: 076825871eb806d44a1ab4c114f5383f
+    - name: Inventory Book Spritesheet_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 192
+        y: 888
+        width: 2152
+        height: 480
+      spriteId: c2299a688ba1ce847a621adf4bb6a1e5
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 4992, y: 2672}
