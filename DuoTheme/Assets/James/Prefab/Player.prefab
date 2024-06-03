@@ -1314,7 +1314,7 @@ MonoBehaviour:
         byte0027: 0
         byte0028: 0
         byte0029: 0
-  <Health>k__BackingField: {fileID: 4450328336590732557}
+  <playerController>k__BackingField: {fileID: 4450328336590732557}
   ownerPriority: 15
   virtualCamera: {fileID: 1339870235081084994}
 --- !u!114 &4450328336590732557
@@ -1357,6 +1357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a4b5f5690559043bd986e476ffdc97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashCost: 0
   dashDuration: 0.2
   dashDistance: 3
 --- !u!114 &7016732967674824769

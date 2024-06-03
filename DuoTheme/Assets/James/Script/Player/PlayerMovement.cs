@@ -5,8 +5,9 @@ using Unity.Netcode;
 using UnityEngine;
 
 public class PlayerMovement : NetworkBehaviour
-    {
+{
         [Header("Dash Setting")] 
+        [SerializeField] private float dashCost;
         [SerializeField] private float dashDuration;
         [SerializeField] private float dashDistance;
         private Vector3 moveDirection;
@@ -54,8 +55,9 @@ public class PlayerMovement : NetworkBehaviour
 
         private void PlayerDash()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && _playerController.PlayerStamina > dashCost)
             {
+                _playerController.DecreaseStamina(dashCost);
                 StartCoroutine(Dash());
             }
         }

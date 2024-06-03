@@ -62,7 +62,7 @@ public class RespawnHandler : NetworkBehaviour
             playerInstance.playerController.PlayerClass = ClassSelectManager.Instance.playerTwo.userClass;
         }
         
-        playerInstance.GetComponent<PlayerController>().ResetStatsServerRpc();
+        playerInstance.SetWhenSpawnedClientRpc();
     }
 
     public void MoveAllPlayersToSpawnPoints()

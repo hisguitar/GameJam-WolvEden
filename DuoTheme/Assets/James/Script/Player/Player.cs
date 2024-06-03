@@ -48,5 +48,16 @@ public class Player : NetworkBehaviour
             OnPlayerDespawned?.Invoke(this);
         }
     }
+
+    [ClientRpc]
+    public void SetWhenSpawnedClientRpc()
+    {
+        if (!IsOwner)
+        {
+            return;
+        }
+        virtualCamera.Priority = ownerPriority;
+        playerController.ResetStatsServerRpc();
+    }
     
 }
