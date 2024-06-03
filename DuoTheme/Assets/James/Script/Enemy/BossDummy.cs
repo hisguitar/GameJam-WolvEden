@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace James.Script
@@ -84,7 +85,7 @@ namespace James.Script
             {
                 // Shoot to direction
                 Vector2 direction = (attackTarget.position - transform.position).normalized;
-                ShootBullet(direction);
+                ShootBulletServerRpc(direction);
                 bulletCount++; // +1 bullet count;
             }
 
@@ -100,7 +101,7 @@ namespace James.Script
             foreach (float angle in angles)
             {
                 Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
-                ShootBullet(direction);
+                ShootBulletServerRpc(direction);
             }
 
             alternatePattern = !alternatePattern; // Toggle pattern
@@ -128,9 +129,26 @@ namespace James.Script
             return nearestPlayer;
         }
 
-        private void ShootBullet(Vector2 direction)
+        [ServerRpc(RequireOwnership = false)]
+        private void ShootBulletServerRpc(Vector2 direction)
         {
             SoundManager.Instance.Play(SoundManager.SoundName.LaserGun);
+            GameObject bulletInstance = Instantiate(bulletObject, transform.position, Quaternion.identity);
+
+            // Rotate bullet to direction
+            bulletInstance.transform.up = direction;
+            bulletInstance.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+            
+            ShootBulletClientRpc(direction);
+        }
+
+        [ClientRpc(RequireOwnership = false)]
+        private void ShootBulletClientRpc(Vector2 direction)
+        {
+            if (IsOwner)
+            {
+                return;
+            }
             GameObject bulletInstance = Instantiate(bulletObject, transform.position, Quaternion.identity);
 
             // Rotate bullet to direction

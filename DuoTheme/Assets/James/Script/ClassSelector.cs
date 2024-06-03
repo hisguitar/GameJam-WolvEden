@@ -74,13 +74,13 @@ public class ClassSelector : NetworkBehaviour
         if (ClassSelectManager.Instance.playerCount == 0)
         {
             ClassSelectManager.Instance.playerOne.userClass = classToSelect;
-            HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(0).userClass = classToSelect;
+            //HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(0).userClass = classToSelect;
             ClassSelectManager.Instance.playerCount += 1;
         }
         else
         {
             ClassSelectManager.Instance.playerTwo.userClass = classToSelect;
-            HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(1).userClass = classToSelect;
+            //HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(1).userClass = classToSelect;
         }
     }
 }

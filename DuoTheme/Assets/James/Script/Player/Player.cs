@@ -49,9 +49,22 @@ public class Player : NetworkBehaviour
         }
     }
 
-    [ClientRpc]
-    public void SetWhenSpawnedClientRpc()
+    [ServerRpc(RequireOwnership = false)]
+    public void SetWhenSpawnedServerRpc()
     {
+        SetWhenSpawnedClientRpc();
+    } 
+    [ClientRpc(RequireOwnership = false)]
+    private void SetWhenSpawnedClientRpc()
+    {
+        if (IsServer)
+        {
+            UserData userData =
+                HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId);
+            
+            PlayerName.Value = userData.userName;
+        }
+        
         if (!IsOwner)
         {
             return;

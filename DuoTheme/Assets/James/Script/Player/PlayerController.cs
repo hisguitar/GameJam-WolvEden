@@ -172,7 +172,14 @@ public class PlayerController : NetworkBehaviour
     [ContextMenu("Reset Stats")]
     public void ResetStats()
     {
-        playerClass = playerStats[(int)playerClass].playerClass;
+        if (OwnerClientId == 0)
+        {
+            playerClass = ClassSelectManager.Instance.playerOne.userClass;
+        }
+        else if (OwnerClientId == 1)
+        {
+            playerClass = ClassSelectManager.Instance.playerTwo.userClass;
+        }
         playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
         playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
         playerMaxSpeed = playerStats[(int)playerClass].playerSpeed;
@@ -225,7 +232,15 @@ public class PlayerController : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ResetStatsServerRpc()
     {
-        playerClass = HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(OwnerClientId).userClass;
+        if (OwnerClientId == 0)
+        {
+            playerClass = ClassSelectManager.Instance.playerOne.userClass;
+        }
+        else if (OwnerClientId == 1)
+        {
+            playerClass = ClassSelectManager.Instance.playerTwo.userClass;
+        }
+        
         playerMaxHealth = playerStats[(int)playerClass].playerMaxHealth;
         playerMaxStamina = playerStats[(int)playerClass].playerMaxStamina;
         playerMaxSpeed = playerStats[(int)playerClass].playerSpeed;

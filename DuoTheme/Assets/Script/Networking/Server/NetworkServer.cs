@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class NetworkServer : IDisposable
+public class NetworkServer : SingletonNetwork<NetworkServer>
 {
     private NetworkManager networkManager;
 

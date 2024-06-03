@@ -52,17 +52,7 @@ public class RespawnHandler : NetworkBehaviour
         Player playerInstance = Instantiate(
             playerPrefab, SpawnPoint.GetRandomSpawnPos(), Quaternion.identity);
         playerInstance.NetworkObject.SpawnAsPlayerObject(ownerClientId);
-
-        if (ownerClientId == 0)
-        {
-            playerInstance.playerController.PlayerClass = ClassSelectManager.Instance.playerOne.userClass;
-        }
-        else
-        {
-            playerInstance.playerController.PlayerClass = ClassSelectManager.Instance.playerTwo.userClass;
-        }
-        
-        playerInstance.SetWhenSpawnedClientRpc();
+        playerInstance.SetWhenSpawnedServerRpc();
     }
 
     public void MoveAllPlayersToSpawnPoints()

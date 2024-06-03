@@ -485,17 +485,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2d5e24891bd2944cba2dd6b6b1e9ecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 4147534525327771330}
+  _animator: {fileID: 5417633237432929165}
+  clearPanel: {fileID: 0}
   PlayerLayer:
     serializedVersion: 2
     m_Bits: 128
-  healthBar: {fileID: 4147534525327771330}
-  _animator: {fileID: 5417633237432929165}
   offSet: {x: -0.52, y: 13}
   maxBossHealth: 1000
   bossHealth: 0
   bulletObject: {fileID: 6552662160762432435, guid: 2c47b18029b2f8248854786ba487c72d, type: 3}
+  bulletClient: {fileID: 6552662160762432435, guid: 12c1dcd165fa6c84f808456d9816d215, type: 3}
   bulletSpeed: 10
   firingSpeed: 3
+  bulletCount: 0
 --- !u!1 &7713980581238242029
 GameObject:
   m_ObjectHideFlags: 0
