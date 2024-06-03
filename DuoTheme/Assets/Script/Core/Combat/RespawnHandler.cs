@@ -14,7 +14,7 @@ public class RespawnHandler : NetworkBehaviour
         {
             HandlePlayerSpawned(player);
         }
-        StartCoroutine(RespawnPlayer(OwnerClientId));
+        StartCoroutine(RespawnPlayer(0));
         StartCoroutine(RespawnPlayer(1));
         Player.OnPlayerSpawned += HandlePlayerSpawned;
         Player.OnPlayerDespawned += HandlePlayerDespawned;
@@ -29,12 +29,12 @@ public class RespawnHandler : NetworkBehaviour
 
     private void HandlePlayerSpawned(Player player)
     {
-        player.Health.OnDie += (health) => HandlePlayerDie(player);
+        player.playerController.OnDie += (health) => HandlePlayerDie(player);
     }
 
     private void HandlePlayerDespawned(Player player)
     {
-        player.Health.OnDie -= (health) => HandlePlayerDie(player);
+        player.playerController.OnDie -= (health) => HandlePlayerDie(player);
     }
 
     private void HandlePlayerDie(Player player)
@@ -52,6 +52,15 @@ public class RespawnHandler : NetworkBehaviour
         Player playerInstance = Instantiate(
             playerPrefab, SpawnPoint.GetRandomSpawnPos(), Quaternion.identity);
         playerInstance.NetworkObject.SpawnAsPlayerObject(ownerClientId);
+
+        if (ownerClientId == 0)
+        {
+            playerInstance.playerController.PlayerClass = ClassSelectManager.instance.playerOne.userClass;
+        }
+        else
+        {
+            playerInstance.playerController.PlayerClass = ClassSelectManager.instance.playerTwo.userClass;
+        }
         
         playerInstance.GetComponent<PlayerController>().ResetStatsServerRpc();
     }

@@ -35,4 +35,9 @@ public class HostSingleton : MonoBehaviour
     {
         GameManager = new HostGameManager();
     }
+
+    public void TestScript()
+    {
+        Debug.Log("Host singleton is work");
+    }
 }

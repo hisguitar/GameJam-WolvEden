@@ -13,6 +13,7 @@ public enum Class
 {
     Sword = 0,
     Shield = 1,
+    Nobody = 2,
 }
 public class PlayerController : NetworkBehaviour
 {
@@ -70,12 +71,11 @@ public class PlayerController : NetworkBehaviour
         if (!IsOwner)
         {
             playerHUD.SetActive(false);
-            return;
-            
         }
 
         if (IsOwner)
         {
+            playerClass = playerStats[PlayerPrefs.GetInt("PlayerClass")].playerClass;
             ResetStatsServerRpc();
         }
     }

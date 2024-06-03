@@ -203,10 +203,6 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 405424423
       objectReference: {fileID: 0}
-    - target: {fileID: 771748595330327187, guid: f72dc3aeba5672f44856b1c196cb0f31, type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 3053941236
-      objectReference: {fileID: 0}
     - target: {fileID: 1091212182983164418, guid: f72dc3aeba5672f44856b1c196cb0f31, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -214,6 +210,14 @@ PrefabInstance:
     - target: {fileID: 1838117774936196352, guid: f72dc3aeba5672f44856b1c196cb0f31, type: 3}
       propertyPath: classToSelect
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238028308820411364, guid: f72dc3aeba5672f44856b1c196cb0f31, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectClassServerRpc
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238028308820411364, guid: f72dc3aeba5672f44856b1c196cb0f31, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnSelectServerRpc
       objectReference: {fileID: 0}
     - target: {fileID: 4408080337579123063, guid: f72dc3aeba5672f44856b1c196cb0f31, type: 3}
       propertyPath: m_Name
@@ -658,17 +662,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8533591860399666890, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3640831451
+      objectReference: {fileID: 0}
     - target: {fileID: 5170869242005150033, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
       propertyPath: m_Name
       value: ClassSelectManager
       objectReference: {fileID: 0}
-    - target: {fileID: 5357358770086551073, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 370399317
+    - target: {fileID: 5739102153886096408, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
+      propertyPath: playerOne.userClass
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 5357358770086551073, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 1951430293
+    - target: {fileID: 5739102153886096408, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
+      propertyPath: playerTwo.userClass
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8073531478068821910, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -715,6 +723,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
+--- !u!114 &3404820685750823365 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5739102153886096408, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
+  m_PrefabInstance: {fileID: 3404820685750823364}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f680939910adb4abddeea0375b1a09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &3514864612610261875
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -750,17 +769,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5137022723573902105 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2191196052541618215, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
-  m_PrefabInstance: {fileID: 3404820685750823364}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e89280b08264ce841bdab82debcf11e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5318197164035684300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -844,10 +852,6 @@ PrefabInstance:
     - target: {fileID: 771748595330327187, guid: f72dc3aeba5672f44856b1c196cb0f31, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3688028598
-      objectReference: {fileID: 0}
-    - target: {fileID: 771748595330327187, guid: f72dc3aeba5672f44856b1c196cb0f31, type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 3053941236
       objectReference: {fileID: 0}
     - target: {fileID: 4408080337579123063, guid: f72dc3aeba5672f44856b1c196cb0f31, type: 3}
       propertyPath: m_Name
@@ -982,8 +986,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5137022723573902105}
-        m_TargetAssemblyTypeName: ClassSelect, Assembly-CSharp
+      - m_Target: {fileID: 3404820685750823365}
+        m_TargetAssemblyTypeName: ClassSelectManager, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:

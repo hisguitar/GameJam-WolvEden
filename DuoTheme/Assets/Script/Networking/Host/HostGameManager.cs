@@ -80,22 +80,19 @@ public class HostGameManager : IDisposable
         }
 
         NetworkServer = new NetworkServer(NetworkManager.Singleton);
-
-        /*Class thisClass = Class.Sword;
-        PlayerPrefs.SetString("PlayerClassSelected",thisClass.ToString());*/
+        
         UserData userData = new UserData
         {
             userName = PlayerPrefs.GetString(NameSelector.PlayerNameKey, "Missing Name"),
             userAuthId = AuthenticationService.Instance.PlayerId,
-            //userClass = (Class)System.Enum.Parse(typeof(Class),PlayerPrefs.GetString("PlayerClassSelected"))
+            userClass = Class.Nobody
         }; 
         string payload = JsonUtility.ToJson(userData);
         byte[] payloadBytes = Encoding.UTF8.GetBytes(payload);
 
         NetworkManager.Singleton.NetworkConfig.ConnectionData = payloadBytes;
-        NetworkManager.Singleton.StartHost();
         
-        transport.SetRelayServerData(relayServerData);
+        NetworkManager.Singleton.StartHost();
         
         NetworkServer.OnClientLeft += HandleClientLeft;
         NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, LoadSceneMode.Single);
@@ -149,4 +146,16 @@ public class HostGameManager : IDisposable
             Debug.Log(e);
         }
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void GetUserDataServerRpc(ulong clientId)
+    {
+        NetworkServer.GetUserDataByClientId(clientId);
+    }
+    
+    public void TestScript()
+    {
+        Debug.Log("Host Game Manager is work");
+    }
+    
 }

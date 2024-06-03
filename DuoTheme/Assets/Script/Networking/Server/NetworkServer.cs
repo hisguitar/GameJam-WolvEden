@@ -75,4 +75,9 @@ public class NetworkServer : IDisposable
             networkManager.Shutdown();
         }
     }
+    
+    public void TestScript()
+    {
+        Debug.Log("Network server is work");
+    }
 }

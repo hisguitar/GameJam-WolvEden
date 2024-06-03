@@ -8,7 +8,7 @@ public class Player : NetworkBehaviour
 {
     [Header("Player")]
     public NetworkVariable<FixedString32Bytes> PlayerName = new();
-    [field: SerializeField] public PlayerController Health { get; private set; }
+    [field: SerializeField] public PlayerController playerController { get; private set; }
 
     [Header("Camera")]
     [SerializeField] private int ownerPriority = 15;
