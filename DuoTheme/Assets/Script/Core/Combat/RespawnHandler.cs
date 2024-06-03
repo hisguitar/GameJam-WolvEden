@@ -55,11 +55,11 @@ public class RespawnHandler : NetworkBehaviour
 
         if (ownerClientId == 0)
         {
-            playerInstance.playerController.PlayerClass = ClassSelectManager.instance.playerOne.userClass;
+            playerInstance.playerController.PlayerClass = ClassSelectManager.Instance.playerOne.userClass;
         }
         else
         {
-            playerInstance.playerController.PlayerClass = ClassSelectManager.instance.playerTwo.userClass;
+            playerInstance.playerController.PlayerClass = ClassSelectManager.Instance.playerTwo.userClass;
         }
         
         playerInstance.GetComponent<PlayerController>().ResetStatsServerRpc();

@@ -25,11 +25,11 @@ public class ClassSelector : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void OnSelectServerRpc()
     {
-        if (ClassSelectManager.instance.playerOne.userClass == classToSelect)
+        if (ClassSelectManager.Instance.playerOne.userClass == classToSelect)
         {
             OnSelectClientRpc(1);
         }
-        else if (ClassSelectManager.instance.playerTwo.userClass == classToSelect)
+        else if (ClassSelectManager.Instance.playerTwo.userClass == classToSelect)
         {
             OnSelectClientRpc(2);
         }
@@ -53,13 +53,15 @@ public class ClassSelector : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void SelectClassServerRpc()
     {
-        if (IsOwnedByServer)
+        if (ClassSelectManager.Instance.playerCount == 0)
         {
-            ClassSelectManager.instance.playerOne.userClass = classToSelect;
+            ClassSelectManager.Instance.playerOne.userClass = classToSelect;
+            HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(0).userClass = classToSelect;
         }
         else
         {
-            ClassSelectManager.instance.playerTwo.userClass = classToSelect;
+            ClassSelectManager.Instance.playerTwo.userClass = classToSelect;
+            HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(1).userClass = classToSelect;
         }
         
         SelectClassClientRpc();
@@ -69,14 +71,15 @@ public class ClassSelector : NetworkBehaviour
     [ClientRpc(RequireOwnership = false)]
     private void SelectClassClientRpc()
     {
-        if (IsOwnedByServer)
+        if (ClassSelectManager.Instance.playerCount == 0)
         {
-            ClassSelectManager.instance.playerOne.userClass = classToSelect;
+            ClassSelectManager.Instance.playerOne.userClass = classToSelect;
             HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(0).userClass = classToSelect;
+            ClassSelectManager.Instance.playerCount += 1;
         }
         else
         {
-            ClassSelectManager.instance.playerTwo.userClass = classToSelect;
+            ClassSelectManager.Instance.playerTwo.userClass = classToSelect;
             HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(1).userClass = classToSelect;
         }
     }

@@ -8,22 +8,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ClassSelectManager : SingletonPersistent<SoundManager>
+public class ClassSelectManager : SingletonPersistent<ClassSelectManager>
 {
-    public static ClassSelectManager instance;
     private NetworkServer _networkServer;
     private const string GameSceneName = "Game";
     public UserData playerOne, playerTwo;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
-
+    public int playerCount = 0;
+    
     private void Update()
     {
         playerOne = HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(0);

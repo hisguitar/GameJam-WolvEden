@@ -853,6 +853,14 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3688028598
       objectReference: {fileID: 0}
+    - target: {fileID: 2238028308820411364, guid: f72dc3aeba5672f44856b1c196cb0f31, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectClassServerRpc
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238028308820411364, guid: f72dc3aeba5672f44856b1c196cb0f31, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnSelectServerRpc
+      objectReference: {fileID: 0}
     - target: {fileID: 4408080337579123063, guid: f72dc3aeba5672f44856b1c196cb0f31, type: 3}
       propertyPath: m_Name
       value: ClassSelector
