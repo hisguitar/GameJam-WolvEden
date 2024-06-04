@@ -48,6 +48,10 @@ public class ClassSelectManager : SingletonPersistent<ClassSelectManager>
     private void Update()
     {
         Debug.Log("Lobby Player: " + lobby.Players.Count);
+        if (lobby.Players.Count == lobby.MaxPlayers)
+        {
+            CheckPlayerInLobbyServerRpc();
+        }
         OnSelectedServerRpc();
         SetupPlayerDataServerRpc();
         CheckButtonStartServerRpc();
