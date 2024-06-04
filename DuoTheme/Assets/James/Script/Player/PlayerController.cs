@@ -263,6 +263,6 @@ public class PlayerController : NetworkBehaviour
     #endregion
 
 
-    public event Action<object> OnDie;
+    //public event Action<object> OnDie;
 }
 

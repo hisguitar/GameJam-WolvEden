@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using TMPro;
 using Unity.Netcode;
 using Unity.Services.Authentication;
 using UnityEngine;
@@ -10,6 +11,8 @@ using UnityEngine.UI;
 
 public class ClassSelectManager : SingletonPersistent<ClassSelectManager>
 {
+    
+    
     private NetworkServer _networkServer;
     private const string GameSceneName = "Game";
     public UserData playerOne, playerTwo;
@@ -106,5 +109,7 @@ public class ClassSelectManager : SingletonPersistent<ClassSelectManager>
             playerTwoSelected = true;
         }
     }
+    
+    
     
 }

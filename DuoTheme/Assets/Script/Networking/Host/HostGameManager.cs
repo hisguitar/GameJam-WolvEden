@@ -18,7 +18,7 @@ public class HostGameManager : IDisposable
 {
     private Allocation allocation;
     private string joinCode;
-    private string lobbyId;
+    public string lobbyId;
 
     public NetworkServer NetworkServer { get; private set; }
 
@@ -146,16 +146,6 @@ public class HostGameManager : IDisposable
             Debug.Log(e);
         }
     }
-
-    [ServerRpc(RequireOwnership = false)]
-    public void GetUserDataServerRpc(ulong clientId)
-    {
-        NetworkServer.GetUserDataByClientId(clientId);
-    }
     
-    public void TestScript()
-    {
-        Debug.Log("Host Game Manager is work");
-    }
     
 }

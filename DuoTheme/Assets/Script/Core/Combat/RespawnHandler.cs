@@ -33,12 +33,12 @@ public class RespawnHandler : SingletonNetwork<RespawnHandler>
 
     private void HandlePlayerSpawned(Player player)
     {
-        player.playerController.OnDie += (health) => HandlePlayerDie(player);
+        //player.playerController.OnDie += (health) => HandlePlayerDie(player);
     }
 
     private void HandlePlayerDespawned(Player player)
     {
-        player.playerController.OnDie -= (health) => HandlePlayerDie(player);
+        //player.playerController.OnDie -= (health) => HandlePlayerDie(player);
     }
 
     private void HandlePlayerDie(Player player)
