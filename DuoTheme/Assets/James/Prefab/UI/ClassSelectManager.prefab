@@ -44,11 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f680939910adb4abddeea0375b1a09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitingPlayerText: {fileID: 0}
+  waitingPlayerCanvas: {fileID: 0}
+  playerReady: 0
+  selectingCounter: 6
+  selectingTimer: 0
   playerOne:
     userName: 
     userAuthId: 
-    userClass: 0
+    userClass: 2
   playerTwo:
     userName: 
     userAuthId: 
-    userClass: 0
+    userClass: 2
+  playerCount: 0
+  startButton: {fileID: 0}
+  playerOneSelected: 0
+  playerTwoSelected: 0

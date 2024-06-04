@@ -9,11 +9,7 @@ using UnityEngine;
 
 public class LobbyManager : MonoBehaviour
 {
-    [Header("Lobby Setting")] 
-    public TextMeshProUGUI waitingPlayerText;
-    public GameObject waitingPlayerCanvas;
-    public bool playerReady;
-    public Lobby lobby;
+    
     
     [Header("Player Name Slot")] 
     public TextMeshProUGUI slotOneLoadingText;
@@ -30,25 +26,11 @@ public class LobbyManager : MonoBehaviour
     [Header("Slot Two setting")]
     public GameObject swordSpriteTwo;
     public GameObject shieldSpriteTwo;
-
-    private void Awake()
-    {
-        if (lobby == null)
-        {
-            GetLobby(); ;
-        }
-    }
-
-    private async void GetLobby()
-    {
-        lobby = await Lobbies.Instance.GetLobbyAsync(HostSingleton.Instance.GameManager.lobbyId);
-        Debug.Log("Get: " + lobby);
-    }
+    
 
     private void Update()
     {
-        CheckPlayerInLobbyServerRpc();
-        if (playerReady == false)
+        if (ClassSelectManager.Instance.playerReady == false)
         {
             return;
         }
@@ -176,74 +158,7 @@ public class LobbyManager : MonoBehaviour
         SetPlayerSelecting();
     }
 
-    [ServerRpc]
-    private void CheckPlayerInLobbyServerRpc()
-    {
-        if (lobby.Players.Count == lobby.MaxPlayers)
-        {
-            waitingPlayerCanvas.SetActive(false);
-            playerReady = true;
-        }
-        else
-        {
-            selectingTimer += Time.deltaTime;
-             if (selectingTimer < 1.5F)
-            {
-                waitingPlayerText.text = "WAITING FOR OTHER PLAYER.";
-            }
-            else if (selectingTimer < 3)
-            {
-                waitingPlayerText.text = "WAITING FOR OTHER PLAYER..";
-            }
-            else if (selectingTimer < 4.5f)
-            {
-                waitingPlayerText.text = "WAITING FOR OTHER PLAYER...";
-            }
-            else if (selectingTimer > selectingCounter)
-            {
-                selectingTimer = 0;
-            }
-            else
-            {
-                waitingPlayerText.text = "WAITING FOR OTHER PLAYER";
-            }
-        }
-        CheckPlayerInLobbyClientRpc();
-    }
-
-    [ClientRpc]
-    private void CheckPlayerInLobbyClientRpc()
-    {
-        if (lobby.Players.Count == lobby.MaxPlayers)
-        {
-            waitingPlayerCanvas.SetActive(false);
-            playerReady = true;
-        }
-        else
-        {
-            selectingTimer += Time.deltaTime;
-            if (selectingTimer < 1.5F)
-            {
-                waitingPlayerText.text = "WAITING FOR OTHER PLAYER.";
-            }
-            else if (selectingTimer < 3)
-            {
-                waitingPlayerText.text = "WAITING FOR OTHER PLAYER..";
-            }
-            else if (selectingTimer < 4.5)
-            {
-                waitingPlayerText.text = "WAITING FOR OTHER PLAYER...";
-            }
-            else if (selectingTimer > selectingCounter)
-            {
-                selectingTimer = 0;
-            }
-            else
-            {
-                waitingPlayerText.text = "WAITING FOR OTHER PLAYER";
-            }
-        }
-    }
+    
     
     
 }

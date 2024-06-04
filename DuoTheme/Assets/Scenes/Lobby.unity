@@ -167,8 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3801f47a87463647aca0deccae0100c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitingPlayerText: {fileID: 559014912}
-  waitingPlayerCanvas: {fileID: 127593610}
   slotOneLoadingText: {fileID: 537852774}
   slotTwoLoadingText: {fileID: 1178091568}
   selectingCounter: 6
@@ -2582,10 +2580,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -8533591860399666890, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 3640831451
-      objectReference: {fileID: 0}
     - target: {fileID: 5170869242005150033, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
       propertyPath: m_Name
       value: ClassSelectManager
@@ -2595,13 +2589,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7636142659288403893}
     - target: {fileID: 5739102153886096408, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
+      propertyPath: playerTwoSelected
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739102153886096408, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
+      propertyPath: waitingPlayerText
+      value: 
+      objectReference: {fileID: 559014912}
+    - target: {fileID: 5739102153886096408, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
       propertyPath: playerOne.userClass
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5739102153886096408, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
       propertyPath: playerTwo.userClass
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5739102153886096408, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
+      propertyPath: waitingPlayerCanvas
+      value: 
+      objectReference: {fileID: 127593610}
     - target: {fileID: 8073531478068821910, guid: fe61ff1a0ad75b442af9b770d70e4dbd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.788614
