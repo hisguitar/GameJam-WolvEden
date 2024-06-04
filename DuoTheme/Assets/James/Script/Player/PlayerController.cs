@@ -188,7 +188,7 @@ public class PlayerController : NetworkBehaviour
         playerSpeed = playerMaxSpeed;
         playerHealth = playerMaxHealth;
         playerStamina = playerMaxStamina;
-        isDead = true;
+        isDead = false;
         _playerAnimationController.ChangeAnimationClassClientRpc();
         UpdateStatsGUI();
     }
@@ -250,7 +250,7 @@ public class PlayerController : NetworkBehaviour
         playerSpeed = playerMaxSpeed;
         playerHealth = playerMaxHealth;
         playerStamina = playerMaxStamina;
-        isDead = true;
+        isDead = false;
         _playerAnimationController.ChangeAnimationClassServerRpc();
         UpdateStatsGUI();
         ResetStatsClientRpc();

@@ -33,9 +33,6 @@ public class NetworkServer : SingletonNetwork<NetworkServer>
         response.Position = SpawnPoint.GetRandomSpawnPos(); // Spawn player
         response.Rotation = Quaternion.identity; // Spawn player
         response.CreatePlayerObject = false;
-
-        Lobbies.Instance.UpdatePlayerAsync(HostSingleton.Instance.GameManager.lobbyId, userData.userAuthId,
-            new UpdatePlayerOptions());
     }
 
     private void OnNetworkReady()
