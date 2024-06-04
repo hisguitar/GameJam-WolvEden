@@ -9,8 +9,6 @@ using UnityEngine;
 
 public class LobbyManager : MonoBehaviour
 {
-    
-    
     [Header("Player Name Slot")] 
     public TextMeshProUGUI slotOneLoadingText;
     public TextMeshProUGUI slotTwoLoadingText;
@@ -30,10 +28,10 @@ public class LobbyManager : MonoBehaviour
 
     private void Update()
     {
-        if (ClassSelectManager.Instance.playerReady == false)
+        /*if (ClassSelectManager.Instance.playerReady == false)
         {
             return;
-        }
+        }*/
         SetPlayerSelectingServerRpc();
         CheckAllSlotServerRpc();
     }
@@ -71,14 +69,14 @@ public class LobbyManager : MonoBehaviour
             shieldSpriteTwo.SetActive(false);
         }
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void CheckAllSlotServerRpc()
     {
         CheckAllSlot();
         CheckAllSlotClientRpc();
     }
 
-    [ClientRpc]
+    [ClientRpc(RequireOwnership = false)]
     private void CheckAllSlotClientRpc()
     {
         CheckAllSlot();
@@ -145,14 +143,14 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void SetPlayerSelectingServerRpc()
     {
         SetPlayerSelecting();
         SetPlayerSelectingClientRpc();
     }
 
-    [ClientRpc]
+    [ClientRpc(RequireOwnership = false)]
     private void SetPlayerSelectingClientRpc()
     {
         SetPlayerSelecting();

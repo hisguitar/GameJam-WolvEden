@@ -17,7 +17,7 @@ using UnityEngine.SceneManagement;
 public class HostGameManager : IDisposable
 {
     private Allocation allocation;
-    private string joinCode;
+    public string joinCode;
     public string lobbyId;
 
     public NetworkServer NetworkServer { get; private set; }
@@ -134,6 +134,7 @@ public class HostGameManager : IDisposable
 
         NetworkServer?.Dispose();
     }
+    
 
     private async void HandleClientLeft(string authId)
     {

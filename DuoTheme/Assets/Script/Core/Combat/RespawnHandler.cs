@@ -75,6 +75,7 @@ public class RespawnHandler : SingletonNetwork<RespawnHandler>
             player.transform.position = spawnPosition;
             // Optionally reset rotation or other parameters
             player.transform.rotation = Quaternion.identity;
+            player.GetComponent<PlayerController>().ResetStatsServerRpc();
         }
     }
     [ServerRpc]

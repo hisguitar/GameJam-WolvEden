@@ -50,13 +50,13 @@ MonoBehaviour:
   selectingCounter: 6
   selectingTimer: 0
   playerOne:
-    userName: 
-    userAuthId: 
-    userClass: 2
+    userName: Nobody
+    userAuthId: 123456
+    userClass: 0
   playerTwo:
-    userName: 
-    userAuthId: 
-    userClass: 2
+    userName: Nobody
+    userAuthId: 123456
+    userClass: 0
   playerCount: 0
   startButton: {fileID: 0}
   playerOneSelected: 0

@@ -5,6 +5,8 @@ using System.Text;
 using TMPro;
 using Unity.Netcode;
 using Unity.Services.Authentication;
+using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -18,20 +20,34 @@ public class ClassSelectManager : SingletonPersistent<ClassSelectManager>
     public float selectingCounter = 6;
     public float selectingTimer = 0;
     
-    private NetworkServer _networkServer;
     private const string GameSceneName = "Game";
-    public UserData playerOne, playerTwo;
+    public UserData playerOne;
+    public UserData playerTwo;
     public int playerCount = 0;
     public Button startButton;
     public bool playerOneSelected, playerTwoSelected;
-    
+    private Lobby lobby;
+
+    private void Start()
+    {
+        GetDataServerRpc();
+    }
+
+    [ServerRpc]
+    private void GetDataServerRpc()
+    {
+        GetDataClientRpc();
+    }
+
+    [ClientRpc]
+    private async void GetDataClientRpc()
+    {
+        lobby = await Lobbies.Instance.GetLobbyAsync(HostSingleton.Instance.GameManager.lobbyId);
+        Debug.Log("Lobby Ok: " + lobby.LobbyCode);
+    }
     private void Update()
     {
-        if (!playerReady)
-        {
-            CheckPlayerInLobbyServerRpc();
-        }
-        
+        Debug.Log("Lobby Player: " + lobby.Players.Count);
         OnSelectedServerRpc();
         SetupPlayerDataServerRpc();
         CheckButtonStartServerRpc();
@@ -42,7 +58,7 @@ public class ClassSelectManager : SingletonPersistent<ClassSelectManager>
         NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, LoadSceneMode.Single);
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void SetupPlayerDataServerRpc()
     {
         playerOne = HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(0);
@@ -50,14 +66,14 @@ public class ClassSelectManager : SingletonPersistent<ClassSelectManager>
         SetupPlayerDataClientRpc();
     }
 
-    [ClientRpc]
+    [ClientRpc(RequireOwnership = false)]
     private void SetupPlayerDataClientRpc()
     {
         playerOne = HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(0);
         playerTwo = HostSingleton.Instance.GameManager.NetworkServer.GetUserDataByClientId(1);
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void CheckButtonStartServerRpc()
     {
         if (playerOneSelected && playerTwoSelected)
@@ -71,7 +87,7 @@ public class ClassSelectManager : SingletonPersistent<ClassSelectManager>
         CheckButtonStartClientRpc();
     }
 
-    [ClientRpc]
+    [ClientRpc(RequireOwnership = false)]
     private void CheckButtonStartClientRpc()
     {
         if (playerOneSelected && playerTwoSelected)
@@ -84,7 +100,7 @@ public class ClassSelectManager : SingletonPersistent<ClassSelectManager>
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void OnSelectedServerRpc()
     {
         if (playerCount == 1)
@@ -95,14 +111,14 @@ public class ClassSelectManager : SingletonPersistent<ClassSelectManager>
         {
             playerTwoSelected = true;
         }
-        else
+        else if (playerCount > 2)
         {
             playerOneSelected = true;
             playerTwoSelected = true;
         }
         OnSelectedClientRpc();
     }
-    [ClientRpc]
+    [ClientRpc(RequireOwnership = false)]
     private void OnSelectedClientRpc()
     {
         if (playerCount == 1)
@@ -113,33 +129,28 @@ public class ClassSelectManager : SingletonPersistent<ClassSelectManager>
         {
             playerTwoSelected = true;
         }
-        else
+        else if (playerCount > 2)
         {
             playerOneSelected = true;
             playerTwoSelected = true;
         }
     }
     
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void CheckPlayerInLobbyServerRpc()
     {
-        WaitingPlayerTextServerRpc();
-        if (playerOne.userClass == Class.Nobody && playerTwo.userClass == Class.Nobody)
-        {
-            waitingPlayerCanvas.SetActive(false);
-            playerReady = true;
-            CheckPlayerInLobbyClientRpc();
-        }
+        waitingPlayerCanvas.SetActive(false);
+        CheckPlayerInLobbyClientRpc();
     }
 
-    [ClientRpc]
+    [ClientRpc(RequireOwnership = false)]
     private void CheckPlayerInLobbyClientRpc()
     {
         waitingPlayerCanvas.SetActive(false);
         playerReady = true;
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void WaitingPlayerTextServerRpc()
     {
         selectingTimer += Time.deltaTime;
@@ -166,7 +177,7 @@ public class ClassSelectManager : SingletonPersistent<ClassSelectManager>
         WaitingPlayerTextClientRpc();
     }
 
-    [ClientRpc]
+    [ClientRpc(RequireOwnership = false)]
     private void WaitingPlayerTextClientRpc()
     {
         selectingTimer += Time.deltaTime;

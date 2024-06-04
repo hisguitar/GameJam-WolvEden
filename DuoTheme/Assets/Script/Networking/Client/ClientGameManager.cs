@@ -10,6 +10,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Text;
 using Unity.Services.Authentication;
+using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
 
 public class ClientGameManager : IDisposable
 {
@@ -56,7 +58,7 @@ public class ClientGameManager : IDisposable
             };
             string payload = JsonUtility.ToJson(userData);
             byte[] payloadBytes = Encoding.UTF8.GetBytes(payload);
-
+            
             NetworkManager.Singleton.NetworkConfig.ConnectionData = payloadBytes;
 
             NetworkManager.Singleton.StartClient();
