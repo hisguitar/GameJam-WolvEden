@@ -1,10 +1,14 @@
+using System;
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
-public class RespawnHandler : NetworkBehaviour
+public class RespawnHandler : SingletonNetwork<RespawnHandler>
 {
     [SerializeField] private Player playerPrefab;
+    [SerializeField] private GameObject deadPanel;
+    public int dieCount;
+    public int dieLimit = 2;
 
     public override void OnNetworkSpawn()
     {
@@ -44,6 +48,11 @@ public class RespawnHandler : NetworkBehaviour
         StartCoroutine(RespawnPlayer(player.OwnerClientId));
     }
 
+    private void Update()
+    {
+        CheckDeadServerRpc();
+    }
+
     private IEnumerator RespawnPlayer(ulong ownerClientId)
     {
         yield return null;
@@ -67,5 +76,39 @@ public class RespawnHandler : NetworkBehaviour
             // Optionally reset rotation or other parameters
             player.transform.rotation = Quaternion.identity;
         }
+    }
+    [ServerRpc]
+    public void CheckDeadServerRpc()
+    {
+        if (dieCount >= dieLimit)
+        {
+            deadPanel.SetActive(true);
+        }
+        CheckDeadClientRpc();
+    }
+    [ClientRpc]
+    public void CheckDeadClientRpc()
+    {
+        if (dieCount >= dieLimit)
+        {
+            deadPanel.SetActive(true);
+        }
+    }
+
+    [ServerRpc]
+    public void AddDieCountServerRpc()
+    {
+        dieCount += 1;
+        AddDieCountClientRpc();
+    }
+    [ClientRpc]
+    public void AddDieCountClientRpc()
+    {
+        if (IsOwner)
+        {
+            return;
+        }
+
+        dieCount += 1;
     }
 }

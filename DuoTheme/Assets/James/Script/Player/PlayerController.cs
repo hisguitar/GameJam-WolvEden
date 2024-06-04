@@ -139,6 +139,7 @@ public class PlayerController : NetworkBehaviour
     {
         GetComponent<Collider2D>().enabled = false;
         _playerAnimationController.DeadAnimation(true);
+        RespawnHandler.Instance.AddDieCountServerRpc();
         isDead = true;
     }
 
